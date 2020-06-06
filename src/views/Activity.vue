@@ -1,5 +1,6 @@
 <template>
     <div class="activity">
+<!--        <mobile-filter/>-->
         <div class="activity__bar"></div>
         <div class="activity__list">
             <div class="activity__item" @click="$router.push('/Detail')">
@@ -121,13 +122,16 @@
 </template>
 
 <script>
+    import MobileFilter from '@/components/MobileFilter'
     export default {
-        name: 'Activity'
+        name: 'Activity',
+        components: {MobileFilter}
     }
 </script>
 
 <style scoped lang="less">
     .activity {
+        padding-top: 20px;
         &__list {
             padding: 10px 5vw;
         }
