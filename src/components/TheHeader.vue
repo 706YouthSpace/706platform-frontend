@@ -6,12 +6,13 @@
     </router-link>
     <nav class="header__menu" v-if="device!=='mobile'">
       <router-link to="/Activity">近期活动</router-link>
-      <router-link to="/">706文化</router-link>
-      <router-link to="/">706广场</router-link>
-      <router-link to="/">706圈子</router-link>
-      <router-link to="/">联系我们</router-link>
+      <router-link to="/Culture">706文化</router-link>
+      <router-link to="/Squre">706广场</router-link>
+      <router-link to="/Social">706圈子</router-link>
+      <router-link to="/Contact">联系我们</router-link>
+      <router-link to="/Login">登陆/注册</router-link>
+      <img class="header__avatar" src="@/assets/images/header.png"/>
     </nav>
-    <img v-if="device!=='mobile'" class="header__avatar" src="@/assets/images/header.png"/>
     <img v-else class="header__more" src="@/assets/images/more.png" @click="isNavShow=true"/>
     <transition name="nav">
       <nav class="header__nav"
@@ -69,13 +70,15 @@
     top: 0;
     left: 0;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 78px;
     padding: 10px 52px 0px 42px;
-    align-items: center;
     background: #fff;
     box-sizing: border-box;
     z-index: 10;
+    box-shadow: 0 0 30px rgba(0,0,0,0.05);
 
     &.mobile {
       height: 51px;
@@ -83,7 +86,7 @@
     }
 
     &__title {
-      flex: 1;
+      flex: 0 0 auto;
       display: flex;
       color: #3e3e3e;
       align-items: flex-end;
@@ -176,6 +179,7 @@
     .nav-enter-active, .nav-leave-active {
       transition: opacity .1s;
     }
+
     .nav-enter, .nav-leave-to /* .fade-leave-active below version 2.1.8 */ {
       opacity: 0;
     }

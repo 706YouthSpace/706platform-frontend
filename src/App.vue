@@ -17,25 +17,11 @@
     name: 'App',
     components: {TheFooter, TheHeader},
     mounted() {
-      this.changeDevice()
-      window.addEventListener('resize', this.changeDevice)
     },
     methods: {
       ...mapMutations([
         'setDevice'
-      ]),
-      isMobile() {
-        const rect = document.body.getBoundingClientRect()
-        return rect.width - 1 < 992
-      },
-      changeDevice() {
-        const isMobile = this.isMobile()
-        if (isMobile) {
-          this.setDevice('mobile')
-        } else {
-          this.setDevice('desktop')
-        }
-      }
+      ])
     }
   }
 </script>
@@ -57,11 +43,20 @@
     color: inherit;
   }
 
+  body {
+    background: #fff;
+  }
+
   #app {
     font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    color: #000;
+  }
+
+  header, main {
+    max-width: 1280px;
+    margin: 0 auto;
   }
 
   main {
