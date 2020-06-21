@@ -60,25 +60,100 @@
         </div>
       </div>
     </div>
+    <div class="home__706">
+      <h2 class="home__706__title">
+        706青年空间
+      </h2>
+      <div class="home__706__content">
+        <div class="home__706__left">
+          <div class="home__706__space__wrap">
+            <div class="home__706__space__wall"></div>
+            <div class="home__706__space__ceil">
+              <span class="home__706__space__ceil__left cell">1</span>
+              <span class="home__706__space__ceil__right cell">2</span>
+            </div>
+            <div class="home__706__space__floor">
+              <span class="home__706__space__floor__left">
+                <span class="home__706__space__floor__left__top cell">3</span>
+                <span class="home__706__space__floor__left__bottom cell">4</span>
+              </span>
+              <span class="home__706__space__floor__right cell">5</span>
+            </div>
+          </div>
+          <p class="home__706__space__tip">鼠标点击不同空间查看详情</p>
+        </div>
+        <div class="home__706__right">
+          <p class="home__706__right__title">1.文化空间</p>
+          <p class="home__706__right__tip">文化空间包括图书馆/讲座厅/小剧场/自习室。。。。。。</p>
+          <swiper class="swiper" :options="swiperOption">
+            <swiper-slide>
+              <div class="home__706__banner">
+                <img src="@/assets/images/banner.png"/>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="home__706__banner">
+                <img src="@/assets/images/banner.png"/>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="home__706__banner">
+                <img src="@/assets/images/banner.png"/>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="home__706__banner">
+                <img src="@/assets/images/banner.png"/>
+              </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+  import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
   import {mapState} from 'vuex'
 
   export default {
     name: 'Home',
+    components: {
+      Swiper,
+      SwiperSlide
+    },
     computed: {
       ...mapState([
         'device'
       ])
     },
-
+    data() {
+      return {
+        swiperOption: {
+          loop: true,
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        }
+      }
+    }
   }
 </script>
 
 <style scoped lang="less">
-  @father: home;
   .home {
     &__section-01 {
       position: relative;
@@ -86,21 +161,11 @@
       box-sizing: border-box;
       overflow: hidden;
 
-      .@{father}.mobile & {
-        height: 349px;
-      }
-
       &__bg {
         position: absolute;
         top: 0;
         right: -5%;
         height: 100%;
-
-        .@{father}.mobile & {
-          top: -5%;
-          width: 87%;
-          height: auto;
-        }
       }
 
       &__content {
@@ -108,14 +173,6 @@
         left: 100px;
         bottom: 149px;
         width: 323px;
-
-        .@{father}.mobile & {
-          width: 100%;
-          left: 0;
-          bottom: 16px;
-          box-sizing: border-box;
-          padding: 0 42px;
-        }
       }
 
       &__title {
@@ -123,23 +180,12 @@
         font-size: 30px;
         line-height: 40px;
         font-weight: normal;
-
-        .@{father}.mobile & {
-          font-size: 18px;
-          line-height: 24px;
-        }
       }
 
       &__paragraph {
         color: rgba(80, 95, 152, 1);
         font-size: 11px;
         line-height: 18px;
-
-        .@{father}.mobile & {
-          width: 207px;
-          font-size: 8px;
-          line-height: 10px;
-        }
       }
 
       &__btn {
@@ -153,11 +199,6 @@
         cursor: pointer;
         font-size: 10px;
         line-height: 16px;
-
-        .@{father}.mobile & {
-          display: block;
-          margin: 27px auto 0 auto;
-        }
       }
     }
 
@@ -187,19 +228,9 @@
         overflow: hidden;
         cursor: pointer;
 
-        .@{father}.mobile & {
-          flex: 0 0 100%;
-          margin-left: 0;
-          margin-bottom: 3%;
-        }
-
         &:nth-child(2n+1) {
           margin-left: 0%;
           margin-right: 0.5%;
-
-          .@{father}.mobile & {
-            margin-right: 0.5%;
-          }
         }
 
         &:hover {
@@ -250,6 +281,170 @@
           font-size: 6px;
           line-height: 12px;
           width: 150px;
+        }
+      }
+    }
+
+    &__706 {
+      margin: 40px 5vw;
+
+      &__title {
+        margin-bottom: 11px;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 16px;
+        color: #3E3E3E;
+      }
+
+      &__content {
+        display: flex;
+        background: #F9F9F9;
+
+        & > div {
+          flex: 0 0 50%
+        }
+
+        & /deep/ .swiper-pagination-bullet {
+          width: 4px;
+          height: 4px;
+          background: #d8d8d8;
+          opacity: 1;
+
+          &.swiper-pagination-bullet-active {
+            background: #00D88F;
+          }
+        }
+
+        & /deep/ .swiper-button-prev, & /deep/ .swiper-button-next {
+          color: #D8D8D8;
+
+          &::after {
+            font-size: 20px;
+          }
+
+          &:hover {
+            color: #00D88F;
+          }
+        }
+      }
+
+      &__left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 35px 0 27px 0;
+      }
+
+      &__space {
+        &__wrap {
+          position: relative;
+
+          .cell {
+            text-align: center;
+            background: #82AF5237;
+            color: #fff;
+            cursor: pointer;
+            transition: background .2s;
+
+            &:hover {
+              background: #82AF52;
+            }
+          }
+        }
+
+        &__tip {
+          margin-top: 20px;
+          font-size: 10px;
+          color: #7B7B7B;
+        }
+
+        &__wall {
+          width: 223px;
+          height: 123px;
+          background: #8DA8B1;
+        }
+
+        &__ceil {
+          position: absolute;
+          left: 0;
+          top: 0;
+          display: flex;
+          width: 223px;
+          height: 61px;
+          background: #BFBFBF67;
+          transform: skewX(45deg) translateX(29px);
+
+          & > span {
+            position: relative;
+            flex: 1 1 50%;
+            margin: 10px;
+          }
+
+          &__left {
+
+          }
+        }
+
+        &__floor {
+          display: flex;
+          width: 223px;
+          height: 61px;
+          padding: 10px;
+          box-sizing: border-box;
+          background: #848484;
+          transform: skewX(45deg) translateX(30px);
+
+          &__left {
+            flex: 1 1 40%;
+            margin-right: 10px;
+
+            display: flex;
+            flex-direction: column;
+
+            &__top {
+              flex: 1 1 70%;
+              margin-bottom: 5px;
+            }
+
+            &__bottom {
+              flex: 1 1 30%;
+            }
+          }
+
+          &__right {
+            flex: 1 1 60%;
+          }
+        }
+      }
+
+      &__right {
+        margin: 20px 0;
+        width: 50%;
+
+        &__title {
+          font-size: 12px;
+        }
+
+        &__tip {
+          margin-top: 10px;
+          font-size: 10px;
+          color: #494949;
+        }
+
+        & > div {
+          width: 100%;
+        }
+      }
+
+      &__banner {
+        padding: 40px 0;
+
+        img {
+          display: block;
+          width: 290px;
+          height: 146px;
+          margin: 0 auto;
         }
       }
     }

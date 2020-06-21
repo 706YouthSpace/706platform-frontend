@@ -129,6 +129,7 @@
 </template>
 
 <script>
+  import { mainStay } from "@/services/mainstay";
   export default {
     name: 'Activity',
     data() {
@@ -230,6 +231,9 @@
           }
         ]
       }
+    },
+    mounted() {
+      mainStay.getOrganizers()
     },
     methods: {
       toggleFilterSelect(filterKey, optionValue) {
@@ -346,10 +350,10 @@
       position: relative;
       width: 200px;
       height: 300px;
-      cursor: pointer;
       margin: 5px;
       border-radius: 2px;
       overflow: hidden;
+      cursor: pointer;
 
       & > img {
         display: block;
