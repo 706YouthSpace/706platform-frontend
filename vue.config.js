@@ -1,14 +1,9 @@
 'use strict'
-const path = require('path')
-
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
-
 module.exports = {
   configureWebpack: {
+    entry: './src/main.js',
     resolve: {
-      extensions: [".ts", ".tsx", ".js", ".json"]
+      extensions: [".vue", ".ts", ".tsx", ".js", ".json"]
     }
   }
 }
