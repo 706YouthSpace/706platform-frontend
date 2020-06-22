@@ -17,7 +17,7 @@ export class GraphQLService {
 
 }
 
-const DEFAULT_GQL_ENDPOINT = 'http://localhost:3001/api/graphql';
+const DEFAULT_GQL_ENDPOINT = `${window.origin}/api/graphql`;
 export class AppGraphQLService extends GraphQLService {
     constructor(endpoint?: string, options?: RequestInit) {
         super(endpoint || DEFAULT_GQL_ENDPOINT, options)
