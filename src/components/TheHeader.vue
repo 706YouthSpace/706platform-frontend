@@ -10,8 +10,8 @@
       <router-link to="/Squre">706广场</router-link>
       <router-link to="/Social">706圈子</router-link>
       <router-link to="/Contact">联系我们</router-link>
-      <router-link to="/Login">登陆/注册</router-link>
-      <img class="header__avatar" src="@/assets/images/header.png"/>
+      <a v-if="!user._id" href="/api/login">登陆/注册 </a>
+      <a v-else href="/api/logout"><img class="header__avatar" :src="user.image || '@/assets/images/header.png'"/></a>
     </nav>
     <img v-else class="header__more" src="@/assets/images/more.png" @click="isNavShow=true"/>
     <transition name="nav">
@@ -40,12 +40,14 @@
 
 <script>
   import {mapState} from 'vuex'
+import { mainStay } from '../services/mainstay'
 
   export default {
     name: 'TheHeader',
     data() {
       return {
-        isNavShow: false
+        isNavShow: false,
+        user: {},
       }
     },
     computed: {
@@ -58,8 +60,13 @@
         this.isNavShow = false
         next()
       })
+      mainStay.userPromise.then((u)=> {
+        this.user = u
+
+      });
     },
-    methods: {}
+    methods: {
+    }
   }
 </script>
 

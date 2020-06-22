@@ -1,7 +1,7 @@
-import {userGQLService, User} from './gql/user';
-import {eventGQLService, EventFilter, Event, Location, Organizer, WebPageElement, ShallowEvent} from './gql/event';
-import {ThingRegistry} from './thing-registry';
-import {VoidPartial as Partial} from '@/utils/interfaces';
+import { userGQLService, User } from './gql/user';
+import { eventGQLService, EventFilter, Event, Location, Organizer, WebPageElement, ShallowEvent } from './gql/event';
+import { ThingRegistry } from './thing-registry';
+import { VoidPartial as Partial } from '@/utils/interfaces';
 import _ from 'lodash';
 
 export class MainStay {
@@ -39,7 +39,7 @@ export class MainStay {
             this.user = await this.userService.whoami()!;
         } catch (err) {
             console.warn('User not logged in');
-            window.location.href = '/api/login';
+            // window.location.href = '/api/login';
             throw err;
         }
 
