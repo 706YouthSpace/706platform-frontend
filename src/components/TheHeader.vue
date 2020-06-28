@@ -1,78 +1,67 @@
 <template>
-  <header class="header" :class="{mobile: device==='mobile'}">
-    <router-link to="/" class="header__title">
-      <img class="header__logo" src="@/assets/images/logo.png"/>
-      <h1 v-if="device!=='mobile'">706青年空间</h1>
-    </router-link>
-    <nav class="header__menu" v-if="device!=='mobile'">
-      <router-link to="/Activity">近期活动</router-link>
-      <router-link to="/Culture">706文化</router-link>
-      <router-link to="/Squre">706广场</router-link>
-      <router-link to="/Social">706圈子</router-link>
-      <router-link to="/Contact">联系我们</router-link>
-      <a v-if="!user._id" href="/api/login">登陆/注册 </a>
-      <a v-else href="/api/logout"><img class="header__avatar" :src="user.image || '@/assets/images/header.png'"/></a>
-    </nav>
-    <img v-else class="header__more" src="@/assets/images/more.png" @click="isNavShow=true"/>
-    <transition name="nav">
-      <nav class="header__nav"
-           v-show="isNavShow">
-        <img class="header__nav__close" src="@/assets/images/close.png" @click="isNavShow=false">
-        <router-link class="header__nav__item" to="/Activity">
-          <img class="header__nav__icon" src="@/assets/images/list_icon.png">近期活动
+    <header class="header">
+        <router-link to="/" class="header__title">
+            <img class="header__logo" src="@/assets/images/logo.png" />
+            <h1 v-if="device!=='mobile'">706青年空间</h1>
         </router-link>
-        <router-link class="header__nav__item" to="/">
-          <img class="header__nav__icon" src="@/assets/images/list_icon.png">706文化
-        </router-link>
-        <router-link class="header__nav__item" to="/">
-          <img class="header__nav__icon" src="@/assets/images/list_icon.png">706广场
-        </router-link>
-        <router-link class="header__nav__item" to="/">
-          <img class="header__nav__icon" src="@/assets/images/list_icon.png">706圈子
-        </router-link>
-        <router-link class="header__nav__item" to="/">
-          <img class="header__nav__icon" src="@/assets/images/list_icon.png">联系我们
-        </router-link>
-      </nav>
-    </transition>
-  </header>
+        <nav class="header__menu">
+            <router-link v-for="route in routes" :key="route.path" :to="route.path">{{route.name}}</router-link>
+            <a v-if="!user._id" href="/api/login">登陆/注册</a>
+            <a v-else href="/api/logout">
+                <img class="header__avatar" :src="user.image || '@/assets/images/header.png'" />
+            </a>
+        </nav>
+    </header>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-import { mainStay } from '../services/mainstay'
+import { mainStay } from "../services/mainstay";
 
-  export default {
-    name: 'TheHeader',
+export default {
+    name: "TheHeader",
     data() {
-      return {
-        isNavShow: false,
-        user: {},
-      }
-    },
-    computed: {
-      ...mapState([
-        'device'
-      ])
+        return {
+            routes: [
+                {
+                    name: "发布活动",
+                    path: "/Publish"
+                },
+                {
+                    name: "近期活动",
+                    path: "/Activity"
+                },
+                {
+                    name: "706文化",
+                    path: "/Culture"
+                },
+                {
+                    name: "706广场",
+                    path: "/Squre"
+                },
+                {
+                    name: "706圈子",
+                    path: "/Social"
+                },
+                {
+                    name: "联系我们",
+                    path: "/Contact"
+                }
+            ],
+            user: {}
+        };
     },
     created() {
-      this.$router.beforeEach((from, to, next) => {
-        this.isNavShow = false
-        next()
-      })
-      mainStay.userPromise.then((u)=> {
-        this.user = u
-
-      });
+        mainStay.userPromise.then(u => {
+            this.user = u;
+        });
     },
-    methods: {
-    }
-  }
+    methods: {}
+};
 </script>
 
 <style scoped lang="less">
-  @father: header;
-  .header {
+@father: header;
+.header {
     position: sticky;
     top: 0;
     left: 0;
@@ -85,110 +74,112 @@ import { mainStay } from '../services/mainstay'
     background: #fff;
     box-sizing: border-box;
     z-index: 10;
-    box-shadow: 0 0 30px rgba(0,0,0,0.05);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
 
     &.mobile {
-      height: 51px;
-      padding: 31px 26px 0px 12px;
+        height: 51px;
+        padding: 31px 26px 0px 12px;
     }
 
     &__title {
-      flex: 0 0 auto;
-      display: flex;
-      color: #3e3e3e;
-      align-items: flex-end;
+        flex: 0 0 auto;
+        display: flex;
+        color: #3e3e3e;
+        align-items: flex-end;
 
-      & > h1 {
-        font-size: 20px;
-        line-height: 16px;
-        font-weight: normal;
-        margin-left: 10px;
-      }
+        & > h1 {
+            font-size: 20px;
+            line-height: 16px;
+            font-weight: normal;
+            margin-left: 10px;
+        }
     }
 
     &__logo {
-      display: block;
-      height: 20px;
-      width: 46px;
+        display: block;
+        height: 20px;
+        width: 46px;
     }
 
     &__menu {
-      display: flex;
-      color: #666664;
-      font-size: 15px;
+        display: flex;
+        color: #666664;
+        font-size: 15px;
 
-      & > a {
-        padding: 0 20px;
+        & > a {
+            padding: 0 20px;
 
-        &:hover {
-          color: #3e3e3e
+            &:hover {
+                color: #3e3e3e;
+            }
         }
-      }
     }
 
     &__avatar {
-      display: block;
-      width: 21px;
-      height: 21px;
-      margin-left: 16px;
+        display: block;
+        width: 21px;
+        height: 21px;
+        margin-left: 16px;
     }
 
-
     &__nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(0, 216, 143, .8) 0%, rgba(158, 209, 15, .8) 100%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            180deg,
+            rgba(0, 216, 143, 0.8) 0%,
+            rgba(158, 209, 15, 0.8) 100%
+        );
 
-      &__close {
-        display: block;
-        width: 20px;
-        height: 20px;
-        margin: 142px auto 83px auto;
-      }
+        &__close {
+            display: block;
+            width: 20px;
+            height: 20px;
+            margin: 142px auto 83px auto;
+        }
 
-      &__item {
-        display: flex;
-        margin-left: 44px;
-        margin-bottom: 20px;
-        color: #fff;
-        font-size: 18px;
-        line-height: 20px;
-        align-items: center;
-      }
+        &__item {
+            display: flex;
+            margin-left: 44px;
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 18px;
+            line-height: 20px;
+            align-items: center;
+        }
 
-      &__icon {
-        width: 6px;
-        height: 10px;
-        vertical-align: middle;
-        margin-right: 10px;
-      }
+        &__icon {
+            width: 6px;
+            height: 10px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
     }
 
     &__more {
-      display: block;
-      height: 19px;
-      width: 4px;
-      cursor: pointer;
+        display: block;
+        height: 19px;
+        width: 4px;
+        cursor: pointer;
     }
 
     &.mobile {
-      /*height: 9.5p;*/
-      background: transparent;
-
-
+        /*height: 9.5p;*/
+        background: transparent;
     }
 
     /* animation */
 
-    .nav-enter-active, .nav-leave-active {
-      transition: opacity .1s;
+    .nav-enter-active,
+    .nav-leave-active {
+        transition: opacity 0.1s;
     }
 
     .nav-enter, .nav-leave-to /* .fade-leave-active below version 2.1.8 */ {
-      opacity: 0;
+        opacity: 0;
     }
-  }
+}
 </style>
