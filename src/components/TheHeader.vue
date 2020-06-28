@@ -5,7 +5,10 @@
             <h1 v-if="device!=='mobile'">706青年空间</h1>
         </router-link>
         <nav class="header__menu">
-            <router-link v-for="route in routes" :key="route.path" :to="route.path">{{route.name}}</router-link>
+            <span v-for="route in routes" :key="route.path">
+                <a v-if="route.type === 'a'" :href="route.path"  class="">{{route.name}}</a>
+                <router-link v-else :to="route.path" class="">{{route.name}}</router-link>
+            </span>
             <a v-if="!user._id" href="/api/login">登陆/注册</a>
             <a v-else href="/api/logout">
                 <img class="header__avatar" :src="user.image || '@/assets/images/header.png'" />
@@ -21,10 +24,12 @@ export default {
     name: "TheHeader",
     data() {
         return {
+            device: undefined,
             routes: [
                 {
+                    type: 'a',
                     name: "发布活动",
-                    path: "/Publish"
+                    path: "/admin"
                 },
                 {
                     name: "近期活动",
@@ -106,7 +111,7 @@ export default {
         color: #666664;
         font-size: 15px;
 
-        & > a {
+        & a {
             padding: 0 20px;
 
             &:hover {

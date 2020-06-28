@@ -12,6 +12,7 @@
     "@types/webpack-env": "^1.15.2",
     "apollo-boost": "^0.4.9",
     "core-js": "^3.6.5",
+    "dayjs": "^1.8.28",
     "graphql-request": "^2.0.0",
     "less-loader": "^6.1.0",
     "lodash": "^4.17.15",
@@ -47,9 +48,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/typescript"
+      "plugin:vue/essential"
     ],
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
