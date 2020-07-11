@@ -2,7 +2,7 @@
     <header class="header">
         <router-link to="/" class="header__title">
             <img class="header__logo" src="@/assets/images/logo.png" />
-            <h1 v-if="device!=='mobile'">706青年空间</h1>
+            <h1>706青年空间</h1>
         </router-link>
         <nav class="header__menu">
             <span v-for="route in routes" :key="route.path">
@@ -27,9 +27,8 @@ export default {
             device: undefined,
             routes: [
                 {
-                    type: 'a',
                     name: "发布活动",
-                    path: "/admin"
+                    path: "/Publish"
                 },
                 {
                     name: "近期活动",

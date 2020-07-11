@@ -1,6 +1,7 @@
 import Home from '@/views/Home'
 import Activity from '@/views/Activity'
 import ActivityDetail from '@/views/ActivityDetail'
+import Publish from '@/views/Publish'
 import NotFound from '@/views/NotFound'
 
 export default [
@@ -16,6 +17,9 @@ export default [
   }, {
     path: '/Detail',
     component: ActivityDetail
+  }, {
+    path: '/Publish',
+    component: Publish
   }, {
     path: '/*',
     component: NotFound

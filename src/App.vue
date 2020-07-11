@@ -9,7 +9,6 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
   import TheHeader from './components/TheHeader'
   import TheFooter from './components/TheFooter'
 
@@ -19,9 +18,6 @@
     mounted() {
     },
     methods: {
-      ...mapMutations([
-        'setDevice'
-      ])
     }
   }
 </script>
