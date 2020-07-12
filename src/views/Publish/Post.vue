@@ -113,16 +113,19 @@
                                     <el-checkbox v-model="ticket.checked"></el-checkbox>
                                     <template v-if="ticket.editable">
                                         <div class="post__ticket__name">
-                                            <input placeholder="自定义票种"/>
+                                            <input placeholder="点击输入票种" v-model="ticket.name"/>
                                         </div>
                                         ¥
                                         <div class="post__ticket__price">
-                                            <input placeholder="点击输入价格"/>
+                                            <input placeholder="点击输入价格" v-model="ticket.value"/>
                                         </div>
                                     </template>
                                     <template v-else>
                                         <p class="post__ticket__name">{{ticket.name}}</p>
-                                        <p class="post__ticket__price">{{'¥ ' + ticket.value}}</p>
+                                        ¥
+                                        <div class="post__ticket__price">
+                                            <input placeholder="点击输入价格" v-model="ticket.value"/>
+                                        </div>
                                     </template>
                                 </div>
                                 <div class="bin"
@@ -134,7 +137,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="post__ticket post__ticket__add" @click="tickets.push({name: '',value: '', editable: true, checked: false})">
+                        <div class="post__ticket post__ticket__add"
+                             @click="tickets.push({name: '',value: '', editable: true, checked: false})">
                             <svg-icon class="icon plus" icon-class="plus"/>
                             添加自定义门票
                         </div>
@@ -153,7 +157,7 @@
             </el-form>
             <div class="post__control">
                 <el-button>预览</el-button>
-                <el-button >保存</el-button>
+                <el-button>保存</el-button>
                 <el-button type="success">发布</el-button>
             </div>
         </div>
@@ -246,27 +250,27 @@
                 tickets: [
                     {
                         name: '标准票',
-                        value: 20,
+                        value: '',
                         checked: true,
                         editable: false
                     }, {
                         name: '学生票',
-                        value: 30,
+                        value: '',
                         checked: true,
                         editable: false
                     }, {
                         name: '会员票',
-                        value: 30,
+                        value: '',
                         checked: true,
                         editable: false
                     }, {
                         name: '终身会员',
-                        value: 30,
+                        value: '',
                         checked: true,
                         editable: false
                     }, {
                         name: '测试',
-                        value: 30,
+                        value: '',
                         checked: true,
                         editable: true
                     }
