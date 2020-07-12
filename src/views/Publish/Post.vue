@@ -20,12 +20,12 @@
             <ckeditor :editor="editor" @ready="onEditorReady" v-model="editorData" :config="editorConfig">
             </ckeditor>
             <el-form class="post__form" label-position="left" label-width="100px">
-                <el-form-item v-show="attrsCheckStatus.type" class="post__item large" label="形式：">
-                    <el-select v-model="baseInfo.type" placeholder="请选择">
-                        <el-option v-for="type in typeOptions"
-                                   :key="type.value"
-                                   :label="type.name"
-                                   :value="type.value">
+                <el-form-item v-show="attrsCheckStatus.form" class="post__item large" label="形式：">
+                    <el-select v-model="baseInfo.form" placeholder="请选择">
+                        <el-option v-for="form in formOptions"
+                                   :key="form.value"
+                                   :label="form.name"
+                                   :value="form.value">
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -44,44 +44,49 @@
                     <el-input v-model="baseInfo.site" placeholder="请输入活动地点"/>
                 </el-form-item>
                 <el-form-item v-show="attrsCheckStatus.series" class="post__item large" label="活动类型：">
-                    <el-tabs type="border-card" class="post__activity">
-                        <el-tab-pane label="系列大纲">
-                            <div v-for="(activity, index) in childActivities"
-                                 :key="activity.id" class="post__activity__item">
-                                <el-select v-model="activity.id">
-                                    <el-option v-for="option in childActivityOptions"
-                                               :key="option.id"
-                                               :label="option.name"
-                                               :value="option.id">
-                                    </el-option>
-                                </el-select>
-                                <div class="bin" @click="childActivities.splice(index, 1)">
-                                    <svg-icon class="icon" icon-class="bin"></svg-icon>
-                                </div>
-                            </div>
-                            <div class="post__activity__item">
-                                <el-button type="primary"
-                                           @click="childActivities.push({id: ''})">
-                                    添加已有自活动
-                                </el-button>
-                                <el-button type="warning"
-                                           @click="handleCreateActivityClick">
-                                    创建系列子活动
-                                </el-button>
-                            </div>
-                        </el-tab-pane>
-                        <el-tab-pane label="系列子项">
-                            <el-select v-model="fatherActivity.value"
-                                       clearable
-                                       placeholder="请选择活动大纲">
-                                <el-option v-for="option in fatherActivity.options"
+                    <el-radio-group v-model="baseInfo.type">
+                        <el-radio-button label="0">系列大纲</el-radio-button>
+                        <el-radio-button label="1">系列子项</el-radio-button>
+                    </el-radio-group>
+                    <template v-if="baseInfo.type == '0'">
+                        <div v-for="(activity, index) in childActivities"
+                             :key="activity.id" class="post__activity__item">
+                            <el-select v-model="activity.id"
+                                       remote
+                                       filterable
+                                       :remote-method="getChildActivity">
+                                <el-option v-for="option in childActivityOptions"
                                            :key="option.id"
                                            :label="option.name"
                                            :value="option.id">
                                 </el-option>
                             </el-select>
-                        </el-tab-pane>
-                    </el-tabs>
+                            <div class="bin" @click="childActivities.splice(index, 1)">
+                                <svg-icon class="icon" icon-class="bin"></svg-icon>
+                            </div>
+                        </div>
+                        <div class="post__activity__item">
+                            <el-button @click="childActivities.push({id: ''})">
+                                添加已有自活动
+                            </el-button>
+                            <el-button @click="handleCreateActivityClick">
+                                创建系列子活动
+                            </el-button>
+                        </div>
+                    </template>
+                    <el-select v-else class="post__activity__item"
+                               v-model="fatherActivity.value"
+                               clearable
+                               placeholder="请选择活动大纲"
+                               remote
+                               filterable
+                               :remote-method="getFatherActivity">
+                        <el-option v-for="option in fatherActivity.options"
+                                   :key="option.id"
+                                   :label="option.name"
+                                   :value="option.id">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item v-show="attrsCheckStatus.pay" class="post__item large" label="报名：">
                     <el-form-item class="post__item large" label="方式：">
@@ -96,27 +101,40 @@
                     <el-form-item class="post__item" label="最大人数：">
                         <el-input v-model="baseInfo.participantMaxNum" placeholder="请输入最大人数（默认不限人数）"/>
                     </el-form-item>
-                    <el-form-item class="post__item" label="最小人数：">
+                    <el-form-item class="post__item align-right" label="最小人数：">
                         <el-input v-model="baseInfo.participantMinNum" placeholder="请输入最小人数（默认为 0）"/>
                     </el-form-item>
                     <el-form-item class="post__item large" label="门票：">
-                        <div class="post__ticket"
-                             v-for="(ticket, index) in tickets"
-                             :key="index">
-                            <div class="post__ticket__inner">
-                                <input class="post__ticket__type"
-                                       :value="ticket.name"
-                                       placeholder="点击输入自定义票种"/>
-                                <input class="post__ticket__price"
-                                       :value="ticket.value"
-                                       placeholder="点击输入价格"/>
-                            </div>
-
-                            <div @click="tickets.splice(index, 1)">
-                                <svg-icon class="icon bin" icon-class="bin"/>
+                        <div class="post__ticket">
+                            <div class="post__ticket__item"
+                                 v-for="(ticket, index) in tickets"
+                                 :key="index">
+                                <div class="post__ticket__item__inner">
+                                    <el-checkbox v-model="ticket.checked"></el-checkbox>
+                                    <template v-if="ticket.editable">
+                                        <div class="post__ticket__name">
+                                            <input placeholder="自定义票种"/>
+                                        </div>
+                                        ¥
+                                        <div class="post__ticket__price">
+                                            <input placeholder="点击输入价格"/>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <p class="post__ticket__name">{{ticket.name}}</p>
+                                        <p class="post__ticket__price">{{'¥ ' + ticket.value}}</p>
+                                    </template>
+                                </div>
+                                <div class="bin"
+                                     v-if="ticket.editable"
+                                     @click="tickets.splice(index, 1)">
+                                    <svg-icon class="icon plus" icon-class="bin"/>
+                                </div>
+                                <div class="bin" v-else>
+                                </div>
                             </div>
                         </div>
-                        <div class="post__ticket post__ticket__add" @click="tickets.push({name: '',value: ''})">
+                        <div class="post__ticket post__ticket__add" @click="tickets.push({name: '',value: '', editable: true, checked: false})">
                             <svg-icon class="icon plus" icon-class="plus"/>
                             添加自定义门票
                         </div>
@@ -135,7 +153,7 @@
             </el-form>
             <div class="post__control">
                 <el-button>预览</el-button>
-                <el-button type="primary">保存</el-button>
+                <el-button >保存</el-button>
                 <el-button type="success">发布</el-button>
             </div>
         </div>
@@ -164,15 +182,16 @@
                     // The configuration of the editor.
                 },
                 baseInfo: {
-                    type: '',
+                    form: '',
                     startTime: '',
                     endTime: '',
+                    type: '0',
                     site: '',
                     payMethod: '',
                     participantMaxNum: '',
                     participantMinNum: ''
                 },
-                typeOptions: [
+                formOptions: [
                     {
                         name: '讲座沙龙',
                         value: 1
@@ -205,7 +224,8 @@
                         id: 1,
                         name: '1.迈向星空（一）：空间与时间',
                         url: 'https://baidu.com'
-                    }, {
+                    },
+                    {
                         id: 2,
                         name: '2.迈向星空（二）：未来与过去',
                         url: 'https://baidu.com'
@@ -226,63 +246,76 @@
                 tickets: [
                     {
                         name: '标准票',
-                        value: 20
+                        value: 20,
+                        checked: true,
+                        editable: false
                     }, {
                         name: '学生票',
-                        value: 30
+                        value: 30,
+                        checked: true,
+                        editable: false
                     }, {
                         name: '会员票',
-                        value: 30
+                        value: 30,
+                        checked: true,
+                        editable: false
                     }, {
                         name: '终身会员',
-                        value: 30
+                        value: 30,
+                        checked: true,
+                        editable: false
+                    }, {
+                        name: '测试',
+                        value: 30,
+                        checked: true,
+                        editable: true
                     }
                 ],
                 customAttributes: [
                     {
                         name: '摘要',
                         prop: 'summary',
-                        checked: false
+                        checked: true
                     }, {
                         name: '时间',
                         prop: 'time',
-                        checked: false
+                        checked: true
                     }, {
                         name: '地点',
                         prop: 'site',
-                        checked: false
+                        checked: true
                     }, {
                         name: '形式',
-                        prop: 'type',
-                        checked: false
-                    },{
+                        prop: 'form',
+                        checked: true
+                    }, {
                         name: '报名',
                         prop: 'pay',
-                        checked: false
+                        checked: true
                     }, {
                         name: '系列',
                         prop: 'series',
-                        checked: false
+                        checked: true
                     }, {
                         name: '学科领域',
                         prop: 'area',
-                        checked: false
+                        checked: true
                     }, {
                         name: '标签',
                         prop: 'label',
-                        checked: false
+                        checked: true
                     }, {
                         name: '主办方',
                         prop: 'host',
-                        checked: false
+                        checked: true
                     }, {
                         name: '赞助方',
                         prop: 'sponsor',
-                        checked: false
+                        checked: true
                     }, {
                         name: '开启赞赏',
                         prop: 'reward',
-                        checked: false
+                        checked: true
                     }
                 ]
             }
@@ -319,11 +352,35 @@
                     const url = location.href
                     window.open(url)
                 }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: '已取消操作'
-                    });
                 });
+            },
+            getChildActivity(query) {
+                if (query === '') {
+                    return
+                }
+                setTimeout(() => {
+                    this.childActivityOptions = [
+                        {
+                            id: 1,
+                            name: '1.迈向星空（一）：空间与时间',
+                            url: 'https://baidu.com'
+                        }
+                    ]
+                })
+            },
+            getFatherActivity(query) {
+                if (query === '') {
+                    return
+                }
+                console.log('hhhh')
+                setTimeout(() => {
+                    this.fatherActivity.options = [
+                        {
+                            id: 2,
+                            name: '共享客厅'
+                        }
+                    ]
+                })
             }
         }
     }
@@ -334,7 +391,7 @@
         padding: 30px 0;
 
         &__inner {
-            width: 60%;
+            width: 840px;
             margin: 0 auto;
         }
 
@@ -389,6 +446,12 @@
                 width: 100%;
             }
 
+            &.align-right {
+                /deep/ .el-form-item__label {
+                    text-align: right;
+                }
+            }
+
             & /deep/ .el-select {
                 width: 100%;
             }
@@ -405,43 +468,64 @@
                 &:nth-child(n+2) {
                     margin-top: 20px;
                 }
+
+                .bin {
+                    color: red;
+                    cursor: pointer;
+                }
+
+                .icon {
+                    margin-left: 10px;
+                }
             }
 
             &__name {
                 flex: 1;
             }
-
-            .icon {
-                margin-left: 10px;
-            }
-
-            .bin {
-                color: red;
-                cursor: pointer;
-            }
-
-            .edit {
-                color: #409EFF;
-                cursor: pointer;
-            }
-
-            .confirm {
-                color: #67C23A;
-                cursor: pointer;
-            }
         }
 
         &__ticket {
-            display: flex;
-            align-items: center;
             width: 50%;
-            padding: 5px 10px;
-            border: 1px solid #ddd;
             margin-bottom: 10px;
 
-            &__inner {
+            &__item {
+                width: 100%;
                 display: flex;
                 align-items: center;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+
+                &__inner {
+                    display: flex;
+                    width: 100%;
+                    padding-left: 10px;
+                    align-items: center;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+
+                .bin {
+                    width: 24px;
+                    color: red;
+                    cursor: pointer;
+                }
+            }
+
+            &__name, &__price {
+                flex: 1 1;
+                padding: 5px 10px;
+                line-height: 40px;
+
+                & > input {
+                    display: block;
+                    width: 100%;
+                    height: 40px;
+                    box-sizing: border-box;
+                    border: none;
+                    outline: none;
+                    padding: 5px 10px;
+                    color: #606266;
+                }
             }
 
             &__add {
@@ -459,31 +543,9 @@
                 }
             }
 
-            & /deep/ .el-checkbox {
-                box-sizing: border-box;
-                border: 1px solid #ddd;
-                width: 50%;
-                margin-right: 20px;
-                padding: 5px 10px;
-            }
-
             .icon {
                 font-size: 14px;
                 margin-left: 10px;
-                cursor: pointer;
-
-                &.bin {
-                    color: red;
-                }
-            }
-
-            input {
-                display: block;
-                border: 1px solid #efefef;
-                outline: none;
-                padding: 5px 10px;
-                width: 50%;
-                color: #606266;
             }
         }
 
