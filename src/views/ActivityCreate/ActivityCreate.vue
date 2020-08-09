@@ -392,11 +392,16 @@
 
 <style lang="less" scoped>
     .post {
-        padding: 30px 0;
+        display: flex;
+
+        &__menu {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+        }
 
         &__inner {
             width: 840px;
             margin: 0 auto;
+            padding: 30px 0;
         }
 
         &__uploader {
