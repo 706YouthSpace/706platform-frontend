@@ -36,16 +36,18 @@ export default {
   }
 
   body {
-    background: #fff;    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    background: #f0f2f5;
+    font-family: Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   #app {
-    color: #000;
+    color: #101010;
+    min-width: 900px;
   }
 
    main {
-    margin: 0 auto;
+     min-height: 100vh;
   }
 </style>

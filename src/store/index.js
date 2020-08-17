@@ -5,11 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    device: 'desktop'
+    isLoadingShow: false
   },
   mutations: {
-    setDevice (state, device) {
-      state.device = device
+    setLoading (state, isShow) {
+      state.isLoadingShow = isShow
     }
   }
 })

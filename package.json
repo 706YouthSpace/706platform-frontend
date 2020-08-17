@@ -13,6 +13,7 @@
     "@types/lodash": "^4.14.159",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "font-awesome": "^4.7.0",
     "graphql-request": "^2.0.0",
     "lodash": "^4.17.15",
     "swiper": "^5.4.5",
