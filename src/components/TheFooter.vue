@@ -63,7 +63,7 @@ export default {
 <style scoped lang="less">
   .footer {
     padding-bottom: 14px;
-    border-top: 2px solid #0B800B;
+    border-top: 6px solid #0B800B;
     background: #333333;
 
     &__content {
