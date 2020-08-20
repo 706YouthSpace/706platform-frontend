@@ -8,15 +8,15 @@
     </div>
     <div class="home__activity__brand">
       <div class="brand__left">
-        <img src="@/assets/images/Home/sec-01.png">
+        <img src="@/assets/images/Home/activity-48hours.png">
         <div class="brand__cover">
           <div class="brand__content">
             <p class="brand__title">48小时生活实验室</p>
-            <p class="brand__text">核心理念：共同生活、自治、集体创造</p>
-            <p class="brand__text">每期活动我们邀请一群志同道合的年轻人</p>
-            <p class="brand__text">在一个实体空间共同生活48个小时，共同完成一次关于生活的实验或创作</p>
-            <p class="brand__text">让渴望认识自我、认识世界的年轻人</p>
-            <p class="brand__text">一起探索生活的可能性</p>
+            <p class="brand__text">48小时生活实验室是推出的生活方式探索项目</p>
+            <p class="brand__text">每期活动我们邀请一群志同道合的年轻人，在一个实体空间共同生活48个小时</p>
+            <p class="brand__text">期间，我们将共同完成一次关于生活的实验或创作</p>
+            <p class="brand__text">让年轻人，打破原有生活环境的局限，突破互联网虚拟社交的屏障</p>
+            <p class="brand__text">聚集在一起共同探索生活的各种可能性</p>
           </div>
         </div>
       </div>
@@ -34,21 +34,14 @@
           <div class="brand__list__item">706生活大爆炸 </div>
           <div class="brand__list__item">706给我三分钟</div>
           <div class="brand__list__item">苏格拉底式对话</div>
-          <div class="brand__list__item">同道学园 I 政治哲学读书会</div>
-          <div class="brand__list__item">706诗会</div>
-          <div class="brand__list__item">语言角 Language Corner</div>
+          <div class="brand__list__item">政治哲学读书会</div>
           <div class="brand__list__item">706客厅对话</div>
           <div class="brand__list__item">706共学小组</div>
-          <div class="brand__list__item">706赛博朋克研究小组</div>
           <div class="brand__list__item">706写作工作坊</div>
           <div class="brand__list__item">706漫游计划</div>
-<!--                      <div class="brand__list__item">706独立出版展</div>-->
-<!--                      <div class="brand__list__item">706新空间主义</div>-->
-<!--                      <div class="brand__list__item">EPU-JSV</div>-->
-<!--                      <div class="brand__list__item">706同学社</div>-->
-<!--                      <div class="brand__list__item">706生活实验室</div>-->
-<!--                      <div class="brand__list__item">断裂酒馆</div>-->
-<!--                      <div class="brand__list__item">深夜食堂</div>-->
+          <div class="brand__list__item">706独立出版展</div>
+          <div class="brand__list__item">706新空间主义</div>
+          <div class="brand__list__item">深夜食堂</div>
         </div>
         <div class="brand__list__more">了解更多</div>
       </div>
@@ -126,17 +119,28 @@ export default {
     background: #F3F7F9;
 
     &__title {
+      position: relative;
       height: 98px;
       line-height: 98px;
       text-align: center;
       font-size: 38px;
       font-weight: bold;
       color: #000;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 8px;
+        background: #0B800B;
+      }
     }
     &__text {
       width: 448px;
       line-height: 17px;
-      margin: 0 auto;
+      margin: 45px auto 0 auto;
       font-size: 12px;
       text-align: center;
     }
@@ -221,7 +225,7 @@ export default {
           &__more {
             width: 115px;
             height: 36px;
-            margin: 19px 0 0 151px;
+            margin: 79px 0 0 151px;
             line-height: 36px;
             border: 1px solid #fff;
             font-size: 12px;
@@ -243,8 +247,13 @@ export default {
         }
         &__content {
           position: relative;
-          height: 200px;
           background: #ccc;
+          overflow: hidden;
+          &::before {
+            content: '';
+            display: block;
+            padding-top: 72%;
+          }
         }
         &__cover {
           position: absolute;
