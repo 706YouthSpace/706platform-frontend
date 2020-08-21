@@ -7,10 +7,10 @@
           <p class="home__media__para">从2012年到2019年，在706青年空间的影响和推广下，全国建立了大大小小各种形式的青年空间30多家，覆盖上海，广州，南京，重庆，杭州，青岛等10多个城市的大学集中的区域。</p>
           <p class="home__media__para">至2016年，706青年空间就已经成为国内外最知名的青年社区之一，先后被纽约时报、NHK、新华社、中国新闻周刊、第一财经周刊、中国青年报、欧洲时报、网易新闻、腾讯教育等国内外媒体深入报道。</p>
           <div class="home__media__links">
-            <p class="link"><a href="#">《北京青年玩自治》</a>——纽约时报</p>
-            <p class="link"><a href="#">《青春实验室》</a>——中国青年报/新浪新闻/搜狐网</p>
-            <p class="link"><a href="#">《文化交流“最后一公里”上的探路者》</a>——新华网/人民网/环球网/亚太日报</p>
-            <p class="link"><a href="#">《706青年空间 青年的逐梦地》</a>——新华社/网易新闻</p>
+            <p class="link"><a href="https://cn.nytimes.com/culture/20160630/706-youth-space/" target="_blank">《北京青年玩自治》</a>——纽约时报</p>
+            <p class="link"><a href="http://zqb.cyol.com/html/2016-08/31/nw.D110000zgqnb_20160831_1-12.htm" target="_blank">《青春实验室》</a>——中国青年报/新浪新闻/搜狐网</p>
+            <p class="link"><a href="http://www.xinhuanet.com/politics/2015-08/21/c_1116329606.htm" target="_blank">《文化交流“最后一公里”上的探路者》</a>——新华网/人民网/环球网/亚太日报</p>
+            <p class="link"><a href="http://xinhua-rss.zhongguowangshi.com/232/-6031091697338706471/1290907.html" target="_blank">《706青年空间 青年的逐梦地》</a>——新华社/网易新闻</p>
           </div>
         </div>
         <div class="home__media__right">
@@ -91,6 +91,7 @@ export default {
       margin-left: 20px;
       flex: 1 1 431px;
       img {
+        margin-top: 20px;
         width: 100%;
       }
     }

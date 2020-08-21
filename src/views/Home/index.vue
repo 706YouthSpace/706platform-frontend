@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <home-slogan/>
+    <home-slogan class="home__slogan"/>
     <home-intro/>
     <home-activity/>
     <home-project/>
@@ -29,5 +29,16 @@ export default {
 
 <style scoped lang="less">
   .home {
+    &__slogan {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      z-index: 0;
+    }
+    &> div:nth-child(n+2) {
+      position: relative;
+      z-index: 1;
+    }
   }
 </style>

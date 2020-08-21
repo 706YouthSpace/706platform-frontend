@@ -6,9 +6,11 @@
     <div class="home__activity__text">
       成立九年以来，我们开创了几十种活动类型，举办了超过3000场活动。 钱理群、秦晖、罗振宇、许知远、黄西等许多知名人士曾来到这里，和大家近距离交流。
     </div>
-    <div class="home__activity__brand">
+    <div class="home__activity__brand" ref="activityBrand">
       <div class="brand__left">
-        <img src="@/assets/images/Home/activity-48hours.png">
+        <div class="brand__left__bg" :style="{height: `${offsetLimit+100}%`,top: `-${bgOffsetY}%`}">
+          <img src="@/assets/images/Home/activity-48hours.png">
+        </div>
         <div class="brand__cover">
           <div class="brand__content">
             <p class="brand__title">48小时生活实验室</p>
@@ -108,8 +110,35 @@
 </template>
 
 <script>
+import { throttle } from 'lodash'
+
 export default {
-  name: 'HomeActivity'
+  name: 'HomeActivity',
+  data () {
+    return {
+      offsetLimit: 50,
+      bgOffsetY: 0
+    }
+  },
+  created () {
+    document.addEventListener('scroll', this.throttleScrollEvent, false)
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.throttleScrollEvent, false)
+  },
+  methods: {
+    throttleScrollEvent () {
+      throttle(this.scrollEvent, 50)()
+    },
+    scrollEvent () {
+      const activeArea = 500
+      const { top, bottom } = this.$refs.activityBrand.getBoundingClientRect()
+      if (bottom < 0 || top > activeArea) {
+        return
+      }
+      this.bgOffsetY = Math.floor((activeArea - top) * this.offsetLimit / (bottom - top + activeArea))
+    }
+  }
 }
 </script>
 
@@ -155,10 +184,16 @@ export default {
           position: relative;
           flex: 1 1;
           overflow: hidden;
-          img {
+          &__bg {
+            position: absolute;
+            left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            transition: all .1s;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
           }
         }
         &__cover {
@@ -182,6 +217,7 @@ export default {
         &__text {
           font-size: 10px;
           line-height: 17px;
+          color: #E1E1E1;
         }
         &__right {
           flex: 0 0 408px;
@@ -221,6 +257,8 @@ export default {
             padding: 8px 0;
             font-size: 13px;
             line-height: 13px;
+            text-decoration: underline;
+            cursor: pointer;
           }
           &__more {
             width: 115px;
@@ -278,6 +316,7 @@ export default {
           margin-top: 10px;
           font-size: 12px;
           line-height: 17px;
+          color: #E0E0E0;
         }
       }
     }
