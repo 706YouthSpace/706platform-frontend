@@ -62,8 +62,8 @@ export default {
 
 <style scoped lang="less">
   .home__slogan {
-    height: 617px;
-    border-top: 5px solid #0B800B;
+    height: 734px;
+    border-top: 6px solid #0B800B;
     background: no-repeat url("~@/assets/images/Home/sec-01.png") center / cover;
     color: #fff;
     text-align: center;
@@ -78,27 +78,27 @@ export default {
     }
     &__logo {
       display: block;
-      width: 130px;
-      height: 85px;
-      margin: 128px auto 0 auto;
+      width: 165px;
+      height: 102px;
+      margin: 154px auto 0 auto;
     }
 
     &__cn {
-      margin-top: 12px;
-      font-size: 38px;
-      line-height: 40px;
+      margin-top: 15px;
+      font-size: 46px;
+      line-height: 48px;
       font-weight: bold;
     }
 
     &__en {
-      margin-top: 10px;
-      font-size: 15px;
-      line-height: 17px;
+      margin-top: 11px;
+      font-size: 18px;
+      line-height: 20px;
     }
 
     &__medias {
       display: flex;
-      margin-top: 25px;
+      margin-top: 28px;
       align-items: center;
       justify-content: center;
       .icon {
@@ -106,7 +106,7 @@ export default {
         font-size: 29px;
 
         &:nth-child(n+2) {
-          margin-left: 29px;
+          margin-left: 35px;
         }
         img {
           display: block;

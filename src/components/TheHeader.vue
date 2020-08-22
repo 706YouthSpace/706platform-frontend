@@ -64,8 +64,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 14px;
-    height: 50px;
+    padding: 0 17px;
+    height: 60px;
     background: #fff;
     box-shadow:0px 1px 3px 0px rgba(0, 0, 0, 0.1);
     z-index: 10;
@@ -75,13 +75,13 @@ export default {
       align-items: center;
 
       img {
-        width: 68px;
-        height: 25px;
+        width: 81px;
+        height: 30px;
       }
 
       h1 {
-        margin-left: 14px;
-        font-size: 17px;
+        margin-left: 22px;
+        font-size: 20px;
         font-weight: normal;
         color: #101010;
       }
@@ -92,13 +92,13 @@ export default {
       align-items: center;
       &__item {
         display: flex;
-        height: 50px;
-        padding: 0 14px;
+        height: 60px;
+        padding: 0 16.5px;
         box-sizing: border-box;
         align-items: center;
         color: #333;
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
 
         &.current {
           border-bottom-color: #0B800B;
@@ -108,18 +108,18 @@ export default {
           background: #D2D2D2;
         }
         .icon {
-          font-size: 22px;
+          font-size: 26px;
         }
         .name {
-          margin-left: 7px;
+          margin-left: 8px;
         }
       }
     }
 
     &__user {
-      margin-left: 27px;
-      margin-right: 13px;
-      font-size: 28px;
+      margin-left: 33px;
+      margin-right: 16px;
+      font-size: 34px;
     }
   }
 </style>

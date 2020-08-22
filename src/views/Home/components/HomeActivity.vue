@@ -143,16 +143,18 @@ export default {
 </script>
 
 <style scoped lang="less">
+  @import ~"@/assets/style/variables";
+
   .home__activity {
     padding-top: 33px;
     background: #F3F7F9;
 
     &__title {
       position: relative;
-      height: 98px;
-      line-height: 98px;
+      height: 118px;
+      line-height: 118px;
       text-align: center;
-      font-size: 38px;
+      font-size: @--font-size-ex-large;
       font-weight: bold;
       color: #000;
       &::after {
@@ -167,10 +169,9 @@ export default {
       }
     }
     &__text {
-      width: 448px;
-      line-height: 17px;
+      width: 537px;
+      line-height: 20px;
       margin: 45px auto 0 auto;
-      font-size: 12px;
       text-align: center;
     }
     &__brand {
@@ -210,13 +211,13 @@ export default {
           bottom: 20px;
         }
         &__title {
-          font-size: 15px;
-          line-height: 17px;
+          font-size: 18px;
+          line-height: 20px;
           margin-bottom: 13px;
         }
         &__text {
-          font-size: 10px;
-          line-height: 17px;
+          font-size: @--font-size-small;
+          line-height: 20px;
           color: #E1E1E1;
         }
         &__right {
@@ -249,13 +250,13 @@ export default {
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
-            height: 290px;
+            height: 350px;
             margin-top: 24px;
           }
           &__item {
             width: 125px;
-            padding: 8px 0;
-            font-size: 13px;
+            padding: 10px 0;
+            font-size: @--font-size-base;
             line-height: 13px;
             text-decoration: underline;
             cursor: pointer;
@@ -263,7 +264,7 @@ export default {
           &__more {
             width: 115px;
             height: 36px;
-            margin: 79px 0 0 151px;
+            margin: 32px 0 0 151px;
             line-height: 36px;
             border: 1px solid #fff;
             font-size: 12px;
@@ -309,13 +310,13 @@ export default {
           }
         }
         &__title {
-          font-size: 13px;
-          line-height: 17px;
+          font-size: 16px;
+          line-height: 20px;
         }
         &__time {
           margin-top: 10px;
-          font-size: 12px;
-          line-height: 17px;
+          font-size: @--font-size-base;
+          line-height: 20px;
           color: #E0E0E0;
         }
       }

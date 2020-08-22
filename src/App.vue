@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style lang="less">
+  @import "./assets/style/variables";
   * {
     margin: 0;
     padding: 0;
@@ -40,6 +41,7 @@ export default {
     font-family: Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: @--font-size-base;
   }
 
   #app {

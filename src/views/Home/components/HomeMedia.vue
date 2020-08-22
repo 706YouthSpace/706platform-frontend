@@ -42,6 +42,8 @@ export default {
 </script>
 
 <style scoped lang="less">
+  @import ~"@/assets/style/variables";
+
   .home__media {
     background: #FFFFFF;
     &__content {
@@ -60,8 +62,8 @@ export default {
     }
     &__title {
       position: relative;
-      height: 69px;
-      font-size: 38px;
+      height: 82px;
+      font-size: @--font-size-ex-large;
       font-weight: bold;
 
       &::after {
@@ -70,19 +72,17 @@ export default {
         left: 0;
         bottom: 0px;
         width: 92px;
-        height: 7px;
+        height: 8px;
         background: #0B800B;
       }
     }
     &__para {
-      margin-top: 38px;
-      font-size: 12px;
-      line-height: 17px;
+      margin-top: 45px;
+      line-height: 20px;
     }
     &__links {
       margin-top: 30px;
-      font-size: 12px;
-      line-height: 17px;
+      line-height: 20px;
       a {
         color: #027DB4;
       }
@@ -105,8 +105,7 @@ export default {
         flex: 1 1 323px;
         padding: 0 63px 0 14px;
         color: #555;
-        font-size: 12px;
-        line-height: 17px;
+        line-height: 20px;
 
         &::after {
           content: '';
@@ -114,7 +113,7 @@ export default {
           left: 0;
           top: 0;
           width: 1px;
-          height: 96px;
+          height: 114px;
           background: #0B800B;
         }
 

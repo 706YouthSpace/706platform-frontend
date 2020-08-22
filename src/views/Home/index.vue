@@ -38,7 +38,12 @@ export default {
     }
     &> div:nth-child(n+2) {
       position: relative;
-      z-index: 1;
     }
+  }
+</style>
+
+<style lang="less">
+  footer {
+    position: relative;
   }
 </style>

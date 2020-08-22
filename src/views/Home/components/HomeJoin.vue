@@ -53,13 +53,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+  @import ~"@/assets/style/variables";
+
   .home__join {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     background: #fff;
     height: 400px;
+    padding-top: 47px;
+    box-sizing: border-box;
     overflow: hidden;
 
     &__bg {
@@ -85,39 +86,22 @@ export default {
     }
     &__title {
       margin-bottom: 18px;
-      font-size: 30px;
+      font-size: @--font-size-large;
       font-weight: bold;
       text-align: center;
     }
     &__para {
-      font-size: 12px;
-      line-height: 17px;
+      line-height: 20px;
       text-align: center;
-    }
-    &__input {
-      width: 250px;
-      height: 33px;
-      margin-top: 44px;
-      padding: 11px;
-      box-sizing: border-box;
-      font-size: 12px;
-      outline: none;
-      border: none;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, .28);
-      color: #fff;
-      &::placeholder {
-        color: rgba(255, 255, 255, .5);;
-      }
     }
     &__btn {
       border: 1px solid #fff;
       color: #fff;
-      width: 250px;
-      height: 33px;
-      margin: 12px auto 0 auto;
-      line-height: 33px;
-      font-size: 12px;
+      width: 300px;
+      height: 40px;
+      margin: 17px auto 0 auto;
+      line-height: 40px;
+      font-size: 14px;
       box-sizing: border-box;
       cursor: pointer;
       &--reg {

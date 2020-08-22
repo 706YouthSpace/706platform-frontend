@@ -7,7 +7,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
-import '@/assets/css/common.less'
+import '@/assets/style/common.less'
 
 Vue.use(CKEditor)
 Vue.use(ElementUI)

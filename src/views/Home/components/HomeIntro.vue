@@ -160,6 +160,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+  @import ~"@/assets/style/variables";
   .home__intro {
     margin-top: 617px;
     background: #fff;
@@ -172,7 +173,7 @@ export default {
         top: -75px;
         display: flex;
         width: 900px;
-        height: 358px;
+        height: 430px;
         margin: 0 auto;
         background: #fff;
         box-shadow:0px 3px 8px 0px rgba(0, 0, 0, 0.1);
@@ -186,24 +187,21 @@ export default {
           padding: 39px 60px 0 38px;
           .title {
             margin-bottom: 33px;
-            font-size: 20px;
-            line-height: 22px;
+            font-size: @--font-size-medium;
             font-weight: bold;
           }
           .text {
-            font-size: 12px;
-            line-height: 17px;
+            line-height: 20px;
             &:nth-child(n+2) {
               margin-top: 28px;
             }
           }
           .btn {
             width: 117px;
-            margin-top: 81px;
+            margin-top: 97px;
             margin-left: auto;
             padding: 13px 0;
-            font-size: 12px;
-            line-height: 17px;
+            line-height: 20px;
             text-align: center;
             background: #0B800B;
             color: #fff;
@@ -221,7 +219,7 @@ export default {
           position: relative;
           height: 102px;
           line-height: 102px;
-          font-size: 38px;
+          font-size: @--font-size-ex-large;
           font-weight: bold;
           &::after {
             content: '';
@@ -236,8 +234,7 @@ export default {
         .text {
           width: 526px;
           margin-top: 25px;
-          font-size: 12px;
-          line-height: 17px;
+          line-height: 20px;
           color: #555;
           &.active {
             color: #000;
@@ -369,7 +366,7 @@ export default {
             line-height: 17px;
           }
           .text {
-            width: 55%;
+            width: 80%;
             margin: 24px auto 0 auto;
             font-size: 10px;
             line-height: 17px;

@@ -47,20 +47,22 @@ export default {
 </script>
 
 <style scoped lang="less">
+  @import ~"@/assets/style/variables";
+
   .home__project {
     background: #F3F7F9;
 
     &__content {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 47px 0px 140px 0px;
+      padding: 47px 0px 168px 0px;
     }
 
     &__title {
       position: relative;
-      height: 101px;
-      line-height: 101px;
-      font-size: 38px;
+      height: 120px;
+      line-height: 120px;
+      font-size:  @--font-size-ex-large;
       font-weight: bold;
       text-align: center;
 
@@ -70,7 +72,7 @@ export default {
         bottom: 0;
         left: 50%;
         width: 87px;
-        height: 7px;
+        height: 8px;
         background: #0B800B;
         transform: translateX(-50%);
       }
@@ -78,7 +80,7 @@ export default {
 
     &__list {
       display: flex;
-      margin-top: 79px;
+      margin-top: 96px;
 
       .project {
         flex: 1 1;
@@ -88,9 +90,9 @@ export default {
 
         &__title {
           position: relative;
-          font-size: 20px;
+          font-size: 24px;
           font-weight: bold;
-          height: 37px;
+          height: 43px;
           text-align: center;
 
           &::after {
@@ -99,7 +101,7 @@ export default {
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 45%;
+            width: 141px;
             height: 1px;
             background: #0B800B;
           }
@@ -109,23 +111,20 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 92px;
+          height: 116px;
           color: #555555;
-          font-size: 12px;
-          line-height: 17px;
+          line-height: 20px;
         }
 
         &__detail {
-          height: 177px;
-          font-size: 12px;
-          line-height: 17px;
+          height: 212px;
+          line-height: 20px;
           color: #242424;
           text-align: justify;
         }
 
         &__more {
-          font-size: 12px;
-          line-height: 17px;
+          line-height: 20px;
           color: #027DB4;
           text-align: center;
           text-decoration: underline;
