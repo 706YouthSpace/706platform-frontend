@@ -172,7 +172,7 @@ export default {
         position: relative;
         top: -75px;
         display: flex;
-        width: 1080px;
+        width: 900px;
         height: 430px;
         margin: 0 auto;
         background: #fff;
