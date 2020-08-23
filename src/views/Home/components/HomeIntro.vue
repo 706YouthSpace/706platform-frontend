@@ -172,13 +172,13 @@ export default {
         position: relative;
         top: -75px;
         display: flex;
-        width: 900px;
+        width: 1080px;
         height: 430px;
         margin: 0 auto;
         background: #fff;
         box-shadow:0px 3px 8px 0px rgba(0, 0, 0, 0.1);
         .left {
-          flex: 0 0 358px;
+          flex: 0 0 430px;
           background: no-repeat url("~@/assets/images/Home/sec-02.png") center / cover;
         }
 
