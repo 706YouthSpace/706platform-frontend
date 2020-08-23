@@ -114,10 +114,15 @@ import { throttle } from 'lodash'
 
 export default {
   name: 'HomeActivity',
+  props: {
+    bgOffsetY: {
+      type: Number,
+      default: 0
+    }
+  },
   data () {
     return {
-      offsetLimit: 50,
-      bgOffsetY: 0
+      offsetLimit: 50
     }
   },
   created () {
@@ -136,7 +141,7 @@ export default {
       if (bottom < 0 || top > activeArea) {
         return
       }
-      this.bgOffsetY = Math.floor((activeArea - top) * this.offsetLimit / (bottom - top + activeArea))
+      this.$emit('bgOffsetYChange', Math.floor((activeArea - top) * this.offsetLimit / (bottom - top + activeArea)))
     }
   }
 }
