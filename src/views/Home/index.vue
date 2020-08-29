@@ -44,8 +44,9 @@ export default {
       throttle(this.scrollEvent, 50)()
     },
     scrollEvent () {
-      const { top, bottom } = document.getElementById('activity').getBoundingClientRect()
-      if (top <= 0 && bottom > 0) {
+      const wHeight = document.documentElement.clientHeight
+      const { bottom } = document.getElementById('activity').getBoundingClientRect()
+      if (bottom <= wHeight) {
         this.isActivityShadowShow = true
       } else {
         this.isActivityShadowShow = false
@@ -74,7 +75,7 @@ export default {
     &__activity {
       &--fixed {
         position: fixed;
-        top: 0;
+        bottom: 0;
         left: 0;
         width: 100%;
         min-width: 900px;
