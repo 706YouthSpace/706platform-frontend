@@ -9,8 +9,8 @@
     <home-activity class="home__sec home__activity--fixed"
                    :class="{'home__activity--hide': !isActivityShadowShow}"
                    :bgOffsetY="activityBgOffset"/>
+    <home-media class="home__sec home__sec__media home__sec__z2"/>
     <home-project class="home__sec home__sec__z2"/>
-    <home-media class="home__sec home__sec__z2"/>
     <home-join class="home__sec home__sec__z2"/>
   </div>
 </template>
@@ -87,6 +87,10 @@ export default {
     &__sec {
       &__z2 {
         z-index: 2;
+      }
+
+      &__media {
+        box-shadow: -5px 0 100px 0 rgba(0, 0, 0, .3);
       }
     }
   }

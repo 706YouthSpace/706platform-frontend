@@ -151,7 +151,7 @@ export default {
   @import ~"@/assets/style/variables";
 
   .home__activity {
-    padding-top: 33px;
+    padding: 33px 0 200px 0;
     background: #F3F7F9;
 
     &__title {
