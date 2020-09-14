@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>706青年空间</title>
+    <script>
+      var isAndroid = navigator.userAgent.match(/android/ig)
+      var isIos = navigator.userAgent.match(/iphone|ipod/ig);
+      var isWeixin = navigator.userAgent.match(/MicroMessenger/ig);
+      if (isAndroid || isIos || isWeixin) {
+        location.replace('https://alpha.706er.com/m')
+      }
+    </script>
   </head>
   <body>
     <noscript>
