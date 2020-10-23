@@ -17,9 +17,9 @@
           {{route.name}}
         </span>
       </router-link>
-      <span class="header__user">
+      <!-- <span class="header__user">
         <i class="fa fa-user-circle"></i>
-      </span>
+      </span> -->
     </nav>
   </header>
 </template>
@@ -49,6 +49,11 @@ export default {
           name: '居住',
           path: '/live',
           icon: 'home'
+        },
+        {
+          name: '加入我们',
+          path: '/join',
+          icon: 'user-circle'
         }
       ]
     }

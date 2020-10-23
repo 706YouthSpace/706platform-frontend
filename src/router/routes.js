@@ -6,6 +6,7 @@ import Activity from '@/views/Activity'
 import ActivityCreate from '@/views/ActivityCreate'
 import ActivityJoin from '@/views/ActivityJoin/ActivityJoin'
 import ActivityOrganize from '@/views/ActivityOrganize/ActivityOrganize'
+import Join from '@/views/Join'
 import NotFound from '@/views/NotFound'
 
 export default [
@@ -67,6 +68,10 @@ export default [
         }
       }
     ]
+  },
+  {
+    path: '/join',
+    component: Join
   },
   {
     path: '/*',
