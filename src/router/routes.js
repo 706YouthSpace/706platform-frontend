@@ -1,4 +1,5 @@
 import Home from '@/views/Home'
+import Register from '@/views/Register'
 import ActivityDetail from '@/views/ActivityDetail'
 import ActivityList from '@/views/ActivityList'
 import Activity from '@/views/Activity'
@@ -17,6 +18,13 @@ export default [
     component: Home,
     meta: {
       title: '首页'
+    }
+  },
+  {
+    path: '/reg',
+    component: Register,
+    meta: {
+      title: '注册'
     }
   },
   {
@@ -59,8 +67,8 @@ export default [
         }
       }
     ]
-
-  }, {
+  },
+  {
     path: '/*',
     component: NotFound
   }
