@@ -5,8 +5,13 @@
       <p class="home__slogan__cn">探索生活的更多可能性</p>
       <p class="home__slogan__en">706 Youth Space, exploring for more possibility of life.</p>
       <div class="home__slogan__medias">
-        <a class="icon" href="" target="_blank">
-          <i class="icon fa fa-wechat"></i>
+        <a class="icon" href="">
+          <el-popover
+            width="100"
+            placement="bottom"
+            trigger="hover">
+            <i slot="reference" class="icon fa fa-wechat"></i>
+          </el-popover>
         </a>
         <a class="icon" href="https://www.facebook.com/706youthspace/" target="_blank">
           <i class="icon fa fa-facebook-square"></i>

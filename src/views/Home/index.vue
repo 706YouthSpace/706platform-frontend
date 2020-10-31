@@ -2,16 +2,17 @@
   <div class="home">
     <home-slogan class="home__sec home__sec__slogan"/>
     <home-intro class="home__sec"/>
-    <home-activity id="activity"
+    <!-- <home-activity id="activity"
                    class="home__sec"
                    @bgOffsetYChange="handleBgOffsetYChange"
-                   :bgOffsetY="activityBgOffset"/>
-    <home-activity class="home__sec home__activity--fixed"
+                   :bgOffsetY="activityBgOffset"/> -->
+    <!-- <home-activity class="home__sec home__activity--fixed"
                    :class="{'home__activity--hide': !isActivityShadowShow}"
-                   :bgOffsetY="activityBgOffset"/>
+                   :bgOffsetY="activityBgOffset"/> -->
     <home-media class="home__sec home__sec__media home__sec__z2"/>
-    <home-project class="home__sec home__sec__z2"/>
-    <home-join class="home__sec home__sec__z2"/>
+    <!-- <home-project class="home__sec home__sec__z2"/> -->
+    <!-- <home-join class="home__sec home__sec__z2"/> -->
+    <home-pay class="home__sec home__sec__z2"/>
   </div>
 </template>
 
@@ -19,14 +20,23 @@
 
 import HomeSlogan from './components/HomeSlogan'
 import HomeIntro from './components/HomeIntro'
-import HomeActivity from './components/HomeActivity'
-import HomeProject from './components/HomeProject'
+// import HomeActivity from './components/HomeActivity'
+// import HomeProject from './components/HomeProject'
 import HomeMedia from './components/HomeMedia'
-import HomeJoin from './components/HomeJoin'
+// import HomeJoin from './components/HomeJoin'
+import HomePay from './components/HomePay'
 import { throttle } from 'lodash'
 export default {
   name: 'Home',
-  components: { HomeJoin, HomeMedia, HomeProject, HomeActivity, HomeIntro, HomeSlogan },
+  components: {
+    HomePay,
+    // HomeJoin,
+    HomeMedia,
+    // HomeProject,
+    // HomeActivity,
+    HomeIntro,
+    HomeSlogan
+  },
   data () {
     return {
       isActivityShadowShow: false,

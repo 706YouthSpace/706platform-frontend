@@ -1,9 +1,18 @@
 <template>
-    <div class="login">
-      <div class="login__img">
-        <img src="@/assets/images/Login/bg.png"/>
+    <div class="reg">
+      <div class="reg__content">
+        <div class="reg__img">
+          <img src="@/assets/images/Login/bg.png"/>
+        </div>
+        <div class="reg__form">
+          <el-form>
+            <yth-button></yth-button>
+            <el-form-item>
+              <el-input placeholder="邀请码"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
-      <div class="login__form"></div>
     </div>
 </template>
 
@@ -14,12 +23,18 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .login {
+  .reg {
     display: flex;
-    align-items: flex-start;
-    max-width: 1200px;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
     background: #fff;
+    &__content {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
     &__img {
       flex: 1 1;
       img {

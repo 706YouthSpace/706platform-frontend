@@ -30,31 +30,31 @@ export default {
   data () {
     return {
       routes: [
-        {
-          name: '广场',
-          path: '/square',
-          icon: 'map-signs'
-        },
-        {
-          name: '圈子',
-          path: '/social',
-          icon: 'spinner'
-        },
-        {
-          name: '活动',
-          path: '/activity/list',
-          icon: 'coffee'
-        },
-        {
-          name: '居住',
-          path: '/live',
-          icon: 'home'
-        },
-        {
-          name: '加入我们',
-          path: '/join',
-          icon: 'user-circle'
-        }
+        // {
+        //   name: '广场',
+        //   path: '/square',
+        //   icon: 'map-signs'
+        // },
+        // {
+        //   name: '圈子',
+        //   path: '/social',
+        //   icon: 'spinner'
+        // },
+        // {
+        //   name: '活动',
+        //   path: '/activity/list',
+        //   icon: 'coffee'
+        // },
+        // {
+        //   name: '居住',
+        //   path: '/live',
+        //   icon: 'home'
+        // },
+        // {
+        //   name: '加入我们',
+        //   path: '/join',
+        //   icon: 'user-circle'
+        // }
       ]
     }
   },

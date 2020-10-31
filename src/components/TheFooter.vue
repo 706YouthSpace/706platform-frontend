@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="footer__list">
+    <!-- <div class="footer__list">
       <div class="item col-3">
         <p class="item__title">
           官方团队
@@ -39,7 +39,7 @@
           <p class="name">获得帮助</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="footer__copyright">
       <p>706文化传播有限公司 版权所有 Copyright 2012-2020 All Rights Reserved</p>
       <p>京ICP证03157号｜京ICP备11043884号｜京公网安备110105023734号</p>
@@ -62,7 +62,8 @@ export default {
 
 <style scoped lang="less">
   .footer {
-    padding-bottom: 14px;
+    padding: 20px 0 40px 0;
+    // padding-bottom: 14px;
     border-top: 6px solid #0B800B;
     background: #333333;
 
