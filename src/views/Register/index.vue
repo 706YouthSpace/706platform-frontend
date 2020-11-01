@@ -5,12 +5,7 @@
           <img src="@/assets/images/Login/bg.png"/>
         </div>
         <div class="reg__form">
-          <el-form>
-            <yth-button></yth-button>
-            <el-form-item>
-              <el-input placeholder="邀请码"></el-input>
-            </el-form-item>
-          </el-form>
+          <yth-input></yth-input>
         </div>
       </div>
     </div>

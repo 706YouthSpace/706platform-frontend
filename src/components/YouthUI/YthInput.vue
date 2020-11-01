@@ -1,17 +1,17 @@
 <template>
-  <div class="yth-button">
-    button
+  <div class="yth-input">
+    <input />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'YthButton',
+  name: 'YthInput',
   methods: {}
 }
 </script>
 
 <style scoped lang="less">
-  .yth-button {
+  .yth-input {
   }
 </style>

@@ -1,7 +1,7 @@
-import YthButton from './YthButton'
+import YthInput from './YthInput'
 
 const components = [
-  YthButton
+  YthInput
 ]
 
 const install = function (Vue) {

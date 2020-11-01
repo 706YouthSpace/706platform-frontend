@@ -10,6 +10,7 @@
             width="100"
             placement="bottom"
             trigger="hover">
+            <img style="width: 100%;" src="@/assets/images/Join/qr_code.jpeg" />
             <i slot="reference" class="icon fa fa-wechat"></i>
           </el-popover>
         </a>

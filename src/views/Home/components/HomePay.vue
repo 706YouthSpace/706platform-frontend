@@ -10,10 +10,11 @@
       <div class="home__join__btn" @click="showPayQrCode">支付￥20加入社群</div>
     </div>
     <el-dialog
+      width="300px"
       title="请微信扫码支付"
       :append-to-body="true"
       :visible.sync="payQrCodeShow">
-      <img style="width: 100%" src="@/assets/images/Join/collection_code.jpg"/>
+      <img style="width: 100%" src="@/assets/images/Join/collection_code.jpeg"/>
     </el-dialog>
   </div>
 </template>
