@@ -7,7 +7,7 @@ function resolve (dir) {
 
 module.exports = {
   devServer: {
-    port: 9527,
+    port: 8080,
     proxy: {
       '/api': {
         target: 'http://localhost:3001/',
