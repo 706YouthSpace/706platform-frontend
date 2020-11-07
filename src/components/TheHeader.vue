@@ -5,6 +5,9 @@
       <h1>706青年空间</h1>
     </router-link>
     <nav class="header__tab">
+      <a class="header__tab__item" href="#intro">介绍</a>
+      <a class="header__tab__item" href="#media">影响力</a>
+      <a class="header__tab__item" href="#join">付费加入</a>
       <router-link
         class="header__tab__item"
         v-for="route in routes"

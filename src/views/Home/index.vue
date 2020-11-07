@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <home-slogan class="home__sec home__sec__slogan"/>
-    <home-intro class="home__sec"/>
+    <home-intro id="intro" class="home__sec"/>
     <!-- <home-activity id="activity"
                    class="home__sec"
                    @bgOffsetYChange="handleBgOffsetYChange"
@@ -9,10 +9,10 @@
     <!-- <home-activity class="home__sec home__activity--fixed"
                    :class="{'home__activity--hide': !isActivityShadowShow}"
                    :bgOffsetY="activityBgOffset"/> -->
-    <home-media class="home__sec home__sec__media home__sec__z2"/>
+    <home-media id="media" class="home__sec home__sec__media home__sec__z2"/>
     <!-- <home-project class="home__sec home__sec__z2"/> -->
     <!-- <home-join class="home__sec home__sec__z2"/> -->
-    <home-pay class="home__sec home__sec__z2"/>
+    <home-pay id="join" class="home__sec home__sec__z2"/>
   </div>
 </template>
 
