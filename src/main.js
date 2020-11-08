@@ -7,7 +7,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue'
 import ElementUI from 'element-ui'
 import YouthUI from '@/components/YouthUI'
 import 'element-ui/lib/theme-chalk/index.css'
-import 'font-awesome/css/font-awesome.min.css'
+import 'font-awesome/css/font-awesome.css'
 import '@/assets/style/common.less'
 
 Vue.use(CKEditor)

@@ -376,7 +376,6 @@ export default {
       if (query === '') {
         return
       }
-      console.log('hhhh')
       setTimeout(() => {
         this.fatherActivity.options = [
           {

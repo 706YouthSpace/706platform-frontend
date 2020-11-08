@@ -10,7 +10,12 @@
       @focus="handleFocus"
       @blur="handleBlur"/>
     <span class="yth-input__suffix">
-      <slot name="suffix"></slot>
+      <slot name="suffix">
+        <span v-if="type==='password'" class="yth-input__icon">
+          <i v-if="isPassword" class="fa fa-eye" @click="setInputType('text')"></i>
+          <i v-else class="fa fa-eye-slash" @click="setInputType('password')"></i>
+        </span>
+      </slot>
     </span>
   </div>
 </template>
@@ -36,6 +41,11 @@ export default {
       nativeType: ''
     }
   },
+  computed: {
+    isPassword () {
+      return this.nativeType === 'password'
+    }
+  },
   methods: {
     handleFocus () {
       this.isFocus = true
@@ -52,6 +62,9 @@ export default {
       if (!input) return
       if (input.value === this.value) return
       input.value = this.value
+    },
+    setInputType (type = '') {
+      this.nativeType = type
     }
   }
 }
@@ -87,6 +100,9 @@ export default {
       flex: 0 0 auto;
       padding-right: 15px;
       color: #7b7b7b;
+    }
+    &__icon {
+      cursor: pointer;
     }
   }
 </style>

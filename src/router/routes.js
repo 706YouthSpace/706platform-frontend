@@ -1,5 +1,6 @@
 import Home from '@/views/Home'
 import Register from '@/views/Register'
+import Login from '@/views/Login'
 import ActivityDetail from '@/views/ActivityDetail'
 import ActivityList from '@/views/ActivityList'
 import Activity from '@/views/Activity'
@@ -24,6 +25,13 @@ export default [
   {
     path: '/reg',
     component: Register,
+    meta: {
+      title: '注册'
+    }
+  },
+  {
+    path: '/login',
+    component: Login,
     meta: {
       title: '注册'
     }
