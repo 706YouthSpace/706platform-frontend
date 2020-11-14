@@ -11,8 +11,16 @@
                    :bgOffsetY="activityBgOffset"/> -->
     <home-media id="media" class="home__sec home__sec__media home__sec__z2"/>
     <!-- <home-project class="home__sec home__sec__z2"/> -->
+    <home-consulting id="consulting" class="home__sec home__sec__z2" @showPayQrCode="showPayQrCode"/>
     <!-- <home-join class="home__sec home__sec__z2"/> -->
-    <home-pay id="join" class="home__sec home__sec__z2"/>
+    <home-pay id="join" class="home__sec home__sec__z2" @showPayQrCode="showPayQrCode"/>
+    <el-dialog
+      width="300px"
+      title="请微信扫码支付"
+      :append-to-body="true"
+      :visible.sync="payQrCodeShow">
+      <img style="width: 100%" src="@/assets/images/Join/collection_code.jpeg"/>
+    </el-dialog>
   </div>
 </template>
 
@@ -26,6 +34,7 @@ import HomeMedia from './components/HomeMedia'
 // import HomeJoin from './components/HomeJoin'
 import HomePay from './components/HomePay'
 import { throttle } from 'lodash'
+import HomeConsulting from './components/HomeConsulting.vue'
 export default {
   name: 'Home',
   components: {
@@ -35,19 +44,15 @@ export default {
     // HomeProject,
     // HomeActivity,
     HomeIntro,
+    HomeConsulting,
     HomeSlogan
   },
   data () {
     return {
       isActivityShadowShow: false,
-      activityBgOffset: 0
+      activityBgOffset: 0,
+      payQrCodeShow: false
     }
-  },
-  created () {
-    document.addEventListener('scroll', this.scrollEvent, false)
-  },
-  destroyed () {
-    document.removeEventListener('scroll', this.scrollEvent, false)
   },
   methods: {
     throttleScrollEvent () {
@@ -64,6 +69,10 @@ export default {
     },
     handleBgOffsetYChange (offset) {
       this.activityBgOffset = offset
+    },
+    showPayQrCode () {
+      console.log('aaa')
+      this.payQrCodeShow = true
     }
   }
 }

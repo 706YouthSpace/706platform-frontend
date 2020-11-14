@@ -7,6 +7,7 @@
     <nav class="header__tab">
       <a class="header__tab__item" href="#intro">介绍</a>
       <a class="header__tab__item" href="#media">影响力</a>
+      <a class="header__tab__item" href="#consulting">付费咨询</a>
       <a class="header__tab__item" href="#join">付费加入</a>
       <router-link
         class="header__tab__item"

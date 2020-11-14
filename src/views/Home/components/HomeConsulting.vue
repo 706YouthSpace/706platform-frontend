@@ -1,7 +1,7 @@
 <template>
-  <div class="home__project">
+  <div class="home__project" id="">
     <div class="home__project__content">
-      <p class="home__project__title">事业&amp;项目</p>
+      <p class="home__project__title">付费咨询</p>
       <div class="home__project__list">
         <div class="project">
           <p class="project__title">线上社区</p>
@@ -9,7 +9,7 @@
           <p class="project__detail">
             有时我骑自行车去客户的办公室，有时我步行去MING工作室。根据我当天在哪里工作，我会路过著名的Eisbach河，人们一大早就在那里冲浪(即使是在冬天……嘿嘿)。当我走到办公室时，我穿过Viktualienmarkt食品市场，这里在一天的这个时候相当平静。
           </p>
-          <p class="project__more" @click="showPay">了解更多</p>
+          <p class="project__more" @click="showPayQrCode">支付￥20查看完整内容</p>
         </div>
         <div class="project">
           <p class="project__title">青年空间旗舰店</p>
@@ -17,7 +17,7 @@
           <p class="project__detail">
             有时我骑自行车去客户的办公室，有时我步行去MING工作室。根据我当天在哪里工作，我会路过著名的Eisbach河，人们一大早就在那里冲浪(即使是在冬天……嘿嘿)。当我走到办公室时，我穿过Viktualienmarkt食品市场，这里在一天的这个时候相当平静。
           </p>
-          <p class="project__more">了解更多</p>
+          <p class="project__more" @click="showPayQrCode">支付￥20查看完整内容</p>
         </div>
         <div class="project">
           <p class="project__title">生活实验室</p>
@@ -25,7 +25,7 @@
           <p class="project__detail">
             有时我骑自行车去客户的办公室，有时我步行去MING工作室。根据我当天在哪里工作，我会路过著名的Eisbach河，人们一大早就在那里冲浪(即使是在冬天……嘿嘿)。当我走到办公室时，我穿过Viktualienmarkt食品市场，这里在一天的这个时候相当平静。
           </p>
-          <p class="project__more">了解更多</p>
+          <p class="project__more" @click="showPayQrCode">支付￥20查看完整内容</p>
         </div>
         <div class="project">
           <p class="project__title">虚拟城市</p>
@@ -33,7 +33,7 @@
           <p class="project__detail">
             有时我骑自行车去客户的办公室，有时我步行去MING工作室。根据我当天在哪里工作，我会路过著名的Eisbach河，人们一大早就在那里冲浪(即使是在冬天……嘿嘿)。当我走到办公室时，我穿过Viktualienmarkt食品市场，这里在一天的这个时候相当平静。
           </p>
-          <p class="project__more">了解更多</p>
+          <p class="project__more" @click="showPayQrCode">支付￥20查看完整内容</p>
         </div>
       </div>
     </div>
@@ -42,7 +42,12 @@
 
 <script>
 export default {
-  name: 'HomeProject'
+  name: 'HomeConsulting',
+  methods: {
+    showPayQrCode () {
+      this.$emit('showPayQrCode')
+    }
+  }
 }
 </script>
 
