@@ -41,7 +41,7 @@
       </div>
     </div> -->
     <div class="footer__copyright">
-      <p>706文化传播有限公司 版权所有 Copyright 2012-2020 All Rights Reserved</p>
+      <p>柒零六文化传播（北京）有限公司 版权所有 Copyright 2012-2020 All Rights Reserved</p>
       <p>京ICP证03157号｜京ICP备11043884号｜京公网安备110105023734号</p>
     </div>
   </footer>
