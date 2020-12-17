@@ -1,0 +1,144 @@
+//用于覆盖 element ui 样式
+@mainColor: #0b800b;
+@mainHoverColor: #0b800b1a;
+@mainHoverBorderColor: #0b800b33;
+
+ul {
+  list-style: none;
+}
+
+#app {
+  .el-select {
+    .el-input.is-focus .el-input {
+      &__inner {
+        border-color: @mainColor;
+      }
+    }
+  }
+
+  .el-input {
+    &__inner {
+      &:focus {
+        border-color: @mainColor;
+      }
+    }
+
+    &.is-active {
+      .el-input {
+        &__inner {
+          border-color: @mainColor;
+        }
+      }
+    }
+  }
+
+  .el-button {
+    &--success {
+      background-color: @mainColor;
+
+      &:focus, &:hover {
+        background-color: @mainHoverColor;
+      }
+    }
+    &:focus, &:hover {
+      color: @mainColor;
+      background-color: @mainHoverColor;
+      border-color: @mainHoverBorderColor;
+    }
+  }
+
+
+  .el-radio-button {
+    &__inner {
+      &:hover {
+        color: @mainColor;
+      }
+    }
+
+    &__orig-radio:checked + .el-radio-button__inner {
+      border-color: @mainColor;
+      background-color: @mainColor;
+      color: #fff;
+    }
+  }
+
+  .el-checkbox {
+    &__inner {
+      &:hover {
+        border-color: @mainColor;
+      }
+    }
+
+    &__input {
+      &.is-focus {
+        .el-checkbox__inner {
+          border-color: @mainColor;
+        }
+      }
+
+      &.is-checked {
+        .el-checkbox__inner {
+          background-color: @mainColor;
+          border-color: @mainColor;
+        }
+
+        & + .el-checkbox__label {
+          color: @mainColor;
+        }
+      }
+    }
+  }
+
+  .el-date-table td.today span {
+    color: @mainColor;
+  }
+
+  .el-pagination {
+    &.is-background {
+      .el-pager {
+        li:not(.disabled):hover {
+          color: @mainColor;
+        }
+
+        li:not(.disabled).active {
+          background-color: @mainColor;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+body {
+  .el-select-dropdown {
+    &__item {
+      &.selected {
+        color: @mainColor;
+      }
+    }
+  }
+
+  .el-date-table {
+    td {
+      &.today {
+        span {
+          color: @mainColor;
+        }
+      }
+
+      &.current {
+        &:not(.disabled) {
+          span {
+            background-color: @mainColor;
+          }
+        }
+      }
+
+      &.available {
+        &:hover {
+          color: @mainColor;
+        }
+      }
+    }
+  }
+}
