@@ -23,11 +23,11 @@
             <div style="color: #222222;font-weight: bold;">工作经历</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__position">•{{workExperience[0].position}}&nbsp; &nbsp;
+            <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{workExperience[0].occupation}}</div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">&nbsp;</div>
+            <div>&nbsp;</div>
           </el-col>
         </el-row>
         <el-row v-if="workExperience.length>0">
@@ -36,7 +36,7 @@
             <div class="people__content__story">{{workExperience[0].story}}</div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">&nbsp; </div>
+            <div>&nbsp; </div>
           </el-col>
         </el-row>
         <!-- 无工作经历时显示空 -->
@@ -45,11 +45,11 @@
             <div style="color: #222222;font-weight: bold;">工作经历</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__position">•空&nbsp; &nbsp;
+            <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
               &nbsp; &nbsp;</div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">&nbsp;</div>
+            <div>&nbsp;</div>
           </el-col>
         </el-row>
         <!-- 多条工作经历时 -->
@@ -57,18 +57,136 @@
                 :key="role.Id">
           <el-col :span="16"
                   offset="4">
-            <div class="people__content__position">•{{role.position}}&nbsp; &nbsp;
+            <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{role.occupation}}</div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">&nbsp;</div>
+            <div>&nbsp;</div>
           </el-col>
           <el-col :span="16"
                   offset="4">
             <div class="people__content__story">{{role.story}}</div>
           </el-col>
           <el-col :span="4">
-            <div class="grid-content bg-purple">&nbsp;</div>
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <!-- 空白行 -->
+        <el-row class="people__content__blank">
+          <div>&nbsp;</div>
+        </el-row>
+        <!-- 教育经历开始 -->
+        <el-row v-if="educationExperience.length>0">
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">教育经历</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{educationExperience[0].education}}&nbsp;•
+              {{educationExperience[0].professional}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <!-- 无教育经历时显示空 -->
+        <el-row v-else>
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">教育经历</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__education"><span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <!-- 多条工作经历时 -->
+        <el-row v-for="item in newEducationExperiences"
+                :key="item.Id">
+          <el-col :span="16"
+                  offset="4">
+            <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{item.education}}&nbsp;•
+              {{item.professional}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+
+        <!-- 空白行 -->
+        <el-row class="people__content__blank">
+          <div>&nbsp;</div>
+        </el-row>
+
+        <!-- 现居住地开始 -->
+        <el-row v-if="educationExperience.length>0">
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">现居住地</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__residencePlace"><span class="people__content__point">•</span>&nbsp;&nbsp;{{residencePlace.city}}&nbsp;
+              •{{residencePlace.region}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <!-- 未填写显示空 -->
+        <el-row v-else>
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">现居住地</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__residencePlace"><span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+
+        <!-- 空白行 -->
+        <el-row class="people__content__blank">
+          <div>&nbsp;</div>
+        </el-row>
+
+        <!-- 工作经历开始 -->
+        <el-row v-if="workExperience.length>0">
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">工作经历</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
+              &nbsp; &nbsp; {{workExperience[0].occupation}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <!-- 无工作经历时显示空 -->
+        <el-row v-else>
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">工作经历</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <!-- 多条工作经历时 -->
+        <el-row v-for="role in newWorkExperience"
+                :key="role.Id">
+          <el-col :span="16"
+                  offset="4">
+            <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
+              &nbsp; &nbsp; {{role.occupation}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
           </el-col>
         </el-row>
       </div>
@@ -93,7 +211,7 @@ export default {
       workExperience: [
         {
           Id: 1,
-          position: '项目',
+          position: '项目1',
           occupation: '角色1 ',
           story: '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         },
@@ -109,13 +227,36 @@ export default {
           occupation: '角色',
           story: '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         }
-      ]
+      ],
+      educationExperience: [
+        {
+          Id: 1,
+          education: '翻斗大学',
+          professional: '土豆专业 '
+        }, {
+          Id: 2,
+          education: '翻斗大学研究生',
+          professional: '土豆专业 '
+        }
+      ],
+      residencePlace: {
+        city: '北京',
+        region: '海淀区'
+      },
+      contactAccount: [{}]
     }
   },
   computed: {
     newWorkExperience () {
       if (this.workExperience.length > 1) {
         return this.workExperience.slice(1)
+      } else {
+        return []
+      }
+    },
+    newEducationExperiences () {
+      if (this.educationExperience.length > 1) {
+        return this.educationExperience.slice(1)
       } else {
         return []
       }
@@ -158,6 +299,12 @@ export default {
   &__content {
     text-align: center;
     padding-top: 27px;
+    &__blank {
+      height: 25px;
+    }
+    &__point {
+      margin-right: 18px;
+    }
     &__name {
       font-size: 32px;
       font-weight: bold;
@@ -191,6 +338,13 @@ export default {
       font-weight: 400;
       line-height: 20px;
     }
+    &__education {
+      text-align: left;
+      color: #222222;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
     &__story {
       margin-top: 5px;
       font-size: 12px;
@@ -198,7 +352,15 @@ export default {
       font-weight: 400;
       color: #383838;
       line-height: 18px;
+      margin-left: 24px;
       margin-bottom: 10px;
+    }
+    &__residencePlace {
+      text-align: left;
+      color: #222222;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
     }
   }
   &__article {
