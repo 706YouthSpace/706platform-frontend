@@ -32,7 +32,7 @@
         </el-row>
         <el-row v-if="workExperience.length>0">
           <el-col :span="16"
-                  offset="4">
+                  :offset="4">
             <div class="people__content__story">{{workExperience[0].story}}</div>
           </el-col>
           <el-col :span="4">
@@ -56,7 +56,7 @@
         <el-row v-for="role in newWorkExperience"
                 :key="role.Id">
           <el-col :span="16"
-                  offset="4">
+                  :offset="4">
             <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{role.occupation}}</div>
           </el-col>
@@ -64,7 +64,7 @@
             <div>&nbsp;</div>
           </el-col>
           <el-col :span="16"
-                  offset="4">
+                  :offset="4">
             <div class="people__content__story">{{role.story}}</div>
           </el-col>
           <el-col :span="4">
@@ -101,11 +101,11 @@
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-        <!-- 多条工作经历时 -->
+        <!-- 多条教育经历时 -->
         <el-row v-for="item in newEducationExperiences"
                 :key="item.Id">
           <el-col :span="16"
-                  offset="4">
+                  :offset="4">
             <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{item.education}}&nbsp;•
               {{item.professional}}</div>
           </el-col>
@@ -151,39 +151,60 @@
           <div>&nbsp;</div>
         </el-row>
 
-        <!-- 工作经历开始 -->
-        <el-row v-if="workExperience.length>0">
+        <!-- 社交账号开始 -->
+        <el-row v-if="contactAccounts.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">工作经历</div>
+            <div style="color: #222222;font-weight: bold;">社交账号</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{workExperience[0].occupation}}</div>
+            <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
+              &nbsp; &nbsp; {{contactAccounts[0].account}}</div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-        <!-- 无工作经历时显示空 -->
+        <!-- 无社交账号时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">工作经历</div>
+            <div style="color: #222222;font-weight: bold;">社交账号</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
+            <div class="people__content__account"><span class="people__content__point">•</span>空&nbsp; &nbsp;
               &nbsp; &nbsp;</div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-        <!-- 多条工作经历时 -->
-        <el-row v-for="role in newWorkExperience"
-                :key="role.Id">
+        <!-- 多条社交账号时 -->
+        <el-row v-for="account in newContactAccounts"
+                :key="account.Id">
           <el-col :span="16"
-                  offset="4">
-            <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{role.occupation}}</div>
+                  :offset="4">
+            <div class="people__content__account"><span class="people__content__point">•</span>{{account.platform}}&nbsp; &nbsp;
+              &nbsp; &nbsp; {{account.account}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+
+        <!-- 空白行 -->
+        <el-row class="people__content__blank">
+          <div>&nbsp;</div>
+        </el-row>
+
+        <!-- 社交圈 -->
+
+        <!-- 社交账号开始 -->
+        <el-row v-if="contactAccounts.length>0">
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">社交账号</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
+              &nbsp; &nbsp; {{contactAccounts[0].account}}</div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -230,11 +251,11 @@ export default {
       ],
       educationExperience: [
         {
-          Id: 1,
+          Id: 4,
           education: '翻斗大学',
           professional: '土豆专业 '
         }, {
-          Id: 2,
+          Id: 5,
           education: '翻斗大学研究生',
           professional: '土豆专业 '
         }
@@ -243,7 +264,21 @@ export default {
         city: '北京',
         region: '海淀区'
       },
-      contactAccount: [{}]
+      contactAccounts: [{
+        Id: 6,
+        platform: 'QQ',
+        account: '2505807508 '
+      },
+      {
+        Id: 7,
+        platform: '微信',
+        account: '12346546456 '
+      }, {
+        Id: 8,
+        platform: '即刻',
+        account: '123336 '
+      }]
+
     }
   },
   computed: {
@@ -257,6 +292,13 @@ export default {
     newEducationExperiences () {
       if (this.educationExperience.length > 1) {
         return this.educationExperience.slice(1)
+      } else {
+        return []
+      }
+    },
+    newContactAccounts () {
+      if (this.contactAccounts.length > 1) {
+        return this.contactAccounts.slice(1)
       } else {
         return []
       }
@@ -344,6 +386,7 @@ export default {
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
+      margin-bottom: 8px;
     }
     &__story {
       margin-top: 5px;
@@ -358,6 +401,23 @@ export default {
     &__residencePlace {
       text-align: left;
       color: #222222;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    &__account {
+      text-align: left;
+      color: #222222;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    &__account:hover {
+      text-align: left;
+      color: #222222;
+      background-color: #ddd;
+      margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
