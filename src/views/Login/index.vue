@@ -31,7 +31,7 @@
             </yth-input>
             <yth-input v-model="verifyForm.code" class="login__form-item" placeholder="*短信验证码">
               <span slot="suffix">
-                <span class="login__form__code">点击获取</span>
+                <span class="login__form__code"  @click="sendPhoneCode">{{timerText}}</span>
               </span>
             </yth-input>
           </div>
@@ -56,31 +56,31 @@
         </div>
       </div>
       <el-dialog
-        class="reg__captcha"
+        class="login__captcha"
         title="请输入图形验证码："
         width="300px"
         :visible.sync="captchaDialog.show"
         @closed="clearCaptchaData"
         >
         <canvas
-          class="reg__captcha__canvas"
+          class="login__captcha__canvas"
           ref="regCaptchaCanvas"
           :width="captchaDialog.canvas.width"
           :height="captchaDialog.canvas.height"
-          @click="refreshCaptcha(form.phone)"
+          @click="refreshCaptcha(verifyForm.phone)"
         >
         </canvas>
-        <span class="reg__captcha__refresh" @click="refreshCaptcha(form.phone)">（点击刷新验证码）</span>
+        <span class="login__captcha__refresh" @click="refreshCaptcha(verifyForm.phone)">（点击刷新验证码）</span>
         <yth-input
-          class="reg__form-item"
+          class="login__form-item"
           placeholder="*输入验证码"
           v-model="captchaDialog.inputValue">
         </yth-input>
-        <p class="reg__captcha__error" v-if="captchaDialog.error">
+        <p class="login__captcha__error" v-if="captchaDialog.error">
           {{captchaDialog.error}}
         </p>
         <div
-          class="reg__captcha__footer"
+          class="login__captcha__footer"
           slot="footer"
         >
           <el-button type="success" size="small" @click="handleSendCode">确认</el-button>
@@ -92,6 +92,7 @@
 
 <script>
 import validate from 'validate.js'
+import { getCaptcha, sendCode, signUpPhone } from '@/http'
 
 export default {
   name: 'index',
@@ -101,6 +102,18 @@ export default {
       verifyForm: {
         phone: '',
         code: ''
+      },
+      constraints: {
+        phone: {
+          presence: {
+            allowEmpty: false,
+            message: '^手机号码不能为空'
+          },
+          format: {
+            pattern: /^[1]([3-9])[0-9]{9}$/,
+            message: '^电话号码格式错误'
+          }
+        }
       },
       pwdForm: {
         email: '',
@@ -131,54 +144,149 @@ export default {
     }
   },
   methods: {
+    sendPhoneCode () {
+      const errors = validate.single(this.verifyForm.phone, this.constraints.phone)
+      if (errors && errors.length) {
+        this.errors = errors
+        return
+      }
+      if (this.timer) {
+        return
+      }
+      this.captchaDialog.show = true
+      this.$nextTick(() => {
+        this.refreshCaptcha(this.verifyForm.phone)
+      })
+    },
+    clearCaptchaData () {
+      this.captchaDialog.captcha = ''
+      this.captchaDialog.inputValue = ''
+      this.captchaDialog.error = ''
+    },
+    async handleSendCode (phone) {
+      const { captcha, inputValue } = this.captchaDialog
+      if (!inputValue || !inputValue.length) {
+        this.captchaDialog.error = '验证码不能为空'
+        return
+      }
+      if (captcha !== inputValue) {
+        this.captchaDialog.error = '验证码错误'
+        return
+      }
+      this.captchaDialog.error = ''
+      await sendCode(inputValue)
+      this.captchaDialog.show = false
+
+      this.timerText = `${this.timeCount}s 后重新发送`
+      this.timer = setInterval(() => {
+        this.timeCount--
+        this.timerText = `${this.timeCount}s 后重新发送`
+        if (this.timeCount < 0) {
+          clearInterval(this.timer)
+          this.timer = null
+          this.timeCount = 5
+          this.timerText = '点击获取'
+        }
+      }, 1000)
+    },
+    async refreshCaptcha (phone) {
+      if (!phone) {
+        return
+      }
+      try {
+        const res = await getCaptcha(phone)
+        const code = res.data
+        this.captchaDialog.captcha = code
+        this.renderCaptcha(code)
+      } catch (e) {}
+    },
+    renderCaptcha (captcha) {
+      const canvas = this.$refs.regCaptchaCanvas
+      const context = canvas.getContext('2d')
+      const captchaArr = captcha.split('')
+      const { width, height } = this.captchaDialog.canvas
+      context.clearRect(0, 0, width, height)
+
+      captchaArr.forEach((v, i) => {
+        const deg = Math.random() - 0.5
+        const x = 10 + i * 20
+        const y = Math.floor(height / 2) + (Math.random() * 8 + 8)
+        context.font = 'bold 40px 微软雅黑'
+
+        context.translate(x, y)
+        context.rotate(deg)
+        context.fillStyle = this.getRandomColor()
+        context.fillText(v, 0, 0)
+
+        context.rotate(-deg)
+        context.translate(-x, -y)
+      })
+      this.renderCanvasBackgroundLines(context, width, height)
+      this.renderCanvasBackgroundPonts(context, width, height)
+    },
+    renderCanvasBackgroundLines (context, width, height) {
+      for (let i = 0; i < 5; i++) {
+        context.strokeStyle = this.getRandomColor()
+        context.beginPath()
+        context.moveTo(Math.random() * width, Math.random() * height)
+        context.lineTo(Math.random() * width, Math.random() * height)
+        context.stroke()
+      }
+    },
+    renderCanvasBackgroundPonts (context, width, height) {
+      for (let i = 0; i < 30; i++) {
+        context.strokeStyle = this.getRandomColor()
+        context.beginPath()
+        const x = Math.random() * width
+        const y = Math.random() * height
+        context.moveTo(x, y)
+        context.lineTo(x + 1, y + 1)
+        context.stroke()
+      }
+    },
+    getRandomColor () {
+      const r = Math.floor(Math.random() * 256)
+      const g = Math.floor(Math.random() * 256)
+      const b = Math.floor(Math.random() * 256)
+      return `rgb(${r},${g},${b})`
+    },
     changeLoginType (type = 'verify') {
       this.loginType = type
     },
-    handleSubmit () {
-      let constraints = {}
-      let form = {}
-      if (this.isVerifyLogin) {
-        form = this.verifyForm
-        constraints = {
-          phone: {
-            length: {
-              minimium: 1,
-              tooShort: '^电话号码不能为空'
-            },
-            format: {
-              pattern: /^[1]([3-9])[0-9]{9}$/,
-              message: '^电话号码格式错误'
-            }
-          },
-          code: {
-            length: {
-              minimum: 4,
-              tooShort: '^验证码格式有误'
-            }
-          }
-        }
-      } else if (this.isPwdLogin) {
-        form = this.pwdForm
-        constraints = {
-          email: {
-            length: {
-              minimium: 1,
-              tooShort: '^邮箱不能为空'
-            },
+    async handleSubmit () {
+      try {
+        if (this.isVerifyLogin) {
+          await signUpPhone({
+            code: this.verifyForm.code,
+            phoneNumber: this.verifyForm.phone
+          })
+        } else if (this.isPwdLogin) {
+          let constraints = {}
+          let form = {}
+          form = this.pwdForm
+          constraints = {
             email: {
-              message: '^邮箱格式有误'
-            }
-          },
-          pwd: {
-            length: {
-              minimum: 8,
-              tooShort: '^密码不能少于八位'
+              length: {
+                minimium: 1,
+                tooShort: '^邮箱不能为空'
+              },
+              email: {
+                message: '^邮箱格式有误'
+              }
+            },
+            pwd: {
+              length: {
+                minimum: 8,
+                tooShort: '^密码不能少于八位'
+              }
             }
           }
+          this.errors = validate(form, constraints, { format: 'flat' })
+          return this.errors
         }
+      } catch (e) {
+        console.log(e)
       }
-      this.errors = validate(form, constraints, { format: 'flat' })
-      return this.errors
     }
   }
 }
@@ -297,6 +405,20 @@ export default {
           border-radius: 4px;
           color: #2e2e2e;
         }
+      }
+    }
+    &__captcha {
+      &__canvas {
+        cursor: pointer;
+      }
+      &__refresh {
+        font-size: 12px;
+        cursor: pointer;
+      }
+      &__error {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #f56c6c;
       }
     }
   }
