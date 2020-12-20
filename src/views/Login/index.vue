@@ -55,6 +55,38 @@
           </ul>
         </div>
       </div>
+      <el-dialog
+        class="reg__captcha"
+        title="请输入图形验证码："
+        width="300px"
+        :visible.sync="captchaDialog.show"
+        @closed="clearCaptchaData"
+        >
+        <canvas
+          class="reg__captcha__canvas"
+          ref="regCaptchaCanvas"
+          :width="captchaDialog.canvas.width"
+          :height="captchaDialog.canvas.height"
+          @click="refreshCaptcha(form.phone)"
+        >
+        </canvas>
+        <span class="reg__captcha__refresh" @click="refreshCaptcha(form.phone)">（点击刷新验证码）</span>
+        <yth-input
+          class="reg__form-item"
+          placeholder="*输入验证码"
+          v-model="captchaDialog.inputValue">
+        </yth-input>
+        <p class="reg__captcha__error" v-if="captchaDialog.error">
+          {{captchaDialog.error}}
+        </p>
+        <div
+          class="reg__captcha__footer"
+          slot="footer"
+        >
+          <el-button type="success" size="small" @click="handleSendCode">确认</el-button>
+          <el-button size="small" @click="captchaDialog.show=false">取消</el-button>
+        </div>
+      </el-dialog>
     </div>
 </template>
 
@@ -74,7 +106,20 @@ export default {
         email: '',
         pwd: ''
       },
-      errors: []
+      errors: [],
+      timer: null,
+      timeCount: 15,
+      timerText: '点击获取',
+      captchaDialog: {
+        show: false,
+        canvas: {
+          width: 150,
+          height: 50
+        },
+        captcha: '',
+        inputValue: '',
+        error: ''
+      }
     }
   },
   computed: {
@@ -231,6 +276,9 @@ export default {
         }
       }
 
+      &__code {
+        cursor: pointer;
+      }
       &__link {
         display: block;
         margin-top: 10px;

@@ -38,7 +38,15 @@ export default {
   data () {
     return {
       isFocus: false,
-      nativeType: 'password'
+      nativeType: ''
+    }
+  },
+  watch: {
+    type: {
+      handler: function (val) {
+        this.nativeType = val
+      },
+      immediate: true
     }
   },
   computed: {
