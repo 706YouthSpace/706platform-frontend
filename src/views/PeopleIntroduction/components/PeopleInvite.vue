@@ -19,7 +19,7 @@ export default {
       this.$msgbox({
         title: '加入706青年空间',
         message:
-          h('el', {
+          h('el-input', {
             attrs: {
               placeholder: '请输入邀请码'
             }
@@ -39,7 +39,6 @@ export default {
         beforeClose: (action, instance, done) => {
           if (action === 'confirm') {
             instance.confirmButtonLoading = true
-            alert(this.event.target.value)
             instance.confirmButtonText = '激活中...'
             setTimeout(() => {
               done()
