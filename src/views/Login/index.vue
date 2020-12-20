@@ -18,12 +18,12 @@
             <div class="tab-item"
               :class="{'tab-item--active': isVerifyLogin}"
               @click="changeLoginType('verify')">
-              短信验证码登录
+              验证码登录
             </div>
             <div class="tab-item"
               :class="{'tab-item--active': isPwdLogin}"
               @click="changeLoginType('pwd')">
-              邮箱密码登录
+              密码登录
             </div>
           </div>
           <div v-if="isVerifyLogin" class="tab-panel" key="verify">
