@@ -12,8 +12,8 @@
     <span class="yth-input__suffix">
       <slot name="suffix">
         <span v-if="type==='password'" class="yth-input__icon">
-          <i v-if="isPassword" class="fa fa-eye" @click="setInputType('text')"></i>
-          <i v-else class="fa fa-eye-slash" @click="setInputType('password')"></i>
+          <i v-if="isPassword" class="fa fa-eye-slash" @click="setInputType('text')"></i>
+          <i v-else class="fa fa-eye" @click="setInputType('password')"></i>
         </span>
       </slot>
     </span>
@@ -38,7 +38,7 @@ export default {
   data () {
     return {
       isFocus: false,
-      nativeType: ''
+      nativeType: 'password'
     }
   },
   computed: {

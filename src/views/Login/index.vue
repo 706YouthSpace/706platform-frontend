@@ -31,7 +31,7 @@
             </yth-input>
             <yth-input v-model="verifyForm.code" class="login__form-item" placeholder="*短信验证码">
               <span slot="suffix">
-                <span class="login__form__code" @click="sendCode">点击获取</span>
+                <span class="login__form__code">点击获取</span>
               </span>
             </yth-input>
           </div>
@@ -44,7 +44,7 @@
           <el-button class="login__form-item login__form-item--submit"
             type="success"
             @click="handleSubmit">
-            注册
+            登录
           </el-button>
           <ul class="login__form__err-list"
             v-if="errors && errors.length">

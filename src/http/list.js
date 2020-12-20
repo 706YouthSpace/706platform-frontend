@@ -8,7 +8,7 @@ export function getCaptcha (phone) {
   })
 }
 
-export function getCode (code) {
+export function sendCode (code) {
   return axios.post('/captcha/validate', {
     code
   })
