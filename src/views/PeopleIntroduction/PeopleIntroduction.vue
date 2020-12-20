@@ -125,8 +125,10 @@
             <div style="color: #222222;font-weight: bold;">现居住地</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__residencePlace"><span class="people__content__point">•</span>&nbsp;&nbsp;{{residencePlace.city}}&nbsp;
-              •{{residencePlace.region}}</div>
+            <div class="people__content__residencePlace">
+              <span class="people__content__point">•</span>&nbsp;&nbsp;{{residencePlace.city}}&nbsp;
+              •{{residencePlace.region}}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -195,16 +197,24 @@
           <div>&nbsp;</div>
         </el-row>
 
-        <!-- 社交圈 -->
+        <!-- 邀请人 -->
 
-        <!-- 社交账号开始 -->
-        <el-row v-if="contactAccounts.length>0">
+        <!-- 邀请人开始 -->
+        <el-row>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">社交账号</div>
+            <div style="color: #222222;font-weight: bold;">邀请人</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{contactAccounts[0].account}}</div>
+            <div v-if="inviter.isExist==false"
+                 class="people__content__unverified"><span class="people__content__point">
+                <i class="fa fa-plus-circle "></i>
+              </span>
+              <!-- 添加邀请人 -->
+              <PeopleInvite />
+            </div>
+            <div v-else
+                 class="people__content__inviter"><span class="people__content__point">•
+              </span>{{inviter.name}}</div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -216,9 +226,11 @@
 </template>
 
 <script>
+import PeopleInvite from './components/PeopleInvite'
 
 export default {
   name: 'PeopleIntroduction',
+  components: { PeopleInvite },
   data () {
     return {
       people: {
@@ -277,7 +289,12 @@ export default {
         Id: 8,
         platform: '即刻',
         account: '123336 '
-      }]
+      }],
+      inviter: {
+        isExist: false,
+        name: '706生活空间',
+        URL: ''
+      }
 
     }
   },
@@ -417,6 +434,22 @@ export default {
       text-align: left;
       color: #222222;
       background-color: #ddd;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    &__unverified {
+      text-align: left;
+      color: #027db4;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    &__inviter {
+      text-align: left;
+      color: #222222;
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;

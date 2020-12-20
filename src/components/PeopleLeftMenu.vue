@@ -9,7 +9,6 @@
         <div class="introduction">{{introduction}}</div>
       </div>
       <li class="left-menu__item"
-          :class='{bg:index==isactive}'
           v-for="(route,index) in routes"
           :key="route.name">
         <router-link :to="route.path">
@@ -47,19 +46,19 @@ export default {
           name: '介绍',
           path: '/people/introduction',
           icon: 'fa fa-address-card fa-2x',
-          styleObj: ''
+          styleObj: 'color: #0b800b;'
         },
         {
           name: '人生',
           path: '/people/introduction',
-          styleObj: 'color: #0b800b;',
+          styleObj: '',
           icon: 'fa fa-road fa-2x'
         },
         {
           name: '文章',
           path: '/people/introduction',
           styleObj: '',
-          icon: 'fa fa-road fa-2x'
+          icon: 'fa fa-edit fa-2x'
         },
         {
           name: '社交',
@@ -80,7 +79,6 @@ export default {
   },
   methods: {
     changeColor (index) {
-      this.isactive = index
       this.routes.forEach(function (item) {
         item.styleObj = ''
       })
@@ -94,9 +92,10 @@ export default {
 
 <style scoped lang="less">
 .left-menu {
-  flex: 0 0 200px;
+  flex: 0 0 160px;
   margin-right: 30px;
   padding-top: 20px;
+  background-color: #ffffff;
   &__info {
     height: 84px;
     position: relative;
@@ -145,9 +144,12 @@ export default {
       margin-left: 14px;
     }
   }
-
-  .bg {
-    background-color: rgb(238, 236, 236);
+  &__item:hover {
+    height: 52px;
+    width: 200px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #f2f2f2;
   }
 }
 </style>
