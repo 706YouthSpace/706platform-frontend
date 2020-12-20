@@ -18,6 +18,6 @@ export function signUp (data) {
   return axios.post('/signup', data)
 }
 
-export function signUpPhone (data) {
-  return axios.post('/signup/phone', data)
+export function signinPhone (data) {
+  return axios.post('/signin/phone', data)
 }

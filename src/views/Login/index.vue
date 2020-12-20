@@ -92,7 +92,7 @@
 
 <script>
 import validate from 'validate.js'
-import { getCaptcha, sendCode, signUpPhone } from '@/http'
+import { getCaptcha, sendCode, signinPhone } from '@/http'
 
 export default {
   name: 'index',
@@ -256,10 +256,15 @@ export default {
     async handleSubmit () {
       try {
         if (this.isVerifyLogin) {
-          await signUpPhone({
+          await signinPhone({
             code: this.verifyForm.code,
             phoneNumber: this.verifyForm.phone
           })
+          this.$message({
+            message: '登录成功',
+            type: 'success'
+          })
+          this.$router.push('/')
         } else if (this.isPwdLogin) {
           let constraints = {}
           let form = {}
