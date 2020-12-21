@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     open () {
-      var self = this
+      // var self = this
       const h = this.$createElement
       this.$msgbox({
         title: '加入706青年空间',
@@ -22,16 +22,16 @@ export default {
           h('el-input', {
             attrs: {
               placeholder: '请输入邀请码'
-            },
-            domProps: {
-              value: self.value,
-              type: 'text'
-            },
-            on: {
-              input: function (event) {
-                self.$emit('input', event.target.value)
-              }
             }
+            // domProps: {
+            //   value: self.value,
+            //   type: 'text'
+            // },
+            // on: {
+            //   input: function (event) {
+            //     self.$emit('input', event.target.value)
+            //   }
+            // }
           }),
         showCancelButton: true,
         confirmButtonText: '确定',

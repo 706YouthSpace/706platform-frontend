@@ -84,9 +84,7 @@ export default {
       })
       this.routes[index].styleObj = 'color: #0b800b;'
     }
-
   }
-
 }
 </script>
 
@@ -131,6 +129,8 @@ export default {
     width: 200px;
     font-size: 14px;
     font-weight: 400;
+    display: flex;
+    align-items: center;
     i {
       margin-top: 15px;
       color: #c2c2c2;

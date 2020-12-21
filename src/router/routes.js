@@ -3,6 +3,7 @@ import Register from '@/views/Register'
 import Login from '@/views/Login'
 import ActivityDetail from '@/views/ActivityDetail'
 import PeopleIntroduction from '@/views/PeopleIntroduction/PeopleIntroduction.vue'
+import PeopleEdit from '@/views/PeopleEdit/PeopleEdit.vue'
 
 import ActivityList from '@/views/ActivityList'
 import Activity from '@/views/Activity'
@@ -92,14 +93,14 @@ export default [
         path: 'introduction',
         component: PeopleIntroduction,
         meta: {
-          title: '发起活动'
+          title: '信息'
         }
       },
       {
-        path: 'join',
-        component: ActivityJoin,
+        path: 'edit',
+        component: PeopleEdit,
         meta: {
-          title: '我参加的活动'
+          title: '信息编辑'
         }
       },
       {
