@@ -61,10 +61,53 @@
           </el-col>
         </el-row>
 
-        <div class="people__content__introduction">{{people.introduction}}</div>
+        <!-- 编辑自我介绍 -->
+        <el-row v-if="editStatus.introduction==false">
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">自我介绍</div>
+          </el-col>
+          <el-col :span="16">
+            <div class="people__content__introduction"
+                 @click="editIntroduction()">
+              {{people.introduction}}</div>
+          </el-col>
+          <el-col :span="4">
+            <span class="people__content__edit"
+                  @click="editIntroduction()">
+              <i class="fa fa-edit fa-2x"></i>
+            </span>
+            <div>
+            </div>
+          </el-col>
+        </el-row>
+        <!-- 编辑自我介绍开始 -->
+        <el-row v-else>
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">自我介绍</div>
+          </el-col>
+          <el-col :span="8">
+            <div class="people__content__input">
+              <el-input type="textarea"
+                        :autosize="{ minRows: 2, maxRows: 4}"
+                        placeholder="请输入内容"
+                        v-model="people.introduction">
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div>
+              <el-button type="success"
+                         @click="saveIntroduction()">保存</el-button>
+              <el-button type="info"
+                         @click="cancleIntroduction()">取消</el-button>
+            </div>
+          </el-col>
+        </el-row>
+
         <el-divider class="people__content__divider"></el-divider>
-        <!-- 工作经历开始 -->
-        <el-row v-if="workExperience.length>0">
+
+        <!-- 编辑工作经历开始 -->
+        <el-row v-if="editStatus.workExperience==false">
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">工作经历</div>
           </el-col>
@@ -98,6 +141,7 @@
             <div>&nbsp;</div>
           </el-col>
         </el-row>
+
         <!-- 多条工作经历时 -->
         <el-row v-for="role in newWorkExperience"
                 :key="role.Id">
@@ -342,22 +386,35 @@ export default {
         URL: ''
       },
       editStatus: {
-        description: false
+        description: false,
+        introduction: false,
+        workExperience: false
       },
-      description: ''
+      tempData: { description: '', introduction: '' }
     }
   },
   methods: {
     cancleDescription () {
-      this.people.description = this.description
+      this.people.description = this.tempData.description
       this.editStatus.description = false
     },
     editDescription () {
-      this.description = this.people.description
+      this.tempData.description = this.people.description
       this.editStatus.description = true
     },
     saveDescription () {
       this.editStatus.description = false
+    },
+    cancleIntroduction () {
+      this.people.introduction = this.tempData.introduction
+      this.editStatus.introduction = false
+    },
+    editIntroduction () {
+      this.tempData.introduction = this.people.introduction
+      this.editStatus.introduction = true
+    },
+    saveIntroduction () {
+      this.editStatus.introduction = false
     }
   },
   computed: {
@@ -468,10 +525,19 @@ export default {
     &__introduction {
       margin-top: 24px;
       text-align: left;
-      width: 956px;
-      margin-left: 133px;
+      width: 560px;
       font-size: 14px;
       font-weight: 400;
+      color: #383838;
+      line-height: 24px;
+    }
+    &__introduction:hover {
+      margin-top: 24px;
+      text-align: left;
+      width: 560px;
+      font-size: 14px;
+      font-weight: 400;
+      background-color: lightgray;
       color: #383838;
       line-height: 24px;
     }
