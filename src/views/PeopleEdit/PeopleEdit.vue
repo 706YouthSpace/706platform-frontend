@@ -107,7 +107,7 @@
         <el-divider class="people__content__divider"></el-divider>
 
         <!-- 编辑工作经历开始 -->
-        <el-row v-if="editStatus.workExperience==false">
+        <el-row>
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">工作经历</div>
           </el-col>
@@ -115,8 +115,11 @@
             <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{workExperience[0].occupation}}</div>
           </el-col>
-          <el-col :span="4">
-            <div>1</div>
+          <el-col :span="4"
+                  class="people__content__del">
+            <i class="fa fa-times"
+               @click="delWorkExp(workExperience[0])"></i>
+            <div></div>
           </el-col>
         </el-row>
         <el-row v-if="workExperience.length>0">
@@ -150,12 +153,68 @@
             <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{role.occupation}}</div>
           </el-col>
-          <el-col :span="4">
-            <div>&nbsp;</div>
+          <el-col :span="4"
+                  class="people__content__del">
+            <i class="fa fa-times"
+               @click="delWorkExp(role)"></i>
+            <div></div>
           </el-col>
           <el-col :span="16"
                   :offset="4">
             <div class="people__content__story">{{role.story}}</div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+
+        <!-- 添加按钮 工作经历 -->
+        <el-row v-if="editStatus.workExperience==false">
+          <el-col :span="16"
+                  :offset="4">
+            <div class="people__content__plus"
+                 @click="openWorkExperience()"><i class="fa fa-plus-circle fa"><span>添加工作经历</span></i></div>
+          </el-col>
+          <el-col :span="4">
+            <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+
+        <el-row v-else>
+          <el-col :span="8"
+                  :offset="4">
+            <div class="people__content__input">
+              <el-input placeholder="公司/项目"
+                        v-model="tempData.position"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="people__content__input">
+              <el-input placeholder="职位"
+                        v-model="tempData.occupation"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div>
+              <el-button type="success"
+                         @click="addWorkExperience()">保存</el-button>
+              <el-button type="info"
+                         @click="cancleWorkExperience()">取消</el-button>
+            </div>
+          </el-col>
+          <el-col :span="16"
+                  :offset="4">
+            <div class="people__content__textarea">
+              <el-input type="textarea"
+                        :rows="3"
+                        placeholder="经历"
+                        v-model="tempData.story">
+              </el-input>
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -333,19 +392,19 @@ export default {
       },
       workExperience: [
         {
-          Id: 1,
+          Id: 0,
           position: '项目1',
           occupation: '角色1 ',
           story: '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         },
         {
-          Id: 2,
+          Id: 1,
           position: '项目2',
           occupation: '角色2',
           story: '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         },
         {
-          Id: 3,
+          Id: 2,
           position: '项目3',
           occupation: '角色',
           story: '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
@@ -389,8 +448,15 @@ export default {
         description: false,
         introduction: false,
         workExperience: false
+
       },
-      tempData: { description: '', introduction: '' }
+      tempData: {
+        description: '',
+        introduction: '',
+        occupation: '',
+        position: '',
+        story: ''
+      }
     }
   },
   methods: {
@@ -415,7 +481,49 @@ export default {
     },
     saveIntroduction () {
       this.editStatus.introduction = false
+    },
+    cancleWorkExperience () {
+      this.editStatus.workExperience = false
+    },
+    addWorkExperience () {
+      if (this.tempData.position !== '' && this.tempData.occupation !== '' && this.tempData.story) {
+        var jsonObj = {
+          Id: this.workExperience.length,
+          position: this.tempData.position,
+          occupation: this.tempData.occupation,
+          story: this.tempData.story
+        }
+        this.workExperience.push(jsonObj)
+        this.editStatus.workExperience = false
+      } else {
+        this.$message.error('职位或活动、职位、经历不能为空')
+      }
+    },
+    openWorkExperience () {
+      this.tempData.story = ''
+      this.tempData.position = ''
+      this.tempData.occupation = ''
+      this.editStatus.workExperience = true
+    },
+    delWorkExp (item) {
+      this.$confirm('确定要删除吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.workExperience = this.workExperience.filter(x => x.Id !== item.Id)
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
+
   },
   computed: {
     newWorkExperience () {
@@ -593,6 +701,23 @@ export default {
       font-weight: 400;
       line-height: 20px;
     }
+    &__plus {
+      span {
+        margin-left: 10px;
+      }
+      text-align: left;
+      color: #027db4;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    &__del {
+      color: #027db4;
+    }
+    &__input {
+      width: 300px;
+    }
     &__unverified {
       text-align: left;
       color: #027db4;
@@ -600,6 +725,10 @@ export default {
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
+    }
+    &__textarea {
+      margin-top: 11px;
+      width: 700px;
     }
     &__inviter {
       text-align: left;
