@@ -2,9 +2,11 @@
   <div class="people">
     <img class="people__author__header"
          src="@/assets/images/header.png" />
-    <el-button type="info"
-               class="people__button__edit"
-               round>编辑个人信息</el-button>
+    <router-link to='/people/edit'>
+      <el-button type="info"
+                 class="people__button__edit"
+                 round>编辑个人信息</el-button>
+    </router-link>
     <div class="people__inner">
       <div class="people__img">
         <img class="people__img__inner"
@@ -348,7 +350,6 @@ export default {
   &__img {
     height: 300px;
     height: 450px;
-
     &__inner {
       width: 100%;
       height: 100%;

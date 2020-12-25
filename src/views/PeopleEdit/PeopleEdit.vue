@@ -3,11 +3,13 @@
     <img class="people__author__header"
          src="@/assets/images/header.png" />
     <el-button type="info"
-               class="people__button__edit"
-               round>上传背景图</el-button>
-    <el-button type="info"
-               class="people__button__edit"
-               round>完成编辑</el-button>
+               class="people__button__upload"
+               round>上传背景</el-button>
+    <router-link to='/people/introduction'>
+      <el-button type="info"
+                 class="people__button__editEnd"
+                 round>完成编辑</el-button>
+    </router-link>
     <div class="people__inner">
       <div class="people__img">
         <img class="people__img__inner"
@@ -183,7 +185,7 @@
         <el-row v-else>
           <el-col :span="8"
                   :offset="4">
-            <div class="people__content__input">
+            <div class="people__content__sinput">
               <el-input placeholder="公司/项目"
                         v-model="tempData.position"
                         clearable>
@@ -191,7 +193,7 @@
             </div>
           </el-col>
           <el-col :span="8">
-            <div class="people__content__input">
+            <div class="people__content__sinput">
               <el-input placeholder="职位"
                         v-model="tempData.occupation"
                         clearable>
@@ -233,8 +235,9 @@
             <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{educationExperience[0].education}}&nbsp;•
               {{educationExperience[0].professional}}</div>
           </el-col>
-          <el-col :span="4">
-            <div>&nbsp;</div>
+          <el-col :span="4"
+                  class="people__content__del">
+            <div> <i class="fa fa-times"></i></div>
           </el-col>
         </el-row>
         <!-- 无教育经历时显示空 -->
@@ -258,8 +261,48 @@
             <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{item.education}}&nbsp;•
               {{item.professional}}</div>
           </el-col>
+          <el-col :span="4"
+                  class="people__content__del">
+            <div> <i class="fa fa-times"></i></div>
+          </el-col>
+        </el-row>
+
+        <!-- 添加按钮 教育经历 -->
+        <el-row v-if="editStatus.educationExperience==false">
+          <el-col :span="16"
+                  :offset="4">
+            <div class="people__content__plus"
+                 @click="openEducationExperiencee()"><i class="fa fa-plus-circle fa"><span>添加教育经历</span></i></div>
+          </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
+          </el-col>
+        </el-row>
+        <el-row v-else>
+          <el-col :span="8"
+                  :offset="4">
+            <div class="people__content__sinput">
+              <el-input placeholder="学校"
+                        v-model="tempData.education"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="people__content__sinput">
+              <el-input placeholder="专业"
+                        v-model="tempData.professional"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div>
+              <el-button type="success"
+                         @click="addEducationExperience()">保存</el-button>
+              <el-button type="info"
+                         @click="cancleEducationExperience()">取消</el-button>
+            </div>
           </el-col>
         </el-row>
 
@@ -269,18 +312,22 @@
         </el-row>
 
         <!-- 现居住地开始 -->
-        <el-row v-if="educationExperience.length>0">
+        <el-row v-if="editStatus.residencePlace==false">
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">现居住地</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__residencePlace">
-              <span class="people__content__point">•</span>&nbsp;&nbsp;{{residencePlace.city}}&nbsp;
+            <div class="people__content__residencePlace"
+                 @click="openEditResidencePlace()">
+              <span class="
+                 people__content__point">•</span>&nbsp;&nbsp;{{residencePlace.city}}&nbsp;
               •{{residencePlace.region}}
             </div>
           </el-col>
           <el-col :span="4">
-            <div>&nbsp;</div>
+            <span class="people__content__reedit"
+                  @click="openEditResidencePlace()"><i class="fa fa-edit fa-2x"></i></span>
+            <div></div>
           </el-col>
         </el-row>
         <!-- 未填写显示空 -->
@@ -288,12 +335,31 @@
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">现居住地</div>
           </el-col>
-          <el-col :span="16">
-            <div class="people__content__residencePlace"><span class="people__content__point">•</span>空&nbsp; &nbsp;
-              &nbsp; &nbsp;</div>
+          <el-col :span="8">
+            <div class="people__content__sinput">
+              <el-input placeholder="城市"
+                        v-model="residencePlace.city"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="people__content__sinput">
+              <el-input placeholder="区域"
+                        v-model="residencePlace.region"
+                        clearable>
+              </el-input>
+            </div>
           </el-col>
           <el-col :span="4">
-            <div>&nbsp;</div>
+            <div>
+              <div>
+                <el-button type="success"
+                           @click="editresidencePlace()">保存</el-button>
+                <el-button type="info"
+                           @click="cancleEditresidencePlace()">取消</el-button>
+              </div>
+            </div>
           </el-col>
         </el-row>
 
@@ -311,8 +377,9 @@
             <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{contactAccounts[0].account}}</div>
           </el-col>
-          <el-col :span="4">
-            <div>&nbsp;</div>
+          <el-col :span="4"
+                  class="people__content__del">
+            <div> <i class="fa fa-times"></i></div>
           </el-col>
         </el-row>
         <!-- 无社交账号时显示空 -->
@@ -336,11 +403,51 @@
             <div class="people__content__account"><span class="people__content__point">•</span>{{account.platform}}&nbsp; &nbsp;
               &nbsp; &nbsp; {{account.account}}</div>
           </el-col>
+          <el-col :span="4"
+                  class="people__content__del">
+            <div> <i class="fa fa-times"></i></div>
+
+          </el-col>
+        </el-row>
+
+        <!-- 添加按钮 社交账号 -->
+        <el-row v-if="editStatus.contactAccount==false">
+          <el-col :span="16"
+                  :offset="4">
+            <div class="people__content__plus"
+                 @click="openContactAccount()"><i class="fa fa-plus-circle fa"><span>添加社交账号</span></i></div>
+          </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-
+        <el-row v-else>
+          <el-col :span="8"
+                  :offset="4">
+            <div class="people__content__sinput">
+              <el-input placeholder="学校"
+                        v-model="tempData.education"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="people__content__sinput">
+              <el-input placeholder="专业"
+                        v-model="tempData.professional"
+                        clearable>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="4">
+            <div>
+              <el-button type="success"
+                         @click="addContactAccount()">保存</el-button>
+              <el-button type="info"
+                         @click="cancleContactAccount()">取消</el-button>
+            </div>
+          </el-col>
+        </el-row>
         <!-- 空白行 -->
         <el-row class="people__content__blank">
           <div>&nbsp;</div>
@@ -447,7 +554,10 @@ export default {
       editStatus: {
         description: false,
         introduction: false,
-        workExperience: false
+        workExperience: false,
+        educationExperience: false,
+        residencePlace: false,
+        contactAccount: false
 
       },
       tempData: {
@@ -455,7 +565,13 @@ export default {
         introduction: '',
         occupation: '',
         position: '',
-        story: ''
+        story: '',
+        education: '',
+        professional: '',
+        city: '',
+        region: '',
+        platform: '',
+        account: ''
       }
     }
   },
@@ -522,8 +638,37 @@ export default {
           message: '已取消删除'
         })
       })
-    }
+    },
+    openEducationExperiencee () {
+      this.editStatus.educationExperience = true
+    },
+    cancleEducationExperience () {
+      this.editStatus.educationExperience = false
+    },
+    openEditResidencePlace () {
+      this.tempData.city = this.residencePlace.city
+      this.tempData.region = this.residencePlace.region
+      this.editStatus.residencePlace = true
+    },
+    cancleEditresidencePlace () {
+      this.residencePlace.city = this.tempData.city
+      this.residencePlace.region = this.tempData.region
+      this.editStatus.residencePlace = false
+    },
+    editresidencePlace () {
+      this.tempData.residencePlace = this.people.residencePlace
 
+      this.editStatus.residencePlace = false
+    },
+    openContactAccount () {
+      this.editStatus.contactAccount = true
+    },
+    cancleContactAccount () {
+      this.editStatus.contactAccount = false
+    },
+    addContactAccount () {
+      this.editStatus.contactAccount = false
+    }
   },
   computed: {
     newWorkExperience () {
@@ -567,10 +712,16 @@ export default {
     width: 1200px;
     margin: 0 auto;
   }
-  &__button__edit {
+  &__button__editEnd {
     position: absolute;
     text-align: right;
     top: 400px;
+    left: 1063px;
+  }
+  &__button__upload {
+    position: absolute;
+    text-align: right;
+    top: 350px;
     left: 1063px;
   }
 
@@ -592,7 +743,12 @@ export default {
     }
     &__edit {
       color: grey;
-      margin-left: 50px;
+      margin-top: 3px;
+      line-height: 20px;
+    }
+    &__reedit {
+      color: grey;
+      margin-left: 15px;
       margin-top: 3px;
       line-height: 20px;
     }
@@ -684,6 +840,14 @@ export default {
       font-weight: 400;
       line-height: 20px;
     }
+    &__residencePlace:hover {
+      text-align: left;
+      color: #222222;
+      background-color: lightgrey;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
     &__account {
       text-align: left;
       color: #222222;
@@ -716,6 +880,10 @@ export default {
       color: #027db4;
     }
     &__input {
+      width: 500px;
+      margin-bottom: 10px;
+    }
+    &__sinput {
       width: 300px;
     }
     &__unverified {
