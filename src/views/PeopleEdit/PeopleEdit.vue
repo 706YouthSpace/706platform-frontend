@@ -9,15 +9,16 @@
         <div class="people__background__img">
           <div class="people__background__img__inner">
             <img src="@/assets/images/activities/activity_bg_1.png" />
-            <el-button type="info"
+            <activity-photo-uploader class="people__background__img__inner__upLoad">
+              <svg-icon class="icon"
+                        icon-class="upload" />
+            </activity-photo-uploader>
+            <!-- <el-button type="info"
                        class="people__background__img__inner__upLoad"
-                       round>上传背景</el-button>
+                       round>上传背景</el-button> -->
             <router-link to='/people/introduction'>
-              <el-button type="info"
-                         class="people__background__img__inner__editBtn"
-                         round>完成编辑</el-button>
+              <CommBtn>完成编辑</CommBtn>
             </router-link>
-
           </div>
         </div>
       </div>
@@ -73,7 +74,7 @@
           <div>&nbsp;</div>
         </el-row>
         <!-- 编辑个人性别信息 -->
-        <el-row v-if="editStatus.introduction==false">
+        <el-row>
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">性别</div>
           </el-col>
@@ -81,11 +82,11 @@
                   class="people__content__gender">
             <el-radio v-model="gender"
                       label="1">女</el-radio>
-            <el-radio v-model="radio"
+            <el-radio v-model="gender"
                       label="2">男</el-radio>
-            <el-radio v-model="radio"
+            <el-radio v-model="gender"
                       label="3">其他</el-radio>
-            <el-radio v-model="radio"
+            <el-radio v-model="gender"
                       label="4">保密</el-radio>
           </el-col>
           <el-col :span="4">
@@ -123,12 +124,12 @@
             <div style="color: #222222;font-weight: bold;">自我介绍</div>
           </el-col>
           <el-col :span="8">
-            <div class="people__content__input">
-              <el-input type="textarea"
-                        :autosize="{ minRows: 2, maxRows: 4}"
-                        placeholder="请输入内容"
-                        v-model="people.introduction">
-              </el-input>
+            <div class="people__content__Linput">
+              <ckeditor :editor="editor"
+                        @ready="onEditorReady"
+                        v-model="people.introduction"
+                        :config="editorConfig">
+              </ckeditor>
             </div>
           </el-col>
           <el-col :span="12">
@@ -521,12 +522,20 @@
 
 <script>
 import PeopleInvite from './components/PeopleInvite'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import ActivityPhotoUploader from './components/ActivityPhotoUploader'
+import CommBtn from '@/components/CommBtn'
 
 export default {
   name: 'PeopleIntroduction',
-  components: { PeopleInvite },
+  components: { PeopleInvite, ActivityPhotoUploader, CommBtn },
   data () {
     return {
+      editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+        // The configuration of the editor.
+      },
       people: {
         name: '张三',
         introduction: '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书，拥有一定的魔法才能，由于魔法部法律的约束不能向各位展示。家有一头鹰头马身有翼兽，魔杖有十又十四分之一英寸长，由紫杉木制成，内芯是一根独角兽的羽毛，守护神是一只天鹅。我认为我应该是格兰芬多的勇士。平时喜欢运动，下棋和读书，如果各位有兴趣了解魁地奇和巫师棋的话，我乐意效劳。家里藏书有《霍格沃茨：一段校史》、《游吟诗人比伯的故事》还有魔法部和格兰杰学姐推荐的《五年O.W.Ls三年模拟》。最后告诉大家，如果看见学校白天平白无故飞进一只猫头鹰的话，请尽快通知我，这很有可能是魔法学院晚来的给我的入学通知书，这对我很重要，谢谢（鞠躬）。',
@@ -816,8 +825,15 @@ export default {
         }
         &__upLoad {
           position: absolute;
-          bottom: 82px;
-          right: 25px;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 60%;
+          font-size: 100px;
+          height: 100px;
+          line-height: 100px;
+          text-align: center;
+          color: #d7d7d7;
+          border-radius: 50%;
         }
       }
     }
@@ -845,6 +861,9 @@ export default {
     }
     &__point {
       margin-right: 18px;
+    }
+    &__Linput {
+      width: 800px;
     }
     &__name {
       font-size: 32px;

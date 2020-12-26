@@ -11,7 +11,7 @@
             <img src="@/assets/images/activities/activity_bg_1.png" />
             <!--TODO:这个按钮应该写在下面 -->
             <router-link to='/people/edit'>
-              <span class="people__background__img__inner__editBtn">编辑个人信息</span>
+              <CommBtn>编辑个人信息</CommBtn>
             </router-link>
           </div>
         </div>
@@ -252,10 +252,11 @@
 
 <script>
 import PeopleInvite from './components/PeopleInvite'
+import CommBtn from '@/components/CommBtn'
 
 export default {
   name: 'PeopleIntroduction',
-  components: { PeopleInvite },
+  components: { PeopleInvite, CommBtn },
   data () {
     return {
       people: {
@@ -392,25 +393,6 @@ export default {
             border-radius: 50%;
             z-index: 100;
           }
-        }
-        &__editBtn {
-          width: 140px;
-          height: 40px;
-          text-align: center;
-          line-height: 40px;
-          color: #888;
-          border-radius: 10px;
-          opacity: 0.7;
-          border: 1px solid #888;
-          position: absolute;
-          bottom: -60px;
-          right: 25px;
-        }
-        &__editBtn:hover {
-          color: #0b800b;
-          opacity: 1;
-          background-color: #0b800b11;
-          border: 1px solid #0b800b;
         }
       }
     }

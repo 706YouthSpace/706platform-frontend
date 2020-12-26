@@ -1,32 +1,33 @@
 <template>
-  <svg :class="svgClass"
-       aria-hidden="true">
-    <span class="editBtn">编辑个人信息</span>
-  </svg>
+  <span class="editBtn">
+    <slot></slot>
+  </span>
 </template>
 
 <script>
 export default {
-  name: 'SvgIcon',
-  props: {
-    iconClass: {
-      type: String,
-      required: true
-    },
-    className: {
-      type: String,
-      default: ''
-    }
-  }
+  name: 'CommBtn'
 }
 </script>
 
-<style scoped>
-.svg-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
+<style lang="less" scoped>
+.editBtn {
+  width: 140px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #888;
+  border-radius: 10px;
+  opacity: 0.7;
+  border: 1px solid #888;
+  position: absolute;
+  bottom: -60px;
+  right: 25px;
+}
+.editBtn:hover {
+  color: #0b800b;
+  opacity: 1;
+  background-color: #0b800b11;
+  border: 1px solid #0b800b;
 }
 </style>
