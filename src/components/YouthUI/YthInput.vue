@@ -1,19 +1,23 @@
 <template>
   <div class="yth-input"
-    :class="{'yth-input--focus': isFocus}">
-    <input
-      ref="input"
-      class="yth-input__content"
-      :placeholder="placeholder"
-      :type="nativeType || type"
-      @input="handleInput"
-      @focus="handleFocus"
-      @blur="handleBlur"/>
+       :class="{'yth-input--focus': isFocus}">
+    <input ref="input"
+           class="yth-input__content"
+           :placeholder="placeholder"
+           :type="nativeType || type"
+           @input="handleInput"
+           @focus="handleFocus"
+           @blur="handleBlur" />
     <span class="yth-input__suffix">
       <slot name="suffix">
-        <span v-if="type==='password'" class="yth-input__icon">
-          <i v-if="isPassword" class="fa fa-eye" @click="setInputType('text')"></i>
-          <i v-else class="fa fa-eye-slash" @click="setInputType('password')"></i>
+        <span v-if="type==='password'"
+              class="yth-input__icon">
+          <i v-if="isPassword"
+             class="fa fa-eye"
+             @click="setInputType('text')"></i>
+          <i v-else
+             class="fa fa-eye-slash"
+             @click="setInputType('password')"></i>
         </span>
       </slot>
     </span>
@@ -71,38 +75,38 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .yth-input {
-    display: flex;
-    align-items: center;
-    border: 1px solid #dcdfe6;
-    border-radius: 4px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    &:hover {
-      border-color: #c0c4cc;
-    }
-
-    &.yth-input--focus {
-      border-color: #0b800b;
-    }
-    &__content {
-      flex: 1 1;
-      height: 40px;
-      padding: 0 15px;
-      line-height: 40px;
-      outline: none;
-      color: #606266;
-      background: none;
-      border: none;
-      box-sizing: border-box;
-    }
-    &__suffix {
-      display: flex;
-      flex: 0 0 auto;
-      padding-right: 15px;
-      color: #7b7b7b;
-    }
-    &__icon {
-      cursor: pointer;
-    }
+.yth-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  &:hover {
+    border-color: #c0c4cc;
   }
+
+  &.yth-input--focus {
+    border-color: #0b800b;
+  }
+  &__content {
+    flex: 1 1;
+    height: 40px;
+    padding: 0 15px;
+    line-height: 40px;
+    outline: none;
+    color: #606266;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+  }
+  &__suffix {
+    display: flex;
+    flex: 0 0 auto;
+    padding-right: 15px;
+    color: #7b7b7b;
+  }
+  &__icon {
+    cursor: pointer;
+  }
+}
 </style>

@@ -1,19 +1,25 @@
 <template>
   <div class="people">
-    <img class="people__author__header"
-         src="@/assets/images/header.png" />
-    <el-button type="info"
-               class="people__button__upload"
-               round>上传背景</el-button>
-    <router-link to='/people/introduction'>
-      <el-button type="info"
-                 class="people__button__editEnd"
-                 round>完成编辑</el-button>
-    </router-link>
-    <div class="people__inner">
-      <div class="people__img">
-        <img class="people__img__inner"
-             src="@/assets/images/activities/activity_bg_1.png" />
+    <div class="people__background">
+      <div class="people__background__img__inner__author__header">
+        <img class="people__background__img__inner__author__header__img"
+             src="@/assets/images/header.png" />
+      </div>
+      <div class="people__background__inner">
+        <div class="people__background__img">
+          <div class="people__background__img__inner">
+            <img src="@/assets/images/activities/activity_bg_1.png" />
+            <el-button type="info"
+                       class="people__background__img__inner__upLoad"
+                       round>上传背景</el-button>
+            <router-link to='/people/introduction'>
+              <el-button type="info"
+                         class="people__background__img__inner__editBtn"
+                         round>完成编辑</el-button>
+            </router-link>
+
+          </div>
+        </div>
       </div>
 
       <div class="people__content">
@@ -47,13 +53,13 @@
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">一句话描述</div>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="16">
             <div class="people__content__input">
               <el-input placeholder="请输入内容"
                         v-model="people.description"></el-input>
             </div>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="4">
             <div>
               <el-button type="success"
                          @click="saveDescription()">保存</el-button>
@@ -62,7 +68,36 @@
             </div>
           </el-col>
         </el-row>
+        <!-- 空白行 -->
+        <el-row class="people__content__blank">
+          <div>&nbsp;</div>
+        </el-row>
+        <!-- 编辑个人性别信息 -->
+        <el-row v-if="editStatus.introduction==false">
+          <el-col :span="4">
+            <div style="color: #222222;font-weight: bold;">性别</div>
+          </el-col>
+          <el-col :span="16"
+                  class="people__content__gender">
+            <el-radio v-model="gender"
+                      label="1">女</el-radio>
+            <el-radio v-model="radio"
+                      label="2">男</el-radio>
+            <el-radio v-model="radio"
+                      label="3">其他</el-radio>
+            <el-radio v-model="radio"
+                      label="4">保密</el-radio>
+          </el-col>
+          <el-col :span="4">
+            <div>
+            </div>
+          </el-col>
+        </el-row>
 
+        <!-- 空白行 -->
+        <el-row class="people__content__blank">
+          <div>&nbsp;</div>
+        </el-row>
         <!-- 编辑自我介绍 -->
         <el-row v-if="editStatus.introduction==false">
           <el-col :span="4">
@@ -425,15 +460,19 @@
           <el-col :span="8"
                   :offset="4">
             <div class="people__content__sinput">
-              <el-input placeholder="学校"
-                        v-model="tempData.education"
-                        clearable>
-              </el-input>
+              <el-select v-model="tempData.platform"
+                         placeholder="请选择">
+                <el-option v-for="item in options"
+                           :key="item.value"
+                           :label="item.label"
+                           :value="item.value">
+                </el-option>
+              </el-select>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="people__content__sinput">
-              <el-input placeholder="专业"
+              <el-input placeholder="账号"
                         v-model="tempData.professional"
                         clearable>
               </el-input>
@@ -454,7 +493,6 @@
         </el-row>
 
         <!-- 邀请人 -->
-
         <!-- 邀请人开始 -->
         <el-row>
           <el-col :span="4">
@@ -497,6 +535,7 @@ export default {
         time: '2020-05-06(周三) 21:00 ~ 2020-06-07(周五) 17:00 | 持续 30天',
         site: '广东 深圳 南山区华侨城创意文化园e6栋马兰戈尼培训中心'
       },
+      gender: '1',
       workExperience: [
         {
           Id: 0,
@@ -551,6 +590,30 @@ export default {
         name: '706生活空间',
         URL: ''
       },
+      options: [{
+        value: '电话',
+        label: '电话'
+      }, {
+        value: '微信',
+        label: '微信'
+      }, {
+        value: 'QQ',
+        label: 'QQ'
+      }, {
+        value: 'FaceBook',
+        label: 'FaceBook'
+      }, {
+        value: '领英',
+        label: '领英'
+      },
+      {
+        value: '微博',
+        label: '微博'
+      },
+      {
+        value: 'Steam',
+        label: 'Steam'
+      }],
       editStatus: {
         description: false,
         introduction: false,
@@ -699,7 +762,7 @@ export default {
 
 <style scoped lang="less">
 .people {
-  position: relative;
+  height: 100%;
   &__author__header {
     position: absolute;
     display: flex;
@@ -712,32 +775,60 @@ export default {
     width: 1200px;
     margin: 0 auto;
   }
-  &__button__editEnd {
-    position: absolute;
-    text-align: right;
-    top: 400px;
-    left: 1063px;
-  }
-  &__button__upload {
-    position: absolute;
-    text-align: right;
-    top: 350px;
-    left: 1063px;
-  }
-
-  &__img {
-    height: 300px;
+  &__background {
+    position: relative;
     height: 450px;
-
-    &__inner {
+    &__img {
+      height: 450px;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      &__inner {
+        height: 450px;
+        img {
+          height: 450px;
+          width: 100%;
+          object-fit: cover;
+          z-index: 100;
+        }
+        &__author__header {
+          position: absolute;
+          bottom: -18px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 192px;
+          height: 192px;
+          border-radius: 50%;
+          background-color: #fff;
+          &__img {
+            width: 183px;
+            bottom: -18px;
+            height: 183px;
+            border-radius: 50%;
+            z-index: 100;
+          }
+        }
+        &__editBtn {
+          position: absolute;
+          bottom: 22px;
+          right: 25px;
+        }
+        &__upLoad {
+          position: absolute;
+          bottom: 82px;
+          right: 25px;
+        }
+      }
     }
   }
+
   &__content {
     text-align: center;
     padding-top: 27px;
+    &__gender {
+      text-align: left;
+    }
     &__blank {
       height: 25px;
     }
@@ -763,7 +854,7 @@ export default {
     }
     &__description {
       text-align: left;
-      width: 956px;
+      width: 0 auto;
       font-size: 14px;
       font-weight: 400;
       color: #383838;
@@ -771,9 +862,9 @@ export default {
     }
     &__description:hover {
       text-align: left;
-      width: 956px;
       font-size: 14px;
       font-weight: 400;
+      line-height: 40px;
       color: #383838;
       background-color: lightgray;
       line-height: 24px;
@@ -789,21 +880,14 @@ export default {
     &__introduction {
       margin-top: 24px;
       text-align: left;
-      width: 560px;
+      width: 80%;
       font-size: 14px;
       font-weight: 400;
       color: #383838;
       line-height: 24px;
     }
     &__introduction:hover {
-      margin-top: 24px;
-      text-align: left;
-      width: 560px;
-      font-size: 14px;
-      font-weight: 400;
       background-color: lightgray;
-      color: #383838;
-      line-height: 24px;
     }
     &__divider {
       margin-top: 35px;
@@ -821,7 +905,7 @@ export default {
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
-      margin-bottom: 8px;
+      margin-bottom: 20px;
     }
     &__story {
       margin-top: 5px;
@@ -831,7 +915,7 @@ export default {
       color: #383838;
       line-height: 18px;
       margin-left: 24px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
     &__residencePlace {
       text-align: left;
@@ -854,37 +938,36 @@ export default {
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;
+      margin-bottom: 20px;
       line-height: 20px;
     }
     &__account:hover {
-      text-align: left;
-      color: #222222;
       background-color: #ddd;
-      margin-bottom: 8px;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
     }
     &__plus {
       span {
         margin-left: 10px;
       }
+      margin-top: 20px;
       text-align: left;
-      color: #027db4;
+      color: #555;
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
     }
+    &__plus:hover {
+      color: #0b800b;
+    }
     &__del {
-      color: #027db4;
+      color: #888;
     }
     &__input {
-      width: 500px;
+      width: 70%;
       margin-bottom: 10px;
     }
     &__sinput {
-      width: 300px;
+      width: 70%;
     }
     &__unverified {
       text-align: left;
@@ -896,7 +979,7 @@ export default {
     }
     &__textarea {
       margin-top: 11px;
-      width: 700px;
+      width: 85%;
     }
     &__inviter {
       text-align: left;

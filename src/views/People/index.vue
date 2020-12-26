@@ -21,15 +21,17 @@ export default {
 <style lang="less" scoped>
 .people {
   display: flex;
+  background-color: #ffffff;
 
   &__menu {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
   }
-
   &__inner {
-    width: 1200px;
+    flex: 1 1 auto;
+    width: 100%;
     margin: 0 auto;
-    padding: 30px 0;
+    padding: 0;
+    height: 1500px;
   }
 }
 </style>

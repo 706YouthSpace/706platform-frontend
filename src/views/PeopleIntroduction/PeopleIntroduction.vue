@@ -1,16 +1,20 @@
 <template>
   <div class="people">
-    <img class="people__author__header"
-         src="@/assets/images/header.png" />
-    <router-link to='/people/edit'>
-      <el-button type="info"
-                 class="people__button__edit"
-                 round>编辑个人信息</el-button>
-    </router-link>
-    <div class="people__inner">
-      <div class="people__img">
-        <img class="people__img__inner"
-             src="@/assets/images/activities/activity_bg_1.png" />
+    <div class="people__background">
+      <div class="people__background__img__inner__author__header">
+        <img class="people__background__img__inner__author__header__img"
+             src="@/assets/images/header.png" />
+      </div>
+      <div class="people__background__inner">
+        <div class="people__background__img">
+          <div class="people__background__img__inner">
+            <img src="@/assets/images/activities/activity_bg_1.png" />
+            <!--TODO:这个按钮应该写在下面 -->
+            <router-link to='/people/edit'>
+              <span class="people__background__img__inner__editBtn">编辑个人信息</span>
+            </router-link>
+          </div>
+        </div>
       </div>
 
       <div class="people__content">
@@ -22,7 +26,9 @@
         <!-- 工作经历开始 -->
         <el-row v-if="workExperience.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">工作经历</div>
+            <span class="people__content__title">
+              工作经历
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
@@ -44,7 +50,9 @@
         <!-- 无工作经历时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">工作经历</div>
+            <span class="people__content__title">
+              工作经历
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -80,7 +88,9 @@
         <!-- 教育经历开始 -->
         <el-row v-if="educationExperience.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">教育经历</div>
+            <span class="people__content__title">
+              教育经历
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{educationExperience[0].education}}&nbsp;•
@@ -93,7 +103,9 @@
         <!-- 无教育经历时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">教育经历</div>
+            <span class="people__content__title">
+              教育经历
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__education"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -124,7 +136,9 @@
         <!-- 现居住地开始 -->
         <el-row v-if="educationExperience.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">现居住地</div>
+            <span class="people__content__title">
+              现居住地
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__residencePlace">
@@ -139,7 +153,9 @@
         <!-- 未填写显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">现居住地</div>
+            <span class="people__content__title">
+              现居住地
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__residencePlace"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -158,7 +174,9 @@
         <!-- 社交账号开始 -->
         <el-row v-if="contactAccounts.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">社交账号</div>
+            <span class="people__content__title">
+              社交账号
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
@@ -171,7 +189,9 @@
         <!-- 无社交账号时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">社交账号</div>
+            <span class="people__content__title">
+              社交账号
+            </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__account"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -204,7 +224,10 @@
         <!-- 邀请人开始 -->
         <el-row>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">邀请人</div>
+            <span class="people__content__title">
+              <!-- TODO:如何居右以及DIV的css不生效 -->
+              邀请人
+            </span>
           </el-col>
           <el-col :span="16">
             <div v-if="inviter.isExist==false"
@@ -328,37 +351,80 @@ export default {
 
 <style scoped lang="less">
 .people {
-  position: relative;
-  &__author__header {
-    position: absolute;
-    display: flex;
-    width: 183px;
-    height: 183px;
-    top: 280px;
-    left: 512px;
-  }
+  height: 100%;
+  // 要问的 为什么要显示设置高度
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   &__inner {
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
   }
-  &__button__edit {
-    position: absolute;
-    top: 400px;
-    left: 1063px;
-  }
-
-  &__img {
-    height: 300px;
+  &__background {
+    position: relative;
+    width: 100%;
     height: 450px;
-    &__inner {
+    &__img {
+      height: 450px;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      &__inner {
+        height: 450px;
+        img {
+          height: 450px;
+          width: 100%;
+          object-fit: cover;
+          z-index: 100;
+        }
+        &__author__header {
+          position: absolute;
+          bottom: -18px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 192px;
+          height: 192px;
+          border-radius: 50%;
+          background-color: #fff;
+          &__img {
+            width: 183px;
+            bottom: -18px;
+            height: 183px;
+            border-radius: 50%;
+            z-index: 100;
+          }
+        }
+        &__editBtn {
+          width: 140px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          color: #888;
+          border-radius: 10px;
+          opacity: 0.7;
+          border: 1px solid #888;
+          position: absolute;
+          bottom: -60px;
+          right: 25px;
+        }
+        &__editBtn:hover {
+          color: #0b800b;
+          opacity: 1;
+          background-color: #0b800b11;
+          border: 1px solid #0b800b;
+        }
+      }
     }
   }
   &__content {
     text-align: center;
     padding-top: 27px;
+    &__title {
+      width: 100%;
+      color: #111;
+      font-weight: bold;
+      text-align: right;
+    }
+
     &__blank {
       height: 25px;
     }
@@ -367,22 +433,23 @@ export default {
     }
     &__name {
       font-size: 32px;
+      margin-top: 10px;
       font-weight: bold;
-      color: #212121;
+      color: #111;
       line-height: 20px;
     }
     &__description {
-      margin-top: 15px;
+      margin-top: 25px;
       font-size: 16px;
       font-weight: 400;
-      color: #212121;
+      color: #111;
       line-height: 20px;
     }
     &__introduction {
-      margin-top: 24px;
+      padding-top: 20px;
       text-align: left;
-      width: 956px;
-      margin-left: 133px;
+      width: 80%;
+      margin: 0 auto;
       font-size: 14px;
       font-weight: 400;
       color: #383838;
@@ -393,51 +460,53 @@ export default {
     }
     &__position {
       text-align: left;
-      color: #222222;
+      color: #111;
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
     }
     &__education {
       text-align: left;
-      color: #222222;
+      color: #111;
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
-      margin-bottom: 8px;
+      margin-bottom: 20px;
     }
     &__story {
       margin-top: 5px;
-      font-size: 12px;
+      font-size: 14px;
       text-align: left;
       font-weight: 400;
-      color: #383838;
+      color: #727272;
       line-height: 18px;
       margin-left: 24px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
     &__residencePlace {
       text-align: left;
-      color: #222222;
+      color: #111;
       font-size: 14px;
       font-weight: 400;
       line-height: 20px;
     }
     &__account {
       text-align: left;
-      color: #222222;
+      color: #111;
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;
+      margin-bottom: 20px;
       line-height: 20px;
     }
     &__account:hover {
       text-align: left;
-      color: #222222;
+      color: #111;
       background-color: #ddd;
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;
+      margin-bottom: 20px;
       line-height: 20px;
     }
     &__unverified {
@@ -450,7 +519,7 @@ export default {
     }
     &__inviter {
       text-align: left;
-      color: #222222;
+      color: #111;
       margin-bottom: 8px;
       font-size: 14px;
       font-weight: 400;
