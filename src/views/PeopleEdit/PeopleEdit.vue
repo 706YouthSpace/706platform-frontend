@@ -2,12 +2,21 @@
   <div class="people">
     <div class="people__background">
       <div class="people__background__img__inner__author__header">
-        <img class="people__background__img__inner__author__header__img"
-             src="@/assets/images/header.png" />
+        <vue-hover-mask @click="handleClick">
+          <!-- 默认插槽 -->
+          <img class="people__background__img__inner__author__header__img"
+               src="@/assets/images/header.png" />
+          <!-- action插槽 -->
+          <template v-slot:action>
+            <i class="iconfont zoom"></i>
+            <i class="iconfont delete"></i>
+          </template>
+        </vue-hover-mask>
       </div>
       <div class="people__background__inner">
         <div class="people__background__img">
           <div class="people__background__img__inner">
+
             <img src="@/assets/images/activities/activity_bg_1.png" />
             <activity-photo-uploader class="people__background__img__inner__upLoad">
               <svg-icon class="icon"
@@ -522,9 +531,11 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ActivityPhotoUploader from './components/ActivityPhotoUploader'
 import CommBtn from '@/components/CommBtn'
 import InvitationBtn from '@/components/InvitationBtn'
+import VueHoverMask from 'vue-hover-mask'
+
 export default {
   name: 'PeopleIntroduction',
-  components: { ActivityPhotoUploader, CommBtn, InvitationBtn },
+  components: { ActivityPhotoUploader, CommBtn, InvitationBtn, VueHoverMask },
   data () {
     return {
       editor: ClassicEditor,
@@ -766,6 +777,11 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import url("//at.alicdn.com/t/font_1223885_a68qqkvtjgr.css");
+.iconfont {
+  font-size: 24px;
+}
+
 .people {
   height: 100%;
   // 要问的 为什么要显示设置高度

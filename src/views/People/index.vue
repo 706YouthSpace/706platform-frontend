@@ -29,7 +29,7 @@ export default {
   &__inner {
     flex: 1 1 auto;
     width: 100%;
-    margin: 0 auto;
+    margin: 0 0 0 200px;
     padding: 0;
     height: 1800px;
   }

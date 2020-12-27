@@ -3,7 +3,8 @@
     <ul>
       <div class="left-menu__info">
         <div class="avatar">
-          <el-avatar :src='imgURL'></el-avatar>
+          <!-- <el-avatar :src='imgURL'></el-avatar> -->
+          <el-avatar icon="el-icon-user-solid"></el-avatar>
         </div>
         <div class="name">{{name}}</div>
         <div class="introduction">{{introduction}}</div>
@@ -12,9 +13,9 @@
           v-for="(route,index) in routes"
           :key="route.name">
         <router-link :to="route.path">
-          <i :class=" route.icon"
-             @click='changeColor(index)'
-             :style="route.styleObj"><span class="left-menu__item__name">{{route.name}}</span> </i>
+          <span class="left-menu__item"><i :class=" route.icon"
+               @click='changeColor(index)'
+               :style="route.styleObj"><span class="left-menu__item__name">{{route.name}}</span> </i></span>
         </router-link>
       </li>
     </ul>
@@ -35,7 +36,7 @@ export default {
     },
     imgURL: {
       type: String,
-      default: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+      default: '@/assets/images/activities/activity_bg_1.png'
     }
   },
   data () {
@@ -90,9 +91,12 @@ export default {
 
 <style scoped lang="less">
 .left-menu {
+  position: fixed;
+  width: 190px;
+  height: 1200px;
   flex: 0 0 160px;
-  margin-right: 30px;
-  padding-top: 20px;
+  margin-right: 10px;
+  padding-top: 10px;
   background-color: #ffffff;
   &__info {
     height: 84px;
@@ -137,9 +141,9 @@ export default {
       margin-left: 20px;
     }
     &__name {
-      height: 40px;
-      color: #222;
+      color: grey;
       font-size: 14px;
+      margin-bottom: 12px;
       line-height: 40px;
       margin-left: 14px;
     }
