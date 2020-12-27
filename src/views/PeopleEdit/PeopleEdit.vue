@@ -13,9 +13,6 @@
               <svg-icon class="icon"
                         icon-class="upload" />
             </activity-photo-uploader>
-            <!-- <el-button type="info"
-                       class="people__background__img__inner__upLoad"
-                       round>上传背景</el-button> -->
             <router-link to='/people/introduction'>
               <CommBtn>完成编辑</CommBtn>
             </router-link>
@@ -81,6 +78,7 @@
           <el-col :span="16"
                   class="people__content__gender">
             <el-radio v-model="gender"
+                      fill="#090909"
                       label="1">女</el-radio>
             <el-radio v-model="gender"
                       label="2">男</el-radio>
@@ -149,18 +147,18 @@
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">工作经历</div>
           </el-col>
-          <el-col :span="16">
+          <el-col :span="16"
+                  class="item">
             <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{workExperience[0].occupation}}</div>
+              &nbsp; &nbsp; {{workExperience[0].occupation}}
+              <span class="people__content__del"> <i class="fa fa-times"
+                   @click="delWorkExp(workExperience[0])"></i></span>
+            </div>
           </el-col>
-          <el-col :span="4"
-                  class="people__content__del">
-            <i class="fa fa-times"
-               @click="delWorkExp(workExperience[0])"></i>
+          <el-col :span="4">
+
             <div></div>
           </el-col>
-        </el-row>
-        <el-row v-if="workExperience.length>0">
           <el-col :span="16"
                   :offset="4">
             <div class="people__content__story">{{workExperience[0].story}}</div>
@@ -170,7 +168,7 @@
           </el-col>
         </el-row>
         <!-- 无工作经历时显示空 -->
-        <el-row v-else>
+        <el-row v-if="this.workExperience.length==0">
           <el-col :span="4">
             <div style="color: #222222;font-weight: bold;">工作经历</div>
           </el-col>
@@ -217,7 +215,6 @@
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-
         <el-row v-else>
           <el-col :span="8"
                   :offset="4">
@@ -501,11 +498,11 @@
           </el-col>
           <el-col :span="16">
             <div v-if="inviter.isExist==false"
-                 class="people__content__unverified"><span class="people__content__point">
-                <i class="fa fa-plus-circle "></i>
-              </span>
+                 class="people__content__plus">
+
+              <InvitationBtn>添加邀请人</InvitationBtn>
+
               <!-- 添加邀请人 -->
-              <PeopleInvite />
             </div>
             <div v-else
                  class="people__content__inviter"><span class="people__content__point">•
@@ -521,14 +518,13 @@
 </template>
 
 <script>
-import PeopleInvite from './components/PeopleInvite'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ActivityPhotoUploader from './components/ActivityPhotoUploader'
 import CommBtn from '@/components/CommBtn'
-
+import InvitationBtn from '@/components/InvitationBtn'
 export default {
   name: 'PeopleIntroduction',
-  components: { PeopleInvite, ActivityPhotoUploader, CommBtn },
+  components: { ActivityPhotoUploader, CommBtn, InvitationBtn },
   data () {
     return {
       editor: ClassicEditor,
@@ -772,6 +768,8 @@ export default {
 <style scoped lang="less">
 .people {
   height: 100%;
+  // 要问的 为什么要显示设置高度
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   &__author__header {
     position: absolute;
     display: flex;
@@ -918,6 +916,9 @@ export default {
       font-weight: 400;
       line-height: 20px;
     }
+    &__position:hover {
+      background-color: lightgray;
+    }
     &__education {
       text-align: left;
       color: #222222;
@@ -979,8 +980,11 @@ export default {
       color: #0b800b;
     }
     &__del {
-      color: #888;
+      color: #fff;
+      text-align: right;
+      margin-left: 80%;
     }
+
     &__input {
       width: 70%;
       margin-bottom: 10px;
@@ -990,9 +994,6 @@ export default {
     }
     &__unverified {
       text-align: left;
-      color: #027db4;
-      margin-bottom: 8px;
-      font-size: 14px;
       font-weight: 400;
       line-height: 20px;
     }
@@ -1012,7 +1013,6 @@ export default {
   &__article {
     margin: 10px 0;
   }
-
   &__info {
     &__item {
       display: flex;

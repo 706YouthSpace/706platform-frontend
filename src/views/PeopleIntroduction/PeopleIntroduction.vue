@@ -231,11 +231,11 @@
           </el-col>
           <el-col :span="16">
             <div v-if="inviter.isExist==false"
-                 class="people__content__unverified"><span class="people__content__point">
-                <i class="fa fa-plus-circle "></i>
+                 class="people__content__plus"><span class="people__content__point">
+                <InvitationBtn>添加邀请人</InvitationBtn>
               </span>
               <!-- 添加邀请人 -->
-              <PeopleInvite />
+
             </div>
             <div v-else
                  class="people__content__inviter"><span class="people__content__point">•
@@ -251,12 +251,13 @@
 </template>
 
 <script>
-import PeopleInvite from './components/PeopleInvite'
+
 import CommBtn from '@/components/CommBtn'
+import InvitationBtn from '@/components/InvitationBtn'
 
 export default {
   name: 'PeopleIntroduction',
-  components: { PeopleInvite, CommBtn },
+  components: { InvitationBtn, CommBtn },
   data () {
     return {
       people: {
