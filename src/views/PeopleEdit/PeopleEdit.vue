@@ -2,19 +2,24 @@
   <div class="people">
     <div class="people__background">
       <div class="people__background__img__inner__author__header">
-        <vue-hover-mask @click="handleClick">
-          <!-- 默认插槽 -->
+        <div class="block">
+          <div class="block__shadow">
+            <span class="block__shadow__item"> <i class="fa fa-edit fa"></i></span>
+          </div>
           <img class="people__background__img__inner__author__header__img"
                src="@/assets/images/header.png" />
-          <!-- action插槽 -->
-          <template v-slot:action>
-            <i class="iconfont zoom"></i>
-            <i class="iconfont delete"></i>
-          </template>
-        </vue-hover-mask>
+        </div>
+
       </div>
       <div class="people__background__inner">
         <div class="people__background__img">
+
+          <div class="block">
+            <div class="block__shadow">
+              <svg-icon class="icon"
+                        icon-class="upload" />
+            </div>
+          </div>
           <div class="people__background__img__inner">
 
             <img src="@/assets/images/activities/activity_bg_1.png" />
@@ -531,11 +536,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import ActivityPhotoUploader from './components/ActivityPhotoUploader'
 import CommBtn from '@/components/CommBtn'
 import InvitationBtn from '@/components/InvitationBtn'
-import VueHoverMask from 'vue-hover-mask'
 
 export default {
   name: 'PeopleIntroduction',
-  components: { ActivityPhotoUploader, CommBtn, InvitationBtn, VueHoverMask },
+  components: { ActivityPhotoUploader, CommBtn, InvitationBtn },
   data () {
     return {
       editor: ClassicEditor,
@@ -1000,6 +1004,9 @@ export default {
       text-align: right;
       margin-left: 80%;
     }
+    &__del :hover {
+      color: #111;
+    }
 
     &__input {
       width: 70%;
@@ -1035,5 +1042,28 @@ export default {
       font-size: 16px;
     }
   }
+}
+.block {
+  position: relative;
+}
+.block__shadow {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 183px;
+  height: 183px;
+  border-radius: 50%;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.4);
+
+  &__item {
+    color: #fff;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.block:hover .block__shadow {
+  opacity: 1;
 }
 </style>

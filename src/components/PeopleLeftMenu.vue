@@ -15,7 +15,8 @@
         <router-link :to="route.path">
           <span class="left-menu__item"><i :class=" route.icon"
                @click='changeColor(index)'
-               :style="route.styleObj"><span class="left-menu__item__name">{{route.name}}</span> </i></span>
+               :style="route.styleObj"></i><span class="left-menu__item__name"
+                  @click='changeColor(index)'>{{route.name}}</span> </span>
         </router-link>
       </li>
     </ul>
@@ -91,9 +92,7 @@ export default {
 
 <style scoped lang="less">
 .left-menu {
-  position: fixed;
   width: 190px;
-  height: 1200px;
   flex: 0 0 160px;
   margin-right: 10px;
   padding-top: 10px;
@@ -136,15 +135,12 @@ export default {
     display: flex;
     align-items: center;
     i {
-      margin-top: 15px;
       color: #c2c2c2;
       margin-left: 20px;
     }
     &__name {
       color: grey;
       font-size: 14px;
-      margin-bottom: 12px;
-      line-height: 40px;
       margin-left: 14px;
     }
   }

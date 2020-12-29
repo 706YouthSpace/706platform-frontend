@@ -9,13 +9,13 @@
                :visible.sync="dialogVisible"
                width="30%"
                center>
-      <el-input placeholder="请输入邀请码                                                         如何获取"
-                v-model="input"
-                class="input"
-                clearable>
-        <i slot="suffix"
-           class="el-input__icon el-icon-question"></i>
-      </el-input>
+      <yth-input v-model="input"
+                 class="reg__form-item"
+                 placeholder="邀请码">
+        <span slot="suffix">
+          <span>如何获取</span><i class="fa fa-question-circle reg__form-icon"></i>
+        </span>
+      </yth-input>
       <span slot="footer"
             class="dialog-footer">
         <el-button class="editBtn"

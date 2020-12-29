@@ -50,9 +50,9 @@
         <!-- 无工作经历时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <span class="people__content__title">
+            <div class="people__content__title">
               工作经历
-            </span>
+            </div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -402,7 +402,6 @@ export default {
     text-align: center;
     padding-top: 27px;
     &__title {
-      width: 100%;
       color: #111;
       font-weight: bold;
       text-align: right;
