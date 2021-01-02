@@ -47,6 +47,12 @@ export default {
         this.nativeType = val
       },
       immediate: true
+    },
+    value: {
+      handler: function (val) {
+        this.setNativeInputValue()
+      },
+      immediate: true
     }
   },
   computed: {

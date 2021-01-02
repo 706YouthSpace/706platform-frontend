@@ -5,10 +5,6 @@
       <h1>706青年空间</h1>
     </router-link>
     <nav class="header__tab">
-      <a class="header__tab__item" href="#intro">介绍</a>
-      <a class="header__tab__item" href="#media">影响力</a>
-      <a class="header__tab__item" href="#consulting">付费资讯</a>
-      <a class="header__tab__item" href="#join">付费加入</a>
       <router-link
         class="header__tab__item"
         v-for="route in routes"
@@ -21,9 +17,11 @@
           {{route.name}}
         </span>
       </router-link>
-      <!-- <span class="header__user">
-        <i class="fa fa-user-circle"></i>
-      </span> -->
+      <span class="header__user">
+        <a href="/reg">
+          <i class="fa fa-user-circle"></i>
+        </a>
+      </span>
     </nav>
   </header>
 </template>
@@ -34,31 +32,26 @@ export default {
   data () {
     return {
       routes: [
-        // {
-        //   name: '广场',
-        //   path: '/square',
-        //   icon: 'map-signs'
-        // },
-        // {
-        //   name: '圈子',
-        //   path: '/social',
-        //   icon: 'spinner'
-        // },
-        // {
-        //   name: '活动',
-        //   path: '/activity/list',
-        //   icon: 'coffee'
-        // },
-        // {
-        //   name: '居住',
-        //   path: '/live',
-        //   icon: 'home'
-        // },
-        // {
-        //   name: '加入我们',
-        //   path: '/join',
-        //   icon: 'user-circle'
-        // }
+        {
+          name: '广场',
+          path: '/square',
+          icon: 'map-signs'
+        },
+        {
+          name: '圈子',
+          path: '/social',
+          icon: 'spinner'
+        },
+        {
+          name: '活动',
+          path: '/activity/list',
+          icon: 'coffee'
+        },
+        {
+          name: '居住',
+          path: '/live',
+          icon: 'home'
+        }
       ]
     }
   },

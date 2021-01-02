@@ -9,7 +9,7 @@
           <p class="project__detail">
             有时我骑自行车去客户的办公室，有时我步行去MING工作室。根据我当天在哪里工作，我会路过著名的Eisbach河，人们一大早就在那里冲浪(即使是在冬天……嘿嘿)。当我走到办公室时，我穿过Viktualienmarkt食品市场，这里在一天的这个时候相当平静。
           </p>
-          <p class="project__more" @click="showPay">了解更多</p>
+          <p class="project__more">了解更多</p>
         </div>
         <div class="project">
           <p class="project__title">青年空间旗舰店</p>
