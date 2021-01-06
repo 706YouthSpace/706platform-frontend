@@ -2,16 +2,18 @@
   <div class="home">
     <home-slogan class="home__sec home__sec__slogan"/>
     <home-intro id="intro" class="home__sec"/>
-    <home-activity id="activity"
+    <!-- <home-activity id="activity"
                    class="home__sec"
                    @bgOffsetYChange="handleBgOffsetYChange"
-                   :bgOffsetY="activityBgOffset"/>
-    <home-activity class="home__sec home__activity--fixed"
+                   :bgOffsetY="activityBgOffset"/> -->
+    <!-- <home-activity class="home__sec home__activity--fixed"
                    :class="{'home__activity--hide': !isActivityShadowShow}"
-                   :bgOffsetY="activityBgOffset"/>
+                   :bgOffsetY="activityBgOffset"/> -->
     <home-media id="media" class="home__sec home__sec__media home__sec__z2"/>
-    <home-project class="home__sec home__sec__z2"/>
-    <home-join class="home__sec home__sec__z2"/>
+    <!-- <home-project class="home__sec home__sec__z2"/> -->
+    <home-consulting id="consulting" class="home__sec home__sec__z2" @showPayQrCode="showPayQrCode"/>
+    <!-- <home-join class="home__sec home__sec__z2"/> -->
+    <home-pay id="join" class="home__sec home__sec__z2" @showPayQrCode="showPayQrCode"/>
     <el-dialog
       width="300px"
       title="请微信扫码支付"
@@ -26,20 +28,23 @@
 
 import HomeSlogan from './components/HomeSlogan'
 import HomeIntro from './components/HomeIntro'
-import HomeActivity from './components/HomeActivity'
-import HomeProject from './components/HomeProject'
+// import HomeActivity from './components/HomeActivity'
+// import HomeProject from './components/HomeProject'
 import HomeMedia from './components/HomeMedia'
-import HomeJoin from './components/HomeJoin'
+// import HomeJoin from './components/HomeJoin'
+import HomePay from './components/HomePay'
 import { throttle } from 'lodash'
-
+import HomeConsulting from './components/HomeConsulting.vue'
 export default {
   name: 'Home',
   components: {
-    HomeJoin,
+    HomePay,
+    // HomeJoin,
     HomeMedia,
-    HomeProject,
-    HomeActivity,
+    // HomeProject,
+    // HomeActivity,
     HomeIntro,
+    HomeConsulting,
     HomeSlogan
   },
   data () {
@@ -48,12 +53,6 @@ export default {
       activityBgOffset: 0,
       payQrCodeShow: false
     }
-  },
-  created () {
-    document.addEventListener('scroll', this.throttleScrollEvent, false)
-  },
-  destroyed () {
-    document.removeEventListener('scroll', this.throttleScrollEvent, false)
   },
   methods: {
     throttleScrollEvent () {
@@ -70,6 +69,10 @@ export default {
     },
     handleBgOffsetYChange (offset) {
       this.activityBgOffset = offset
+    },
+    showPayQrCode () {
+      console.log('aaa')
+      this.payQrCodeShow = true
     }
   }
 }

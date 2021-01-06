@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <div class="footer__list">
+    <!-- <div class="footer__list">
       <div class="item col-3">
         <p class="item__title">
           官方团队
@@ -39,7 +39,7 @@
           <p class="name">获得帮助</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="footer__copyright">
       <p>柒零六文化传播（北京）有限公司 版权所有 Copyright 2012-2020 All Rights Reserved</p>
       <p>京ICP备19057389号-1</p>
@@ -63,6 +63,7 @@ export default {
 <style scoped lang="less">
   .footer {
     padding: 20px 0 40px 0;
+    // padding-bottom: 14px;
     border-top: 6px solid #0B800B;
     background: #333333;
 
