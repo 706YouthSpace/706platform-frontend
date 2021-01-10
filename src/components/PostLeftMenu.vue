@@ -1,22 +1,24 @@
 <template>
-    <div class="left-menu">
-        <ul>
+  <div class="left-menu">
+    <ul>
+      <li class="left-menu__item"
+          v-for="route in routes"
+          :key="route.path">
+        <template v-if="route.children&&route.children.length">
+          {{route.name}}
+          <ul>
             <li class="left-menu__item"
-                v-for="route in routes"
-                :key="route.path">
-                <template v-if="route.children&&route.children.length">
-                    {{route.name}}
-                    <ul>
-                        <li class="left-menu__item"
-                            v-for="subRoute in route.children" :key="subRoute.path">
-                            <router-link :to="subRoute.path">{{subRoute.name}}</router-link>
-                        </li>
-                    </ul>
-                </template>
-                <router-link v-else :to="route.path">{{route.name}}</router-link>
+                v-for="subRoute in route.children"
+                :key="subRoute.path">
+              <router-link :to="subRoute.path">{{subRoute.name}}</router-link>
             </li>
-        </ul>
-    </div>
+          </ul>
+        </template>
+        <router-link v-else
+                     :to="route.path">{{route.name}}</router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -54,27 +56,27 @@ export default {
 </script>
 
 <style scoped lang="less">
-    .left-menu {
-        flex: 0 0 200px;
-        margin-right: 30px;
-        padding-top: 20px;
+.left-menu {
+  flex: 0 0 200px;
+  margin-right: 30px;
+  padding-top: 20px;
 
-        &__item {
-            height: 40px;
-            line-height: 40px;
-            font-size: 14px;
-            padding-left: 40px;
-        }
+  &__item {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    padding-left: 40px;
+  }
 
-        ul {
-            list-style: none;
+  ul {
+    list-style: none;
 
-            li {
-                cursor: pointer;
-                :hover {
-                    opacity: .9;
-                }
-            }
-        }
+    li {
+      cursor: pointer;
+      :hover {
+        opacity: 0.9;
+      }
     }
+  }
+}
 </style>

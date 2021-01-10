@@ -2,6 +2,9 @@ import Home from '@/views/Home'
 import Register from '@/views/Register'
 import Login from '@/views/Login'
 import ActivityDetail from '@/views/ActivityDetail'
+import PeopleIntroduction from '@/views/PeopleIntroduction/PeopleIntroduction.vue'
+import PeopleEdit from '@/views/PeopleEdit/PeopleEdit.vue'
+
 import ActivityList from '@/views/ActivityList'
 import Activity from '@/views/Activity'
 import ActivityCreate from '@/views/ActivityCreate'
@@ -9,6 +12,7 @@ import ActivityJoin from '@/views/ActivityJoin/ActivityJoin'
 import ActivityOrganize from '@/views/ActivityOrganize/ActivityOrganize'
 import Join from '@/views/Join'
 import NotFound from '@/views/NotFound'
+import People from '@/views/People/index.vue'
 
 export default [
   {
@@ -80,6 +84,33 @@ export default [
   {
     path: '/join',
     component: Join
+  },
+  {
+    path: '/people',
+    component: People,
+    children: [
+      {
+        path: 'introduction',
+        component: PeopleIntroduction,
+        meta: {
+          title: '信息'
+        }
+      },
+      {
+        path: 'edit',
+        component: PeopleEdit,
+        meta: {
+          title: '信息编辑'
+        }
+      },
+      {
+        path: 'organize',
+        component: ActivityOrganize,
+        meta: {
+          title: '我组织的活动'
+        }
+      }
+    ]
   },
   {
     path: '/*',

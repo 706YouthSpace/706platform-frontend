@@ -160,228 +160,231 @@ export default {
 </script>
 
 <style scoped lang="less">
-  @import ~"@/assets/style/variables";
-  .home__intro {
-    margin-top: 617px;
-    background: #fff;
+@import ~"@/assets/style/variables";
+.home__intro {
+  margin-top: 617px;
+  background: #fff;
 
-    &__inner {
-      max-width: 1920px;
+  &__inner {
+    max-width: 1920px;
+    margin: 0 auto;
+    .card {
+      position: relative;
+      top: -75px;
+      display: flex;
+      width: 900px;
+      height: 430px;
       margin: 0 auto;
-      .card {
-        position: relative;
-        top: -75px;
-        display: flex;
-        width: 900px;
-        height: 430px;
-        margin: 0 auto;
-        background: #fff;
-        box-shadow:0px 3px 8px 0px rgba(0, 0, 0, 0.1);
-        .left {
-          flex: 0 0 430px;
-          background: no-repeat url("~@/assets/images/Home/sec-02.png") center / cover;
-        }
-
-        .right {
-          flex: 1 1;
-          padding: 39px 60px 0 38px;
-          .title {
-            margin-bottom: 33px;
-            font-size: @--font-size-medium;
-            font-weight: bold;
-          }
-          .text {
-            line-height: 20px;
-            &:nth-child(n+2) {
-              margin-top: 28px;
-            }
-          }
-          .btn {
-            width: 117px;
-            margin-top: 97px;
-            margin-left: auto;
-            padding: 13px 0;
-            line-height: 20px;
-            text-align: center;
-            background: #0B800B;
-            color: #fff;
-            cursor: pointer;
-          }
-        }
+      background: #fff;
+      box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.1);
+      .left {
+        flex: 0 0 430px;
+        background: no-repeat url("~@/assets/images/Home/sec-02.png") center /
+          cover;
       }
 
-      .content {
-        margin: -32px auto 38px auto;
-        width: 900px;
-        box-sizing: border-box;
-        padding-left: 66px;
+      .right {
+        flex: 1 1;
+        padding: 39px 60px 0 38px;
         .title {
-          position: relative;
-          height: 102px;
-          line-height: 102px;
-          font-size: @--font-size-ex-large;
+          margin-bottom: 33px;
+          font-size: @--font-size-medium;
           font-weight: bold;
-          &::after {
-            content: '';
-            position: absolute;
-            width: 92px;
-            height: 7px;
-            left: 0;
-            bottom: 0;
-            background: #0B800B;
-          }
         }
         .text {
-          width: 526px;
-          margin-top: 25px;
           line-height: 20px;
-          color: #555;
-          &.active {
-            color: #000;
+          &:nth-child(n + 2) {
+            margin-top: 28px;
           }
         }
+        .btn {
+          width: 117px;
+          margin-top: 97px;
+          margin-left: auto;
+          padding: 13px 0;
+          line-height: 20px;
+          text-align: center;
+          background: #0b800b;
+          color: #fff;
+          cursor: pointer;
+        }
       }
+    }
 
-      .list {
+    .content {
+      margin: -32px auto 38px auto;
+      width: 900px;
+      box-sizing: border-box;
+      padding-left: 66px;
+      .title {
+        position: relative;
+        height: 102px;
+        line-height: 102px;
+        font-size: @--font-size-ex-large;
+        font-weight: bold;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 92px;
+          height: 7px;
+          left: 0;
+          bottom: 0;
+          background: #0b800b;
+        }
+      }
+      .text {
+        width: 526px;
+        margin-top: 25px;
+        line-height: 20px;
+        color: #555;
+        &.active {
+          color: #000;
+        }
+      }
+    }
+
+    .list {
+      display: flex;
+      flex-wrap: nowrap;
+      max-width: 1920px;
+      margin-top: 81px;
+      .left,
+      .right {
         display: flex;
-        flex-wrap: nowrap;
-        max-width: 1920px;
-        margin-top: 81px;
-        .left, .right {
+        flex: 1 1 50%;
+        .col-1 {
           display: flex;
-          flex: 1 1 50%;
-          .col-1 {
-            display: flex;
-            flex-wrap: wrap;
-            flex: 1 1;
+          flex-wrap: wrap;
+          flex: 1 1;
 
-            .small {
-              flex: 0 0 100%;
-            }
-          }
-          .col-2 {
-            display: flex;
-            flex-wrap: wrap;
-            flex: 2 1;
-            .small {
-              flex: 0 0 50%;
-            }
-          }
-          .big, .small {
-            position: relative;
-            box-sizing: border-box;
-            padding: 4px;
-          }
-          .big {
+          .small {
             flex: 0 0 100%;
           }
         }
-        &-inner {
+        .col-2 {
+          display: flex;
+          flex-wrap: wrap;
+          flex: 2 1;
+          .small {
+            flex: 0 0 50%;
+          }
+        }
+        .big,
+        .small {
           position: relative;
-          padding-top: 100%;
-          cursor: pointer;
-          &:hover {
-            .list-content {
-              &::before {
-                background: rgba(0, 0, 0, .5);
-              }
-              .list-text {
-                opacity: 1;
-              }
+          box-sizing: border-box;
+          padding: 4px;
+        }
+        .big {
+          flex: 0 0 100%;
+        }
+      }
+      &-inner {
+        position: relative;
+        padding-top: 100%;
+        cursor: pointer;
+        &:hover {
+          .list-content {
+            &::before {
+              background: rgba(0, 0, 0, 0.5);
+            }
+            .list-text {
+              opacity: 1;
             }
           }
         }
+      }
 
-        &-content {
+      &-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background: no-repeat center / cover;
+        color: #fff;
+        text-align: center;
+
+        &--canteen {
+          background-image: url("~@/assets/images/Home/intro-canteen.png");
+        }
+
+        &--coffee {
+          background-image: url("~@/assets/images/Home/intro-coffee.png");
+        }
+
+        &--exhibit {
+          background-image: url("~@/assets/images/Home/intro-exhibit.png");
+        }
+
+        &--gym {
+          background-image: url("~@/assets/images/Home/intro-gym.png");
+        }
+
+        &--hotel {
+          background-image: url("~@/assets/images/Home/intro-hotel.png");
+        }
+
+        &--labor {
+          background-image: url("~@/assets/images/Home/intro-labor.png");
+        }
+
+        &--library {
+          background-image: url("~@/assets/images/Home/intro-library.png");
+        }
+
+        &--living {
+          background-image: url("~@/assets/images/Home/intro-living.png");
+        }
+
+        &--pub {
+          background-image: url("~@/assets/images/Home/intro-pub.png");
+        }
+
+        &--rooftop {
+          background-image: url("~@/assets/images/Home/intro-rooftop.png");
+        }
+
+        &--salon {
+          background-image: url("~@/assets/images/Home/intro-salon.png");
+        }
+
+        &--theatre {
+          background-image: url("~@/assets/images/Home/intro-theatre.png");
+        }
+
+        &::before {
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          box-sizing: border-box;
-          background: no-repeat center / cover;
-          color: #fff;
-          text-align: center;
-
-          &--canteen {
-            background-image: url("~@/assets/images/Home/intro-canteen.png");
-          }
-
-          &--coffee {
-            background-image: url("~@/assets/images/Home/intro-coffee.png");
-          }
-
-          &--exhibit {
-            background-image: url("~@/assets/images/Home/intro-exhibit.png");
-          }
-
-          &--gym {
-            background-image: url("~@/assets/images/Home/intro-gym.png");
-          }
-
-          &--hotel {
-            background-image: url("~@/assets/images/Home/intro-hotel.png");
-          }
-
-          &--labor {
-            background-image: url("~@/assets/images/Home/intro-labor.png");
-          }
-
-          &--library {
-            background-image: url("~@/assets/images/Home/intro-library.png");
-          }
-
-          &--living {
-            background-image: url("~@/assets/images/Home/intro-living.png");
-          }
-
-          &--pub {
-            background-image: url("~@/assets/images/Home/intro-pub.png");
-          }
-
-          &--rooftop {
-            background-image: url("~@/assets/images/Home/intro-rooftop.png");
-          }
-
-          &--salon {
-            background-image: url("~@/assets/images/Home/intro-salon.png");
-          }
-
-          &--theatre {
-            background-image: url("~@/assets/images/Home/intro-theatre.png");
-          }
-
-          &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0);
-            transition: background .2s;
-          }
-          .title {
-            font-size: 15px;
-            line-height: 17px;
-          }
-          .text {
-            width: 80%;
-            margin: 24px auto 0 auto;
-            font-size: 10px;
-            line-height: 17px;
-          }
+          background: rgba(0, 0, 0, 0);
+          transition: background 0.2s;
         }
-
-        &-text {
-          position: absolute;
-          top: 50%;
-          width: 100%;
-          transform: translateY(-50%);
-          opacity: 0;
-          transition: opacity .2s;
+        .title {
+          font-size: 15px;
+          line-height: 17px;
         }
+        .text {
+          width: 80%;
+          margin: 24px auto 0 auto;
+          font-size: 10px;
+          line-height: 17px;
+        }
+      }
+
+      &-text {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: opacity 0.2s;
       }
     }
   }
+}
 </style>
