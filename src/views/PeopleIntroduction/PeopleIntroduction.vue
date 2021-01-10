@@ -26,7 +26,8 @@
         <!-- 工作经历开始 -->
         <el-row v-if="workExperience.length>0">
           <el-col :span="4">
-            <span class="people__content__title">
+            <span @click="get(1)"
+                  class="people__content__title">
               工作经历
             </span>
           </el-col>
@@ -254,6 +255,7 @@
 
 import CommBtn from '@/components/CommBtn'
 import InvitationBtn from '@/components/InvitationBtn'
+import { getProfile } from '@/http'
 
 export default {
   name: 'PeopleIntroduction',
@@ -323,6 +325,13 @@ export default {
         URL: ''
       }
 
+    }
+  },
+  methods: {
+    getProfile (id) {
+      getProfile(id).then(res => {
+        console.log(res)
+      })
     }
   },
   computed: {

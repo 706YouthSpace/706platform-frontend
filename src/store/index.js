@@ -5,11 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLoadingShow: false
+    isLoadingShow: false,
+    token: ''
   },
   mutations: {
-    setLoading (state, isShow) {
+    setLoading (state, isShow, token) {
       state.isLoadingShow = isShow
+      state.token = token
     }
   }
 })

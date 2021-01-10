@@ -140,8 +140,8 @@ export default {
           },
           pwd: {
             length: {
-              minimum: 8,
-              tooShort: '^密码不能少于八位'
+              minimum: 4,
+              tooShort: '^密码不能少于四位'
             }
           }
         }

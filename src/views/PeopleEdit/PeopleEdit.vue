@@ -9,19 +9,10 @@
           <img class="people__background__img__inner__author__header__img"
                src="@/assets/images/header.png" />
         </div>
-
       </div>
       <div class="people__background__inner">
         <div class="people__background__img">
-
-          <div class="block">
-            <div class="block__shadow">
-              <svg-icon class="icon"
-                        icon-class="upload" />
-            </div>
-          </div>
           <div class="people__background__img__inner">
-
             <img src="@/assets/images/activities/activity_bg_1.png" />
             <activity-photo-uploader class="people__background__img__inner__upLoad">
               <svg-icon class="icon"
@@ -33,7 +24,6 @@
           </div>
         </div>
       </div>
-
       <div class="people__content">
         <!-- 个人信息开始 -->
         <div class="people__content__name">{{people.name}}</div>
@@ -44,7 +34,7 @@
         <!-- 编辑一句话描述 -->
         <el-row v-if="editStatus.description==false">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">一句话描述</div>
+            <div class="people__content__title">一句话描述</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__description"
@@ -63,7 +53,7 @@
         <!-- 编辑个人描述开始 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">一句话描述</div>
+            <div class="people__content__title">一句话描述</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__input">
@@ -87,7 +77,7 @@
         <!-- 编辑个人性别信息 -->
         <el-row>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">性别</div>
+            <div class="people__content__title">性别</div>
           </el-col>
           <el-col :span="16"
                   class="people__content__gender">
@@ -114,7 +104,7 @@
         <!-- 编辑自我介绍 -->
         <el-row v-if="editStatus.introduction==false">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">自我介绍</div>
+            <div class="people__content__title">自我介绍</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__introduction"
@@ -133,9 +123,9 @@
         <!-- 编辑自我介绍开始 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">自我介绍</div>
+            <div class="people__content__title">自我介绍</div>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="14">
             <div class="people__content__Linput">
               <ckeditor :editor="editor"
                         @ready="onEditorReady"
@@ -144,7 +134,7 @@
               </ckeditor>
             </div>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="6">
             <div>
               <el-button type="success"
                          @click="saveIntroduction()">保存</el-button>
@@ -159,7 +149,7 @@
         <!-- 编辑工作经历开始 -->
         <el-row>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">工作经历</div>
+            <div class="people__content__title">工作经历</div>
           </el-col>
           <el-col :span="16"
                   class="item">
@@ -184,7 +174,7 @@
         <!-- 无工作经历时显示空 -->
         <el-row v-if="this.workExperience.length==0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">工作经历</div>
+            <div class="people__content__title">工作经历</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -201,7 +191,10 @@
           <el-col :span="16"
                   :offset="4">
             <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{role.occupation}}</div>
+              &nbsp; &nbsp; {{role.occupation}}
+              <span class="people__content__del"> <i class="fa fa-times"
+                   @click="delWorkExp(role)"></i></span>
+            </div>
           </el-col>
           <el-col :span="4"
                   class="people__content__del">
@@ -276,7 +269,7 @@
         <!-- 教育经历开始 -->
         <el-row v-if="educationExperience.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">教育经历</div>
+            <div class="people__content__title">教育经历</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{educationExperience[0].education}}&nbsp;•
@@ -290,7 +283,7 @@
         <!-- 无教育经历时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">教育经历</div>
+            <div class="people__content__title">教育经历</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__education"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -361,7 +354,7 @@
         <!-- 现居住地开始 -->
         <el-row v-if="editStatus.residencePlace==false">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">现居住地</div>
+            <div class="people__content__title">现居住地</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__residencePlace"
@@ -380,7 +373,7 @@
         <!-- 未填写显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">现居住地</div>
+            <div class="people__content__title">现居住地</div>
           </el-col>
           <el-col :span="8">
             <div class="people__content__sinput">
@@ -418,7 +411,7 @@
         <!-- 社交账号开始 -->
         <el-row v-if="contactAccounts.length>0">
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">社交账号</div>
+            <div class="people__content__title">社交账号</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
@@ -432,7 +425,7 @@
         <!-- 无社交账号时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">社交账号</div>
+            <div class="people__content__title">社交账号</div>
           </el-col>
           <el-col :span="16">
             <div class="people__content__account"><span class="people__content__point">•</span>空&nbsp; &nbsp;
@@ -508,7 +501,7 @@
         <!-- 邀请人开始 -->
         <el-row>
           <el-col :span="4">
-            <div style="color: #222222;font-weight: bold;">邀请人</div>
+            <div class="people__content__title">邀请人</div>
           </el-col>
           <el-col :span="16">
             <div v-if="inviter.isExist==false"
@@ -860,6 +853,11 @@ export default {
   &__content {
     text-align: center;
     padding-top: 27px;
+    &__title {
+      color: #111;
+      font-weight: bold;
+      text-align: center;
+    }
     &__gender {
       text-align: left;
     }
