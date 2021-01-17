@@ -6,12 +6,23 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLoadingShow: false,
-    token: ''
+    // 存储token
+    token: sessionStorage.getItem('token')
+      ? sessionStorage.getItem('token')
+      : ''
   },
   mutations: {
-    setLoading (state, isShow, token) {
+    setLoading(state, isShow) {
       state.isLoadingShow = isShow
-      state.token = token
+    },
+    // 设置token，并将token存入localStorage
+    setToken(state, user) {
+      state.token = user.token
+      sessionStorage.setItem('token', user.token)
+    },
+    delToken(state) {
+      state.token = ''
+      sessionStorage.removeItem('token')
     }
   }
 })

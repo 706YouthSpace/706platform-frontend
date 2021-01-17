@@ -2,15 +2,17 @@
   <div class="people">
     <div class="people__background">
       <div class="people__background__img__inner__author__header">
-        <img class="people__background__img__inner__author__header__img"
-             src="@/assets/images/header.png" />
+        <img
+          class="people__background__img__inner__author__header__img"
+          src="@/assets/images/header.png"
+        />
       </div>
       <div class="people__background__inner">
         <div class="people__background__img">
           <div class="people__background__img__inner">
             <img src="@/assets/images/activities/activity_bg_1.png" />
             <!--TODO:这个按钮应该写在下面 -->
-            <router-link to='/people/edit'>
+            <router-link to="/people/edit">
               <CommBtn>编辑个人信息</CommBtn>
             </router-link>
           </div>
@@ -19,64 +21,69 @@
 
       <div class="people__content">
         <!-- 个人信息开始 -->
-        <div class="people__content__name">{{people.name}}</div>
-        <div class="people__content__description">{{people.description}}</div>
-        <div class="people__content__introduction">{{people.introduction}}</div>
+        <div class="people__content__name">{{ people.name }}</div>
+        <div class="people__content__description">{{ people.description }}</div>
+        <div class="people__content__introduction">
+          {{ people.introduction }}
+        </div>
         <el-divider class="people__content__divider"></el-divider>
         <!-- 工作经历开始 -->
-        <el-row v-if="workExperience.length>0">
+        <el-row v-if="workExperience.length > 0">
           <el-col :span="4">
-            <span @click="get(1)"
-                  class="people__content__title">
+            <span @click="getTest(1)" class="people__content__title">
               工作经历
             </span>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__position"><span class="people__content__point">•</span>{{workExperience[0].position}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{workExperience[0].occupation}}</div>
+            <div class="people__content__position">
+              <span class="people__content__point">•</span
+              >{{ workExperience[0].position }}&nbsp; &nbsp; &nbsp; &nbsp;
+              {{ workExperience[0].occupation }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-        <el-row v-if="workExperience.length>0">
-          <el-col :span="16"
-                  :offset="4">
-            <div class="people__content__story">{{workExperience[0].story}}</div>
+        <el-row v-if="workExperience.length > 0">
+          <el-col :span="16" :offset="4">
+            <div class="people__content__story">
+              {{ workExperience[0].story }}
+            </div>
           </el-col>
           <el-col :span="4">
-            <div>&nbsp; </div>
+            <div>&nbsp;</div>
           </el-col>
         </el-row>
         <!-- 无工作经历时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <div class="people__content__title">
-              工作经历
-            </div>
+            <div class="people__content__title">工作经历</div>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__position"><span class="people__content__point">•</span>空&nbsp; &nbsp;
-              &nbsp; &nbsp;</div>
+            <div class="people__content__position">
+              <span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
         <!-- 多条工作经历时 -->
-        <el-row v-for="role in newWorkExperience"
-                :key="role.Id">
-          <el-col :span="16"
-                  :offset="4">
-            <div class="people__content__position"><span class="people__content__point">•</span>{{role.position}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{role.occupation}}</div>
+        <el-row v-for="role in newWorkExperience" :key="role.Id">
+          <el-col :span="16" :offset="4">
+            <div class="people__content__position">
+              <span class="people__content__point">•</span
+              >{{ role.position }}&nbsp; &nbsp; &nbsp; &nbsp;
+              {{ role.occupation }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
-          <el-col :span="16"
-                  :offset="4">
-            <div class="people__content__story">{{role.story}}</div>
+          <el-col :span="16" :offset="4">
+            <div class="people__content__story">{{ role.story }}</div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -87,15 +94,16 @@
           <div>&nbsp;</div>
         </el-row>
         <!-- 教育经历开始 -->
-        <el-row v-if="educationExperience.length>0">
+        <el-row v-if="educationExperience.length > 0">
           <el-col :span="4">
-            <span class="people__content__title">
-              教育经历
-            </span>
+            <span class="people__content__title"> 教育经历 </span>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{educationExperience[0].education}}&nbsp;•
-              {{educationExperience[0].professional}}</div>
+            <div class="people__content__education">
+              <span class="people__content__point">•</span>&nbsp;&nbsp;{{
+                educationExperience[0].education
+              }}&nbsp;• {{ educationExperience[0].professional }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -104,25 +112,26 @@
         <!-- 无教育经历时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <span class="people__content__title">
-              教育经历
-            </span>
+            <span class="people__content__title"> 教育经历 </span>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__education"><span class="people__content__point">•</span>空&nbsp; &nbsp;
-              &nbsp; &nbsp;</div>
+            <div class="people__content__education">
+              <span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
         <!-- 多条教育经历时 -->
-        <el-row v-for="item in newEducationExperiences"
-                :key="item.Id">
-          <el-col :span="16"
-                  :offset="4">
-            <div class="people__content__education"><span class="people__content__point">•</span>&nbsp;&nbsp;{{item.education}}&nbsp;•
-              {{item.professional}}</div>
+        <el-row v-for="item in newEducationExperiences" :key="item.Id">
+          <el-col :span="16" :offset="4">
+            <div class="people__content__education">
+              <span class="people__content__point">•</span>&nbsp;&nbsp;{{
+                item.education
+              }}&nbsp;• {{ item.professional }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -135,16 +144,15 @@
         </el-row>
 
         <!-- 现居住地开始 -->
-        <el-row v-if="educationExperience.length>0">
+        <el-row v-if="educationExperience.length > 0">
           <el-col :span="4">
-            <span class="people__content__title">
-              现居住地
-            </span>
+            <span class="people__content__title"> 现居住地 </span>
           </el-col>
           <el-col :span="16">
             <div class="people__content__residencePlace">
-              <span class="people__content__point">•</span>&nbsp;&nbsp;{{residencePlace.city}}&nbsp;
-              •{{residencePlace.region}}
+              <span class="people__content__point">•</span>&nbsp;&nbsp;{{
+                residencePlace.city
+              }}&nbsp; •{{ residencePlace.region }}
             </div>
           </el-col>
           <el-col :span="4">
@@ -154,13 +162,13 @@
         <!-- 未填写显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <span class="people__content__title">
-              现居住地
-            </span>
+            <span class="people__content__title"> 现居住地 </span>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__residencePlace"><span class="people__content__point">•</span>空&nbsp; &nbsp;
-              &nbsp; &nbsp;</div>
+            <div class="people__content__residencePlace">
+              <span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -173,15 +181,16 @@
         </el-row>
 
         <!-- 社交账号开始 -->
-        <el-row v-if="contactAccounts.length>0">
+        <el-row v-if="contactAccounts.length > 0">
           <el-col :span="4">
-            <span class="people__content__title">
-              社交账号
-            </span>
+            <span class="people__content__title"> 社交账号 </span>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__account"><span class="people__content__point">•</span>{{contactAccounts[0].platform}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{contactAccounts[0].account}}</div>
+            <div class="people__content__account">
+              <span class="people__content__point">•</span
+              >{{ contactAccounts[0].platform }}&nbsp; &nbsp; &nbsp; &nbsp;
+              {{ contactAccounts[0].account }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -190,38 +199,37 @@
         <!-- 无社交账号时显示空 -->
         <el-row v-else>
           <el-col :span="4">
-            <span class="people__content__title">
-              社交账号
-            </span>
+            <span class="people__content__title"> 社交账号 </span>
           </el-col>
           <el-col :span="16">
-            <div class="people__content__account"><span class="people__content__point">•</span>空&nbsp; &nbsp;
-              &nbsp; &nbsp;</div>
+            <div class="people__content__account">
+              <span class="people__content__point">•</span>空&nbsp; &nbsp;
+              &nbsp; &nbsp;
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
         <!-- 多条社交账号时 -->
-        <el-row v-for="account in newContactAccounts"
-                :key="account.Id">
-          <el-col :span="16"
-                  :offset="4">
-            <div class="people__content__account"><span class="people__content__point">•</span>{{account.platform}}&nbsp; &nbsp;
-              &nbsp; &nbsp; {{account.account}}</div>
+        <el-row v-for="account in newContactAccounts" :key="account.Id">
+          <el-col :span="16" :offset="4">
+            <div class="people__content__account">
+              <span class="people__content__point">•</span
+              >{{ account.platform }}&nbsp; &nbsp; &nbsp; &nbsp;
+              {{ account.account }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
           </el-col>
         </el-row>
-
         <!-- 空白行 -->
         <el-row class="people__content__blank">
           <div>&nbsp;</div>
         </el-row>
-
+        <DisplayBoard><span slot="center">•</span></DisplayBoard>
         <!-- 邀请人 -->
-
         <!-- 邀请人开始 -->
         <el-row>
           <el-col :span="4">
@@ -231,16 +239,15 @@
             </span>
           </el-col>
           <el-col :span="16">
-            <div v-if="inviter.isExist==false"
-                 class="people__content__plus"><span class="people__content__point">
+            <div v-if="inviter.isExist == false" class="people__content__plus">
+              <span class="people__content__point">
                 <InvitationBtn>添加邀请人</InvitationBtn>
               </span>
               <!-- 添加邀请人 -->
-
             </div>
-            <div v-else
-                 class="people__content__inviter"><span class="people__content__point">•
-              </span>{{inviter.name}}</div>
+            <div v-else class="people__content__inviter">
+              <span class="people__content__point">• </span>{{ inviter.name }}
+            </div>
           </el-col>
           <el-col :span="4">
             <div>&nbsp;</div>
@@ -252,21 +259,24 @@
 </template>
 
 <script>
-
 import CommBtn from '@/components/CommBtn'
 import InvitationBtn from '@/components/InvitationBtn'
-import { getProfile } from '@/http'
+import DisplayBoard from '@/components/People/DisplayBoard'
+
+import { getProfile, signIn } from '@/http/people'
 
 export default {
   name: 'PeopleIntroduction',
-  components: { InvitationBtn, CommBtn },
-  data () {
+  components: { InvitationBtn, CommBtn, DisplayBoard },
+  data() {
     return {
       people: {
         name: '张三',
-        introduction: '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书，拥有一定的魔法才能，由于魔法部法律的约束不能向各位展示。家有一头鹰头马身有翼兽，魔杖有十又十四分之一英寸长，由紫杉木制成，内芯是一根独角兽的羽毛，守护神是一只天鹅。我认为我应该是格兰芬多的勇士。平时喜欢运动，下棋和读书，如果各位有兴趣了解魁地奇和巫师棋的话，我乐意效劳。家里藏书有《霍格沃茨：一段校史》、《游吟诗人比伯的故事》还有魔法部和格兰杰学姐推荐的《五年O.W.Ls三年模拟》。最后告诉大家，如果看见学校白天平白无故飞进一只猫头鹰的话，请尽快通知我，这很有可能是魔法学院晚来的给我的入学通知书，这对我很重要，谢谢（鞠躬）。',
+        introduction:
+          '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书，拥有一定的魔法才能，由于魔法部法律的约束不能向各位展示。家有一头鹰头马身有翼兽，魔杖有十又十四分之一英寸长，由紫杉木制成，内芯是一根独角兽的羽毛，守护神是一只天鹅。我认为我应该是格兰芬多的勇士。平时喜欢运动，下棋和读书，如果各位有兴趣了解魁地奇和巫师棋的话，我乐意效劳。家里藏书有《霍格沃茨：一段校史》、《游吟诗人比伯的故事》还有魔法部和格兰杰学姐推荐的《五年O.W.Ls三年模拟》。最后告诉大家，如果看见学校白天平白无故飞进一只猫头鹰的话，请尽快通知我，这很有可能是魔法学院晚来的给我的入学通知书，这对我很重要，谢谢（鞠躬）。',
         description: '发布者的描述信息',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.',
+        content:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.',
         time: '2020-05-06(周三) 21:00 ~ 2020-06-07(周五) 17:00 | 持续 30天',
         site: '广东 深圳 南山区华侨城创意文化园e6栋马兰戈尼培训中心'
       },
@@ -275,19 +285,22 @@ export default {
           Id: 1,
           position: '项目1',
           occupation: '角色1 ',
-          story: '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
+          story:
+            '大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         },
         {
           Id: 2,
           position: '项目2',
           occupation: '角色2',
-          story: '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
+          story:
+            '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         },
         {
           Id: 3,
           position: '项目3',
           occupation: '角色',
-          story: '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
+          story:
+            '大家好，我是，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书大家好，我是xxx，来自麻瓜家庭，不过父母之中可能有一人是巫师但没有披露。目前还没有接到霍格沃茨魔法学校的通知书'
         }
       ],
       educationExperience: [
@@ -295,7 +308,8 @@ export default {
           Id: 4,
           education: '翻斗大学',
           professional: '土豆专业 '
-        }, {
+        },
+        {
           Id: 5,
           education: '翻斗大学研究生',
           professional: '土豆专业 '
@@ -305,51 +319,70 @@ export default {
         city: '北京',
         region: '海淀区'
       },
-      contactAccounts: [{
-        Id: 6,
-        platform: 'QQ',
-        account: '2505807508 '
-      },
-      {
-        Id: 7,
-        platform: '微信',
-        account: '12346546456 '
-      }, {
-        Id: 8,
-        platform: '即刻',
-        account: '123336 '
-      }],
+      contactAccounts: [
+        {
+          Id: 6,
+          platform: 'QQ',
+          account: '2505807508 '
+        },
+        {
+          Id: 7,
+          platform: '微信',
+          account: '12346546456 '
+        },
+        {
+          Id: 8,
+          platform: '即刻',
+          account: '123336 '
+        }
+      ],
       inviter: {
         isExist: false,
         name: '706生活空间',
         URL: ''
       }
-
     }
   },
+  created: function() {
+    var id = this.$route.params
+    var data = this._data
+    console.log(id.id)
+    getProfile(id.id).then(res => {
+      console.log(res)
+      var resData = res.data
+      data.people.name = resData.firstName + resData.lastName
+      data.people.description = resData.description
+      // data.people.name=res.data.
+    })
+  },
   methods: {
-    getProfile (id) {
-      getProfile(id).then(res => {
+    getTest(id) {
+      console.log('登入尝试')
+      var loginData = {
+        username: 'guest@example.com',
+        password: 'guest'
+      }
+      signIn(loginData).then(res => {
         console.log(res)
       })
     }
   },
   computed: {
-    newWorkExperience () {
+    newWorkExperience() {
       if (this.workExperience.length > 1) {
         return this.workExperience.slice(1)
       } else {
         return []
       }
     },
-    newEducationExperiences () {
+    newEducationExperiences() {
       if (this.educationExperience.length > 1) {
         return this.educationExperience.slice(1)
       } else {
         return []
       }
     },
-    newContactAccounts () {
+    newContactAccounts() {
       if (this.contactAccounts.length > 1) {
         return this.contactAccounts.slice(1)
       } else {
