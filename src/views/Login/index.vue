@@ -123,216 +123,216 @@
 </template>
 
 <script>
-import validate from "validate.js";
-import { getCaptcha, sendCode, signinPhone } from "@/http";
+import validate from 'validate.js'
+import { getCaptcha, sendCode, signinPhone } from '@/http'
 
 export default {
-  name: "index",
-  data() {
+  name: 'index',
+  data () {
     return {
-      loginType: "verify",
+      loginType: 'verify',
       verifyForm: {
-        phone: "",
-        code: ""
+        phone: '',
+        code: ''
       },
       constraints: {
         phone: {
           presence: {
             allowEmpty: false,
-            message: "^手机号码不能为空"
+            message: '^手机号码不能为空'
           },
           format: {
             pattern: /^[1]([3-9])[0-9]{9}$/,
-            message: "^电话号码格式错误"
+            message: '^电话号码格式错误'
           }
         }
       },
       pwdForm: {
-        email: "",
-        pwd: ""
+        email: '',
+        pwd: ''
       },
       errors: [],
       timer: null,
       timeCount: 15,
-      timerText: "点击获取",
+      timerText: '点击获取',
       captchaDialog: {
         show: false,
         canvas: {
           width: 150,
           height: 50
         },
-        captcha: "",
-        inputValue: "",
-        error: ""
+        captcha: '',
+        inputValue: '',
+        error: ''
       }
-    };
+    }
   },
   computed: {
-    isVerifyLogin() {
-      return this.loginType === "verify";
+    isVerifyLogin () {
+      return this.loginType === 'verify'
     },
-    isPwdLogin() {
-      return this.loginType === "pwd";
+    isPwdLogin () {
+      return this.loginType === 'pwd'
     }
   },
   methods: {
-    sendPhoneCode() {
+    sendPhoneCode () {
       const errors = validate.single(
         this.verifyForm.phone,
         this.constraints.phone
-      );
+      )
       if (errors && errors.length) {
-        this.errors = errors;
-        return;
+        this.errors = errors
+        return
       }
       if (this.timer) {
-        return;
+        return
       }
-      this.captchaDialog.show = true;
+      this.captchaDialog.show = true
       this.$nextTick(() => {
-        this.refreshCaptcha(this.verifyForm.phone);
-      });
+        this.refreshCaptcha(this.verifyForm.phone)
+      })
     },
-    clearCaptchaData() {
-      this.captchaDialog.captcha = "";
-      this.captchaDialog.inputValue = "";
-      this.captchaDialog.error = "";
+    clearCaptchaData () {
+      this.captchaDialog.captcha = ''
+      this.captchaDialog.inputValue = ''
+      this.captchaDialog.error = ''
     },
-    async handleSendCode(phone) {
-      const { captcha, inputValue } = this.captchaDialog;
+    async handleSendCode (phone) {
+      const { captcha, inputValue } = this.captchaDialog
       if (!inputValue || !inputValue.length) {
-        this.captchaDialog.error = "验证码不能为空";
-        return;
+        this.captchaDialog.error = '验证码不能为空'
+        return
       }
       if (captcha !== inputValue) {
-        this.captchaDialog.error = "验证码错误";
-        return;
+        this.captchaDialog.error = '验证码错误'
+        return
       }
-      this.captchaDialog.error = "";
-      await sendCode(inputValue);
-      this.captchaDialog.show = false;
+      this.captchaDialog.error = ''
+      await sendCode(inputValue)
+      this.captchaDialog.show = false
 
-      this.timerText = `${this.timeCount}s 后重新发送`;
+      this.timerText = `${this.timeCount}s 后重新发送`
       this.timer = setInterval(() => {
-        this.timeCount--;
-        this.timerText = `${this.timeCount}s 后重新发送`;
+        this.timeCount--
+        this.timerText = `${this.timeCount}s 后重新发送`
         if (this.timeCount < 0) {
-          clearInterval(this.timer);
-          this.timer = null;
-          this.timeCount = 5;
-          this.timerText = "点击获取";
+          clearInterval(this.timer)
+          this.timer = null
+          this.timeCount = 5
+          this.timerText = '点击获取'
         }
-      }, 1000);
+      }, 1000)
     },
-    async refreshCaptcha(phone) {
+    async refreshCaptcha (phone) {
       if (!phone) {
-        return;
+        return
       }
       try {
-        const res = await getCaptcha(phone);
-        const code = res.data;
-        this.captchaDialog.captcha = code;
-        this.renderCaptcha(code);
+        const res = await getCaptcha(phone)
+        const code = res.data
+        this.captchaDialog.captcha = code
+        this.renderCaptcha(code)
       } catch (e) {}
     },
-    renderCaptcha(captcha) {
-      const canvas = this.$refs.regCaptchaCanvas;
-      const context = canvas.getContext("2d");
-      const captchaArr = captcha.split("");
-      const { width, height } = this.captchaDialog.canvas;
-      context.clearRect(0, 0, width, height);
+    renderCaptcha (captcha) {
+      const canvas = this.$refs.regCaptchaCanvas
+      const context = canvas.getContext('2d')
+      const captchaArr = captcha.split('')
+      const { width, height } = this.captchaDialog.canvas
+      context.clearRect(0, 0, width, height)
 
       captchaArr.forEach((v, i) => {
-        const deg = Math.random() - 0.5;
-        const x = 10 + i * 20;
-        const y = Math.floor(height / 2) + (Math.random() * 8 + 8);
-        context.font = "bold 40px 微软雅黑";
+        const deg = Math.random() - 0.5
+        const x = 10 + i * 20
+        const y = Math.floor(height / 2) + (Math.random() * 8 + 8)
+        context.font = 'bold 40px 微软雅黑'
 
-        context.translate(x, y);
-        context.rotate(deg);
-        context.fillStyle = this.getRandomColor();
-        context.fillText(v, 0, 0);
+        context.translate(x, y)
+        context.rotate(deg)
+        context.fillStyle = this.getRandomColor()
+        context.fillText(v, 0, 0)
 
-        context.rotate(-deg);
-        context.translate(-x, -y);
-      });
-      this.renderCanvasBackgroundLines(context, width, height);
-      this.renderCanvasBackgroundPonts(context, width, height);
+        context.rotate(-deg)
+        context.translate(-x, -y)
+      })
+      this.renderCanvasBackgroundLines(context, width, height)
+      this.renderCanvasBackgroundPonts(context, width, height)
     },
-    renderCanvasBackgroundLines(context, width, height) {
+    renderCanvasBackgroundLines (context, width, height) {
       for (let i = 0; i < 5; i++) {
-        context.strokeStyle = this.getRandomColor();
-        context.beginPath();
-        context.moveTo(Math.random() * width, Math.random() * height);
-        context.lineTo(Math.random() * width, Math.random() * height);
-        context.stroke();
+        context.strokeStyle = this.getRandomColor()
+        context.beginPath()
+        context.moveTo(Math.random() * width, Math.random() * height)
+        context.lineTo(Math.random() * width, Math.random() * height)
+        context.stroke()
       }
     },
-    renderCanvasBackgroundPonts(context, width, height) {
+    renderCanvasBackgroundPonts (context, width, height) {
       for (let i = 0; i < 30; i++) {
-        context.strokeStyle = this.getRandomColor();
-        context.beginPath();
-        const x = Math.random() * width;
-        const y = Math.random() * height;
-        context.moveTo(x, y);
-        context.lineTo(x + 1, y + 1);
-        context.stroke();
+        context.strokeStyle = this.getRandomColor()
+        context.beginPath()
+        const x = Math.random() * width
+        const y = Math.random() * height
+        context.moveTo(x, y)
+        context.lineTo(x + 1, y + 1)
+        context.stroke()
       }
     },
-    getRandomColor() {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgb(${r},${g},${b})`;
+    getRandomColor () {
+      const r = Math.floor(Math.random() * 256)
+      const g = Math.floor(Math.random() * 256)
+      const b = Math.floor(Math.random() * 256)
+      return `rgb(${r},${g},${b})`
     },
-    changeLoginType(type = "verify") {
-      this.loginType = type;
+    changeLoginType (type = 'verify') {
+      this.loginType = type
     },
-    handleReg() {
-      this.$router.push("/reg");
+    handleReg () {
+      this.$router.push('/reg')
     },
-    async handleSubmit() {
+    async handleSubmit () {
       try {
         if (this.isVerifyLogin) {
           await signinPhone({
             code: this.verifyForm.code,
             phoneNumber: this.verifyForm.phone
-          });
+          })
           this.$message({
-            message: "登录成功",
-            type: "success"
-          });
-          this.$router.push("/");
+            message: '登录成功',
+            type: 'success'
+          })
+          this.$router.push('/')
         } else if (this.isPwdLogin) {
-          let constraints = {};
-          let form = {};
-          form = this.pwdForm;
+          let constraints = {}
+          let form = {}
+          form = this.pwdForm
           constraints = {
             email: {
               length: {
                 minimium: 1,
-                tooShort: "^邮箱不能为空"
+                tooShort: '^邮箱不能为空'
               },
               email: {
-                message: "^邮箱格式有误"
+                message: '^邮箱格式有误'
               }
             },
             pwd: {
               length: {
                 minimum: 8,
-                tooShort: "^密码不能少于八位"
+                tooShort: '^密码不能少于八位'
               }
             }
-          };
-          this.errors = validate(form, constraints, { format: "flat" });
-          return this.errors;
+          }
+          this.errors = validate(form, constraints, { format: 'flat' })
+          return this.errors
         }
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">
