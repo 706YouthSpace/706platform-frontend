@@ -1,30 +1,30 @@
 import { GraphQLClient } from 'graphql-request'
 
 export class GraphQLService {
-    endpoint: string;
+  endpoint: string;
 
-    client: GraphQLClient
+  client: GraphQLClient
 
-    constructor (endpoint: string, options?: RequestInit) {
-      this.endpoint = endpoint
+  constructor(endpoint: string, options?: RequestInit) {
+    this.endpoint = endpoint
 
-      this.client = new GraphQLClient(this.endpoint, { ...options, credentials: 'include' })
-    }
+    this.client = new GraphQLClient(this.endpoint, { ...options, credentials: 'include' })
+  }
 
-    query (gqlText: string, variables?: { [k: string]: any }) {
-      return this.client.request(gqlText, variables)
-    }
+  query(gqlText: string, variables?: { [k: string]: any }) {
+    return this.client.request(gqlText, variables)
+  }
 }
 
 const DEFAULT_GQL_ENDPOINT = `${window.origin}/api/graphql`
 export class AppGraphQLService extends GraphQLService {
-  constructor (endpoint?: string, options?: RequestInit) {
+  constructor(endpoint?: string, options?: RequestInit) {
     super(endpoint || DEFAULT_GQL_ENDPOINT, options)
 
     this.client = new GraphQLClient(this.endpoint, { ...options, credentials: 'include' })
   }
 
-  async query (gqlText: string, variables?: { [k: string]: any }) {
+  async query(gqlText: string, variables?: { [k: string]: any }) {
     try {
       const result = await super.query(gqlText, variables)
 
@@ -38,7 +38,7 @@ export class AppGraphQLService extends GraphQLService {
     }
   }
 
-  async multiQuery (gqlText: string, variables?: { [k: string]: any }) {
+  async multiQuery(gqlText: string, variables?: { [k: string]: any }) {
     try {
       const result = await super.query(gqlText, variables)
 

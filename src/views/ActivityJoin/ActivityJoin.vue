@@ -1,44 +1,46 @@
 <template>
-    <div class="activity">
-        <div class="activity__header">
-            <p class="activity__title">参加的活动</p>
-            <div class="activity__search">
-                <el-input placeholder="请输入内容" v-model="query" size="mini">
-                    <el-button slot="append" icon="el-icon-search"></el-button>
-                </el-input>
-            </div>
-        </div>
-        <div class="activity__content">
-            <el-table style="width: 100%"
-                      :data="table.data">
-                <el-table-column
-                        v-for="(column,index) in table.columns"
-                        :key="index"
-                        :label="column.name"
-                        :width="column.width">
-                    <template slot-scope="scope">
-                        <div class="activity__table__title" v-if="column.prop === 'name'">
-                            <img :src="scope.row.imgUrl"/>
-                            <p>{{scope.row.name}}</p>
-                        </div>
-                        <template v-else-if="column.prop === 'operate'">
-                            <el-button size="mini">详情</el-button>
-                        </template>
-                        <template v-else>
-                            {{scope.row[column.prop]}}
-                        </template>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </div>
-        <div class="activity__footer">
-            <el-pagination
-                    background
-                    layout="prev, pager, next"
-                    :total="1000">
-            </el-pagination>
-        </div>
+  <div class="activity">
+    <div class="activity__header">
+      <p class="activity__title">参加的活动</p>
+      <div class="activity__search">
+        <el-input placeholder="请输入内容"
+                  v-model="query"
+                  size="mini">
+          <el-button slot="append"
+                     icon="el-icon-search"></el-button>
+        </el-input>
+      </div>
     </div>
+    <div class="activity__content">
+      <el-table style="width: 100%"
+                :data="table.data">
+        <el-table-column v-for="(column,index) in table.columns"
+                         :key="index"
+                         :label="column.name"
+                         :width="column.width">
+          <template slot-scope="scope">
+            <div class="activity__table__title"
+                 v-if="column.prop === 'name'">
+              <img :src="scope.row.imgUrl" />
+              <p>{{scope.row.name}}</p>
+            </div>
+            <template v-else-if="column.prop === 'operate'">
+              <el-button size="mini">详情</el-button>
+            </template>
+            <template v-else>
+              {{scope.row[column.prop]}}
+            </template>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <div class="activity__footer">
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :total="1000">
+      </el-pagination>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -93,29 +95,29 @@ export default {
 </script>
 
 <style scoped lang="less">
-    .activity {
-        min-height: 500px;
-        &__header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.activity {
+  min-height: 500px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-        &__content {
-            margin-top: 20px;
-        }
+  &__content {
+    margin-top: 20px;
+  }
 
-        &__table {
-            &__title {
-                img {
-                    width: 100px;
-                }
-            }
-        }
-
-        &__footer {
-            margin-top: 20px;
-            text-align: center;
-        }
+  &__table {
+    &__title {
+      img {
+        width: 100px;
+      }
     }
+  }
+
+  &__footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+}
 </style>

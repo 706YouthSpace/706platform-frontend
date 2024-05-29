@@ -36,11 +36,14 @@ ul {
     &--success {
       background-color: @mainColor;
 
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         background-color: @mainHoverColor;
       }
     }
-    &:focus, &:hover {
+
+    &:focus,
+    &:hover {
       color: @mainColor;
       background-color: @mainHoverColor;
       border-color: @mainHoverBorderColor;
@@ -55,7 +58,7 @@ ul {
       }
     }
 
-    &__orig-radio:checked + .el-radio-button__inner {
+    &__orig-radio:checked+.el-radio-button__inner {
       border-color: @mainColor;
       background-color: @mainColor;
       color: #fff;
@@ -82,7 +85,7 @@ ul {
           border-color: @mainColor;
         }
 
-        & + .el-checkbox__label {
+        &+.el-checkbox__label {
           color: @mainColor;
         }
       }

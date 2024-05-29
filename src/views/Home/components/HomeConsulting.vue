@@ -1,7 +1,7 @@
 <template>
   <div class="home__project" id="">
     <div class="home__project__content">
-      <p class="home__project__title">付费资讯</p>
+      <p class="home__project__title">付费咨询</p>
       <div class="home__project__list">
         <div class="project">
           <p class="project__title">线上社区</p>

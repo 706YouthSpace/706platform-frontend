@@ -1,9 +1,7 @@
 import devConfig from './dev.conf'
 import prodConfig from './prod.conf'
 
-const config = {
-  baseUrl: '/api/'
-}
+const config = {}
 
 if (process.env.NODE_ENV === 'development') {
   Object.assign(config, devConfig)
