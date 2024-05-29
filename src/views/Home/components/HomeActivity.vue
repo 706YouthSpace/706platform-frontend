@@ -48,7 +48,7 @@
         <div class="brand__list__more">了解更多</div>
       </div>
     </div>
-    <div class="home__activity__list">
+    <!-- <div class="home__activity__list">
       <div class="activity activity__item">
         <div class="activity__content">
           <div class="activity__cover">
@@ -105,7 +105,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -151,7 +151,7 @@ export default {
   @import ~"@/assets/style/variables";
 
   .home__activity {
-    padding: 33px 0 200px 0;
+    padding-top: 33px;
     background: #F3F7F9;
 
     &__title {
