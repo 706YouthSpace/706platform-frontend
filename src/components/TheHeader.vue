@@ -46,11 +46,11 @@ export default {
         {
           name: '生活实验室',
           path: 'http://www.706lifelab.com/'
-        },
-        {
-          name: '瓦猫',
-          path: 'https://discuss.wamo.club/'
         }
+        // {
+        //   name: '706 论坛',
+        //   path: 'https://discuss.wamo.club/'
+        // }
       ]
     }
   },
