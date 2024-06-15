@@ -2,17 +2,17 @@
   <div class="home">
     <home-slogan class="home__sec home__sec__slogan"/>
     <home-intro id="intro" class="home__sec"/>
-    <home-activity id="activity"
+    <!-- <home-activity id="activity"
                    class="home__sec"
                    @bgOffsetYChange="handleBgOffsetYChange"
-                   :bgOffsetY="activityBgOffset"/>
-    <home-activity class="home__sec home__activity--fixed"
+                   :bgOffsetY="activityBgOffset"/> -->
+    <!-- <home-activity class="home__sec home__activity--fixed"
                    :class="{'home__activity--hide': !isActivityShadowShow}"
-                   :bgOffsetY="activityBgOffset"/>
+                   :bgOffsetY="activityBgOffset"/> -->
     <home-media id="media" class="home__sec home__sec__media home__sec__z2"/>
-    <home-project class="home__sec home__sec__z2"/>
+    <!-- <home-project class="home__sec home__sec__z2"/> -->
     <home-consulting id="consulting" class="home__sec home__sec__z2" @showPayQrCode="showPayQrCode"/>
-    <home-join class="home__sec home__sec__z2"/>
+    <!-- <home-join class="home__sec home__sec__z2"/> -->
     <home-pay id="join" class="home__sec home__sec__z2" @showPayQrCode="showPayQrCode"/>
     <el-dialog
       width="300px"
@@ -28,10 +28,10 @@
 
 import HomeSlogan from './components/HomeSlogan'
 import HomeIntro from './components/HomeIntro'
-import HomeActivity from './components/HomeActivity'
-import HomeProject from './components/HomeProject'
+// import HomeActivity from './components/HomeActivity'
+// import HomeProject from './components/HomeProject'
 import HomeMedia from './components/HomeMedia'
-import HomeJoin from './components/HomeJoin'
+// import HomeJoin from './components/HomeJoin'
 import HomePay from './components/HomePay'
 import { throttle } from 'lodash'
 import HomeConsulting from './components/HomeConsulting.vue'
@@ -39,10 +39,10 @@ export default {
   name: 'Home',
   components: {
     HomePay,
-    HomeJoin,
+    // HomeJoin,
     HomeMedia,
-    HomeProject,
-    HomeActivity,
+    // HomeProject,
+    // HomeActivity,
     HomeIntro,
     HomeConsulting,
     HomeSlogan
@@ -84,7 +84,7 @@ export default {
       position: relative;
       &__slogan {
         position: fixed;
-        top: 50px;
+        top: 89px;
         left: 0;
         width: 100%;
         z-index: 0;
