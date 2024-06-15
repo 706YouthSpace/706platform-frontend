@@ -4,6 +4,15 @@
 
 ### 分支规范
 
+分支分为三类：
+* master：线上分支；
+* feature：功能开发分支；
+* fix：修复分支。
+
+在开发时，先从 master 上新建一个分支，根据实际需要以 feature/* 或 fix/* 的方式命名。
+
+开发完成后，将分支合并到 master 分支，自动触发 Github Actions 流水线，将最新版本更新到线上服务器。
+
 
 ### commit message
 
