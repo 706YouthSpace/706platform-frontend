@@ -69,7 +69,6 @@ export default {
 <style scoped lang="less">
   .home__slogan {
     height: 734px;
-    border-top: 6px solid #0B800B;
     background: no-repeat url("~@/assets/images/Home/sec-01.png") center / cover;
     color: #fff;
     text-align: center;

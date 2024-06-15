@@ -84,7 +84,7 @@ export default {
       position: relative;
       &__slogan {
         position: fixed;
-        top: 50px;
+        top: 89px;
         left: 0;
         width: 100%;
         z-index: 0;
