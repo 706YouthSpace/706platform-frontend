@@ -13,6 +13,7 @@
 
 开发完成后，将分支合并到 master 分支，自动触发 Github Actions 流水线，将最新版本更新到线上服务器。
 
+发布完成后，删除开发时用到的分支。
 
 ### commit message
 
