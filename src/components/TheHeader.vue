@@ -9,6 +9,9 @@
         <router-link class="header__tab__item" to="/home">
           <span class="name"> 首页 </span>
         </router-link>
+        <router-link class="header__tab__item" to="/life-lab">
+          <span class="name"> 生活实验室 </span>
+        </router-link>
         <a
           class="header__tab__item"
           v-for="route in routes"

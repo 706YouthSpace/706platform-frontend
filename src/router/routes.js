@@ -13,6 +13,7 @@ import ActivityOrganize from '@/views/ActivityOrganize/ActivityOrganize'
 import Join from '@/views/Join'
 import NotFound from '@/views/NotFound'
 import People from '@/views/People/index.vue'
+import LifeLab from '@/views/LifeLab'
 
 export default [
   {
@@ -24,6 +25,13 @@ export default [
     component: Home,
     meta: {
       title: '首页'
+    }
+  },
+  {
+    path: '/life-lab',
+    component: LifeLab,
+    meta: {
+      title: '生活实验室'
     }
   },
   {
