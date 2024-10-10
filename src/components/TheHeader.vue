@@ -47,10 +47,6 @@ export default {
           path: 'https://medialab.706er.com/'
         },
         {
-          name: '生活实验室',
-          path: 'http://www.706lifelab.com/'
-        },
-        {
           name: '706 论坛',
           path: 'https://forum.seven.fan/'
         }
